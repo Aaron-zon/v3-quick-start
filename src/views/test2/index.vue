@@ -4,7 +4,9 @@
   
   <script>
   export default {
-  
+    created() {
+      console.log('test2')
+    }
   }
   </script>
   

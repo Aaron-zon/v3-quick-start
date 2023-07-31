@@ -22,7 +22,7 @@ export const constantRoutes = [
         children: [
             {
                 path: 'b',
-                component: () => import('@/views/test/index.vue'),
+                component: () => import('@/views/test2/index.vue'),
                 meta: {
                     title: '首页2',
                     svgIcon: 'dashboard'

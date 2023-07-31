@@ -5,7 +5,7 @@
         
         <div class="main-container">
             <!-- header -->
-            <div>
+            <div :class="{'fixed-header' : false}">
                 <!-- NavigationBar -->
                 <NavigationBar></NavigationBar>
                 <!-- TagsView -->
@@ -47,6 +47,16 @@ const classList = computed(() => {
 .main-container {
     transition: margin-left 0.28s;
     margin-left: var(--v3-sidebar-width);
+    position: relative;
+
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 9;
+        width: calc(100% - var(--v3-sidebar-width));
+        transition: width 0.28s;
+    }
 }
 // left menu
 .sidebar-container {
@@ -69,6 +79,10 @@ const classList = computed(() => {
 
     .main-container {
         margin-left: var(--v3-sidebar-hide-width);
+    }
+
+    .fixed-header {
+        width: calc(100% - var(--v3-sidebar-hide-width));
     }
 }
 
