@@ -3,6 +3,15 @@ import { layout } from '@/layout/index.js'
 // 常驻路由
 export const constantRoutes = [
     {
+        path: '/login',
+        name: 'login',
+        meta: {
+            title: '登录',
+            hidden: true
+        },
+        component: () => import('@/views/login/index.vue')
+    },
+    {
         path: '/', 
         component: layout,
         children: [
