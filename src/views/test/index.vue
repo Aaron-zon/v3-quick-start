@@ -13,7 +13,6 @@ export default {
     }
   },
   created() {
-    console.log('test')
   }
 }
 </script>

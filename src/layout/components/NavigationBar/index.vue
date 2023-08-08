@@ -17,7 +17,7 @@
                 </div>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item>
+                        <el-dropdown-item @click="logout">
                             <span>Logout</span>
                         </el-dropdown-item>
                     </el-dropdown-menu>
@@ -45,6 +45,13 @@ const userStore = useUserStore()
 const sidebar = computed(() => appStore.sidebar)
 const toggleSidebar = () => {
     appStore.toggleSidebar(false)
+}
+
+// 登出
+const logout = () => {
+    // 清除vuex的缓存数据
+    userStore.logout()
+    router.push("/login")
 }
 
 </script>

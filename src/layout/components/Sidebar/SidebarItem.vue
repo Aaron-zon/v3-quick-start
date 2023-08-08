@@ -1,20 +1,47 @@
 <template>
-    <div class="sidebar-item-container" v-if="!props.item.meta?.hidden">
+    <div 
+        class="sidebar-item-container" 
+        :class="{'simple-mode': props.isCollapse, 'first-level': props.isFirstLevel}"
+        v-if="!props.item.meta?.hidden" 
+    >
         <!-- 单层 -->
-        <template v-if="theOnlyOneChild.meta">
+        <!-- <template v-if="theOnlyOneChild?.meta"> -->
+        <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
             <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
                 <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
-                    <SvgIcon :name="theOnlyOneChild.meta.svgIcon"></SvgIcon>
-                    <span v-if="theOnlyOneChild.meta.title && !props.isCollapse">{{ theOnlyOneChild.meta.title }}</span>
+                    <SvgIcon v-if="theOnlyOneChild.meta.svgIcon" :name="theOnlyOneChild.meta.svgIcon"></SvgIcon>
+                    <component v-else-if="theOnlyOneChild.meta.elIcon" :is="theOnlyOneChild.meta.elIcon" class="el-icon" />
+                    <template v-if="theOnlyOneChild.meta.title" #title>
+                        {{ theOnlyOneChild.meta.title }}
+                    </template>
                 </el-menu-item>
             </SidebarItemLink>
         </template>
+
         <!-- 多层 -->
+        <el-sub-menu v-else :index="resolvePath(props.item.path)" teleported>
+            <template #title>
+                <SvgIcon v-if="props.item.meta && props.item.meta.svgIcon" :name="props.item.meta.svgIcon" />
+                <component v-else-if="props.item.meta?.elIcon" :is="props.item.meta.elIcon" class="el-icon"></component>
+                <span v-if="props.item.meta && props.item.meta.title">{{ props.item.meta.title }}</span>
+            </template>
+
+            <template v-if="props.item.children">
+                <sidebarItem
+                    v-for="child in props.item.children"
+                    :key="child.path"
+                    :item="child"
+                    :is-collapse="props.isCollapse"
+                    :is-first-level="false"
+                    :base-path="resolvePath(child.path)"
+                />
+            </template>
+        </el-sub-menu>
     </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue"
+import { computed } from "vue"
 import SidebarItemLink from './SidebarItemLink.vue'
 import { isExternal } from "@/utils/validate"
 import path from 'path-browserify'
@@ -36,6 +63,9 @@ const props = defineProps({
         default: ""
     }
 })
+
+/** 是否始终显示根菜单 */
+const alwaysShowRootMenu = computed(() => props.item.meta?.alwaysShow)
 
 // Number of child nodes
 const childNosesNumber = computed(() => {
@@ -87,16 +117,22 @@ const resolvePath = (routePath) => {
     font-size: 18px;
 }
 
-// .simple-mode {
-//     &.first-level {
-//         :deep(.el-submenu) {
-//             .el-sub-menu__icon-arrow {
-//                 display: none;
-//             }
-//             span {
-//                 visibility: hidden;
-//             }
-//         }
-//     }
-// }
+.el-icon {
+    width: 1em;
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+.simple-mode {
+    &.first-level {
+        :deep(.el-sub-menu) {
+            .el-sub-menu__icon-arrow {
+                display: none;
+            }
+            span {
+                visibility: hidden;
+            }
+        }
+    }
+}
 </style>

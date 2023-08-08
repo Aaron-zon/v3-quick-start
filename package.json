@@ -12,6 +12,8 @@
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.8",
+    "js-cookie": "^3.0.5",
+    "lodash-es": "^4.17.21",
     "normalize.css": "^8.0.1",
     "path-browserify": "^1.0.1",
     "pinia": "^2.1.4",

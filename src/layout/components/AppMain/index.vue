@@ -16,7 +16,6 @@ import { useRoute } from "vue-router"
 
 const route = useRoute()
 const key = computed(() => {
-    console.log(route.path);
     return route.path
 })
 

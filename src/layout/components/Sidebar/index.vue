@@ -44,9 +44,9 @@ const v3SidebarMenuTextColor = getCssVariableValue("--v3-sidebar-menu-text-color
 const v3SidebarMenuActiveTextColor = getCssVariableValue("--v3-sidebar-menu-active-text-color")
 
 onMounted(() => {
-    if (!permissionSrote.routes.length) {
-        permissionSrote.setRoles('admin')
-    }
+    // if (!permissionSrote.routes.length) {
+    //     permissionSrote.setRoles('admin')
+    // }
 })
 
 // 默认激活的菜单
@@ -58,7 +58,7 @@ const activeMenu = computed(() => {
     return path
 })
 
-// 是否展开菜单
+// 是否展开菜单 false: 未展开 true：展开
 const isCollapse = computed(() => {
     return !appStore.sidebar.opened
 })
@@ -92,7 +92,7 @@ const isCollapse = computed(() => {
 
 
             .sidebar-item-container {
-                height: var(--v3-sidebar-menu-item-height);
+                min-height: var(--v3-sidebar-menu-item-height);
             }
 
             :deep(.el-menu-item),
