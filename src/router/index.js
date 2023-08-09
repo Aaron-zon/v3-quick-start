@@ -18,6 +18,7 @@ export const constantRoutes = [
             {
                 path: '',
                 component: () => import('@/views/test/index.vue'),
+                name: 'home',
                 meta: {
                     title: '首页',
                     svgIcon: 'dashboard'

@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
+import '@/router/permission'
 // load
 import { loadPlugins } from '@/plugins'
 import { loadSvg } from '@/icons/index.js'

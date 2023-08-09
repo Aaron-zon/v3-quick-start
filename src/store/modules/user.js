@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import store from '@/store'
 import { usePermissionStore } from "./permission"
 import router, { resetRouter } from '@/router'
 import { loginApi, getUserInfoApi } from "@/api/login"
@@ -22,6 +23,7 @@ export const useUserStore = defineStore('user', () => {
     /** 获取用户详细信息 */
     const getInfo = async () => {
         const { data } = await getUserInfoApi()
+        // 设置用户名
         username.value = data.username
         // 检查返回的roles是否为空数组，如果是设置为默认角色
         roles.value = data.roles?.length > 0 ? data.roles : asyncRouteSettings.defaultRoles
@@ -33,9 +35,14 @@ export const useUserStore = defineStore('user', () => {
         token.value = newToken
         setToken(newToken)
         await getInfo()
-        // 路由设定 TODO
+        // 计算符合当前角色权限的动态路由表
         permissionStore.setRoutes(roles.value)
+        // 清除有权限检查的路由
         resetRouter()
+        // 将符合当前角色权限的路由加入当前路由表
+        permissionStore.dynamicRoutes.forEach(item => {
+            router.addRoute(item)
+        })
 
         
     }
@@ -71,3 +78,8 @@ export const useUserStore = defineStore('user', () => {
 
     return { token, roles, username, setToken, setUserName, login, logout, resetToken, setRoles }
 })
+
+/** 在 setup 外使用 */
+export function useUserStoreHook() {
+    return useUserStore(store)
+}

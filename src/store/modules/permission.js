@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import store from '@/store'
 import { constantRoutes, asyncRoutes } from "@/router"
 
 /**
@@ -56,7 +57,7 @@ export const usePermissionStore = defineStore('permission', () => {
     const dynamicRoutes = ref([])
 
     const setRoutes = (roles) => {
-        // 判断动态路由模式是否开启，开启执行 filterAsyncRoutes，未开启获取route中的动态路由
+        // 判断动态路由模式是否开启，开启执行 filterAsyncRoutes根据roles显示路由，未开启获取route中所有动态路由并显示
         const accessedRoutes = asyncRouteSettings.open ? filterAsyncRoutes(asyncRoutes, roles) : asyncRoutes
         routes.value = constantRoutes.concat(accessedRoutes)
         dynamicRoutes.value = accessedRoutes
@@ -64,3 +65,7 @@ export const usePermissionStore = defineStore('permission', () => {
 
     return { routes, dynamicRoutes, setRoutes }
 })
+
+export function usePermissionStoreHook() {
+    return usePermissionStore(store)
+}
