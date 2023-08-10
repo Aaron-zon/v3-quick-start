@@ -2,7 +2,7 @@
 import { ref, reactive } from 'vue'
 import { useUserStore } from '@/store/modules/user'
 import { User, Lock } from '@element-plus/icons-vue'
-import router from '../../router';
+import router from '@/router';
 
 /** 表单区域DOM */
 const loginFormRef = ref(null)
@@ -28,8 +28,6 @@ const loginFormRules = {
 
 /** 登录处理 */
 const handleLogin = () => {
-    console.log(loginFormData.remember);
-    return ;
     loginFormRef.value?.validate((valid, fields) => {
         if (valid) {
             loading.value = true

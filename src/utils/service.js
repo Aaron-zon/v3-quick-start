@@ -40,7 +40,7 @@ function createRequest(service) {
                 "Content-Type": "application/json"
             },
             timeout: 5000,
-            // baseURL: import.meta.env.VITE_BASE_API,
+            baseURL: import.meta.env.VITE_BASE_API,
             data: {}
         }
         // 合并config，将默认配置 defaultConfig 和 当此请求的自定义配置 config 合并

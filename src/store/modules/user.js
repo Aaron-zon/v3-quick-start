@@ -16,6 +16,7 @@ export const useUserStore = defineStore('user', () => {
 
     const login = async ({ username, password }) => {
         const { data } = await loginApi({ username, password })
+        console.log(data);
         setToken(data.token)
         token.value = data.token
 
