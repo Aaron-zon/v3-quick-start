@@ -14,10 +14,12 @@ export const useUserStore = defineStore('user', () => {
 
     const permissionStore = usePermissionStore()
 
-    const login = async ({ username, password, code }) => {
-        const { data } = await loginApi({ username, password, code })
+    const login = async ({ username, password }) => {
+        const { data } = await loginApi({ username, password })
         setToken(data.token)
         token.value = data.token
+
+        return data;
     }
 
     /** 获取用户详细信息 */
