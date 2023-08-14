@@ -52,7 +52,7 @@ export default function useLogin (loginFormRef) {
                             Cookies.set('user-remember', remember)
                         }
                         // 跳转至 Home 画面
-                        router.push({name: 'home'})
+                        router.push({name: 'Home'})
                     })
                     .catch(() => {
                         loginFormData.password = ''

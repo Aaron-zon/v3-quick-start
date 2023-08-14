@@ -3,6 +3,11 @@
 // Transition
 @import "./transition.scss";
 
+// 业务画面外边距
+.app-container {
+    padding: 20px;
+}
+
 html {
     height: 100%;
     box-sizing: border-box;

@@ -4,7 +4,7 @@ import { layout } from '@/layout/index.js'
 export const constantRoutes = [
     {
         path: '/login',
-        name: 'login',
+        name: 'Login',
         meta: {
             title: '登录',
             hidden: true
@@ -18,7 +18,7 @@ export const constantRoutes = [
             {
                 path: '',
                 component: () => import('@/views/test/index.vue'),
-                name: 'home',
+                name: 'Home',
                 meta: {
                     title: '首页',
                     svgIcon: 'dashboard'
@@ -27,23 +27,9 @@ export const constantRoutes = [
         ]
     },
     {
-        path: '/a', 
-        component: layout,
-        children: [
-            {
-                path: 'b',
-                component: () => import('@/views/test2/index.vue'),
-                meta: {
-                    title: '首页2',
-                    svgIcon: 'dashboard'
-                }
-            }
-        ]
-    },
-    {
         path: "/table",
         component: layout,
-        redirect: "/table/element-plus",
+        redirect: "/table/simpleTable",
         name: "Table",
         meta: {
             title: "表格",
@@ -51,20 +37,20 @@ export const constantRoutes = [
         },
         children: [
             {
-                path: "element-plus",
-                component: () => import('@/views/test2/index.vue'),
-                name: "ElementPlus",
+                path: "simpleTable",
+                component: () => import('@/views/table/simpleTable/index.vue'),
+                name: "SimpleTable",
                 meta: {
-                    title: "Element Plus",
+                    title: "Simple Table",
                     keepAlive: true
                 }
             },
             {
-                path: "vxe-table",
-                component: () => import('@/views/test/index.vue'),
-                name: "VxeTable",
+                path: "workableTable",
+                component: () => import('@/views/table/workableTable/index.vue'),
+                name: "WorkableTable",
                 meta: {
-                    title: "Vxe Table",
+                    title: "Workable Table",
                     keepAlive: true
                 }
             }
@@ -143,7 +129,7 @@ export const constantRoutes = [
             }
           }
         ]
-      },
+    },
 ]
 
 export const asyncRoutes = [

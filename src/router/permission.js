@@ -18,7 +18,7 @@ router.beforeEach(async (to, _from, next) => {
     if (getToken()) {
         // 已登录且访问画面是login时直接跳转至Home画面
         if (to.name === 'login') {
-            next({name: 'home'})
+            next({name: 'Home'})
             NProgress.done()
         } else { 
             // 检查用户权限（防止当前页面是用户无权限查看的画面）
