@@ -14,9 +14,8 @@ export const useUserStore = defineStore('user', () => {
 
     const permissionStore = usePermissionStore()
 
-    const login = async ({ username, password }) => {
-        const { data } = await loginApi({ username, password })
-        console.log(data);
+    const login = async ({ account, password }) => {
+        const { data } = await loginApi({ account, password })
         setToken(data.token)
         token.value = data.token
 
@@ -79,7 +78,7 @@ export const useUserStore = defineStore('user', () => {
         roles.value = []
     }
 
-    return { token, roles, username, setToken, setUserName, login, logout, resetToken, setRoles }
+    return { token, roles, username, setToken, setUserName, login, getInfo, logout, resetToken, setRoles }
 })
 
 /** 在 setup 外使用 */

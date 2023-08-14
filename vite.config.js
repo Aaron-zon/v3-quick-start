@@ -31,7 +31,7 @@ export default defineConfig(({mode}) => {
       strictPort: false,
       proxy: {
         '/api/v1': {
-          target: 'http://127.0.0.1:4523/m1/3139849-0-default',
+          target: 'https://mock.apifox.cn/m1/3139849-0-default/qweasdzxc',
           ws: true,
           changeOrigin: true
         }

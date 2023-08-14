@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import store from '@/store'
-import { constantRoutes, asyncRoutes } from "@/router"
+import { constantRoutes, asyncRoutes } from '@/router'
+import asyncRouteSettings from '@/config/async-route'
 
 /**
  * check当前角色是否可以使用目标路由

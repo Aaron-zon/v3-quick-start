@@ -1,56 +1,18 @@
 <script setup>
-import { ref, reactive } from 'vue'
-import { useUserStore } from '@/store/modules/user'
+import { ref } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
-import router from '@/router';
+import useLogin from './hooks/useLogin'
 
 /** 表单区域DOM */
 const loginFormRef = ref(null)
 
-/** 登录按钮 Loading */
-const loading = ref(false)
-
-// 存放登录表单的信息
-const loginFormData = reactive({
-    username: 'admin',
-    password: '12345678',
-    remember: '0'
-})
-
-/** 登录表单校验规则 */
-const loginFormRules = {
-    username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-    password: [
-        { required: true, message: "请输入密码", trigger: "blur" },
-        { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
-    ],
-}
-
-/** 登录处理 */
-const handleLogin = () => {
-    loginFormRef.value?.validate((valid, fields) => {
-        if (valid) {
-            loading.value = true
-            useUserStore()
-                .login(loginFormData)
-                .then((res) => {
-                    if (loginFormData.remember) {
-                        const { username, password, remember } = loginFormData;
-                    }
-                    router.push({name: 'home'})
-                })
-                .catch(() => {
-                    loginFormData.password = ''
-                })
-                .finally(() => {
-                    loading.value = false
-                })
-                
-        } else {
-            console.error("表单校验不通过", fields)
-        }
-    })
-}
+/** 
+ * loading：登录时按钮loading效果
+ * loginFormData：表单数据
+ * loginFormRules：表单规则
+ * handleLogin：登录按钮按下
+ */
+const { loading, loginFormData, loginFormRules, handleLogin } = useLogin(loginFormRef)
 
 </script>
 
@@ -64,10 +26,10 @@ const handleLogin = () => {
 
             <div class="content">
                 <el-form ref="loginFormRef" :model="loginFormData" :rules="loginFormRules" @keyup.enter="handleLogin">
-                    <!-- username -->
-                    <el-form-item prop="username">
+                    <!-- account -->
+                    <el-form-item prop="account">
                         <el-input 
-                            v-model="loginFormData.username"
+                            v-model="loginFormData.account"
                             placeholder="账户"
                             type="text"
                             tabindex="1"
@@ -89,11 +51,10 @@ const handleLogin = () => {
                             :disabled="loading"
                         />
                     </el-form-item>
-                    <el-form-item prop="remember">
-                        <el-radio-group v-model="loginFormData.remember">
-                            <el-radio :label="true" size="large">记住密码</el-radio>
-                        </el-radio-group>
+                    <el-form-item prop="remember" class="remember-box">
+                        <el-checkbox v-model="loginFormData.remember">记住密码</el-checkbox>
                     </el-form-item>
+
                     <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin">登 录</el-button>
                 </el-form>
             </div>
@@ -141,6 +102,12 @@ const handleLogin = () => {
                     user-select: none;
                     cursor: pointer;
                     text-align: center;
+                }
+            }
+
+            .remember-box {
+                :deep(.el-form-item__content) {
+                    justify-content: end;
                 }
             }
 

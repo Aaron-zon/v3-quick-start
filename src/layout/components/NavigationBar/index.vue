@@ -30,7 +30,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAppStore } from '@/store/modules/app'
 import { useUserStore } from '@/store/modules/user'
 import { UserFilled } from '@element-plus/icons-vue'
@@ -38,6 +39,7 @@ import { UserFilled } from '@element-plus/icons-vue'
 import Hamburger from '../Hamburger/index.vue'
 import Breadcrumb from '../Breadcrumb/index.vue'
 
+const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
 

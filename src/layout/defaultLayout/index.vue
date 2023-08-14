@@ -19,21 +19,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import NavigationBar from '../components/NavigationBar/index.vue'
 import Sidebar from '../components/Sidebar/index.vue'
 import AppMain from '../components/AppMain/index.vue'
+import useDefaultLayout from './hooks/useDefaultLayout'
 
-import { useAppStore } from '@/store/modules/app'
-
-const appStore = useAppStore()
-
-const classList = computed(() => {
-    return {
-        hideSidebar: !appStore.sidebar.opened,
-        openSidebar: appStore.sidebar.opened,
-    }
-})
+/**
+ * classList: 计算当前应该显示的class，来控制sidebar的显示隐藏
+ */
+const { classList } = useDefaultLayout()
 
 </script>
 
