@@ -46,7 +46,7 @@ router.beforeEach(async (to, _from, next) => {
 
                 } catch(err) {
                     userStore.resetToken()
-                    next({name: 'login'})
+                    next({name: 'Login'})
                     NProgress.done()
                 }
                 
@@ -59,7 +59,7 @@ router.beforeEach(async (to, _from, next) => {
         if (isWhiteList(to)) { // 在白名单内
             next()
         } else { // 不在白名单内，重定向到登录画面
-            next({name: 'login'})
+            next({name: 'Login'})
             NProgress.done()
         }
     }

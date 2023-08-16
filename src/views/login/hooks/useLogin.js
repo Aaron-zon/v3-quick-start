@@ -38,7 +38,6 @@ export default function useLogin (loginFormRef) {
     /** 登录处理 */
     const handleLogin = () => {
         loginFormRef.value?.validate((valid, fields) => {
-            debugger
             if (valid) {
                 loading.value = true
                 useUserStore()
