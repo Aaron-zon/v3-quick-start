@@ -1,6 +1,9 @@
 <script setup>
 import { QUERY_COMPONENT_TYPE } from './constants'
-const props = defineProps(['queryData', 'toolData', 'modelData'])
+const props = defineProps(['data'])
+const queryData = props.data?.queryData || []
+const toolData = props.data?.toolData || []
+const modelData = props.data?.modelData || []
 
 const getQueryComponentName = (componentInfo, i) => {
     const componentType = QUERY_COMPONENT_TYPE[componentInfo.type]
@@ -15,22 +18,22 @@ const getQueryComponentName = (componentInfo, i) => {
 
 <template>
     <div class="basic-from-container">
-        <el-form class="form-wrapper">
+        <el-form class="form-wrapper" v-if="props.data">
             <div class="query-wrapper">
-                <template v-for="(item, i) in props.queryData" :key="i">
+                <template v-for="(item, i) in queryData" :key="i">
                     <el-form-item :label="item.name">
                         <component :is="getQueryComponentName(item, i)" 
                             :lable="item.name" 
                             placeholder="text"
-                            v-model="props.modelData[item.model]"
+                            v-model="modelData[item.model]"
                         />
                     </el-form-item>
                 </template>
             </div>
             <div class="tool-wrapper">
-                <template v-if="props.toolData && props.toolData.length" >
+                <template v-if="toolData && toolData.length" >
                     <el-button 
-                        v-for="(item, i) in props.toolData" 
+                        v-for="(item, i) in toolData" 
                         :key="i"
                     >
                         {{ item.name || '检索' }}
