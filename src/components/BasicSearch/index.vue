@@ -1,7 +1,6 @@
 <script setup>
 import BasicForm from '@/components/BasicForm/index.vue'
 const props = defineProps(['layouts', 'toolData', 'modelData'])
-console.log(props.layouts)
 </script>
 
 <template>

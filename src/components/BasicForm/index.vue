@@ -1,9 +1,10 @@
 <script setup>
-import { QUERY_COMPONENT_TYPE } from './constants'
+import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js'
 const props = defineProps(['layouts', 'toolData', 'modelData'])
 
-const getQueryComponentName = (componentInfo, i) => {
-    const componentType = QUERY_COMPONENT_TYPE[componentInfo.is]
+const getQueryComponentName = (item, i) => {
+    const componentType = QUERY_COMPONENT_TYPE[item.type]
+    console.log(componentType)
     if (componentType == null) {
         console.warn(`queryData中第${i}个数据没有设定正确的type, 当前显示默认组件`)
         return QUERY_COMPONENT_TYPE['default']
@@ -11,12 +12,27 @@ const getQueryComponentName = (componentInfo, i) => {
     return componentType
 }
 
-const checkSelect = (item) => {
-    return item.is != 'select'
+/** 判断组件是否是共生组件 */
+const checkParagenesis = (item) => {
+    return [QUERY_COMPONENT_KEY.select].includes(item.type)  
 }
 
-const getComponentType = (item) => {
-    return item.type;
+/** 获取组件属性 */
+const getComponentBind = (item) => {
+    return {
+        ...item.props
+    }
+};
+
+/** 获取组件事件 */
+const getComponentEvents = (item) => {
+    let events = {};
+    const modelData = props.modelData
+    Object.entries(item.events || {}).forEach((data) => {
+        const [key, fn] = data;
+        events[key] = (...params) => fn({modelData}, ...params);
+    })
+    return events
 }
 
 </script>
@@ -28,20 +44,21 @@ const getComponentType = (item) => {
                 <template v-for="(item, i) in props.layouts" :key="i">
                     <el-form-item :label="item.name" >
                         <!-- select外组件 -->
-                        <component v-if="checkSelect(item)"
+                        <component
                             :is="getQueryComponentName(item, i)" 
                             v-model="props.modelData[item.model]"
-                            :lable="item.name"
-                            :placeholder="item.placeholder || ''"
-                            :options="item.options"
-                            :type="getComponentType(item)"
-                            :fetch-suggestions="querySearch"
-                        />
-
-                        <!-- select组件 -->
-                        <el-select v-else v-model="props.modelData[item.model]">
-                            <el-option v-for="(option, oIdx) in item.options" :key="oIdx" :label="option.label" :value="option.value" />
-                        </el-select>
+                            v-bind="getComponentBind(item)"
+                            v-on="getComponentEvents(item)"
+                        >
+                            <template v-if="checkParagenesis(item)" #default>
+                                <el-option 
+                                    v-for="(option, oIdx) in item.props.options" 
+                                    :key="oIdx" 
+                                    :label="option.label" 
+                                    :value="option.value" 
+                                />
+                            </template>
+                        </component>
                     </el-form-item>
                 </template>
             </div>
