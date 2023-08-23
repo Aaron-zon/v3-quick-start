@@ -1,10 +1,10 @@
 <script setup>
 import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js'
-const props = defineProps(['layouts', 'toolData', 'modelData'])
+const props = defineProps(['layouts', 'modelData'])
 
+/** 获取当前组件 */
 const getQueryComponentName = (item, i) => {
     const componentType = QUERY_COMPONENT_TYPE[item.type]
-    console.log(componentType)
     if (componentType == null) {
         console.warn(`queryData中第${i}个数据没有设定正确的type, 当前显示默认组件`)
         return QUERY_COMPONENT_TYPE['default']
@@ -62,21 +62,6 @@ const getComponentEvents = (item) => {
                     </el-form-item>
                 </template>
             </div>
-            <div class="tool-wrapper">
-                <template v-if="props.toolData && props.toolData.length" >
-                    <el-button 
-                        v-for="(item, i) in props.toolData" 
-                        :key="i"
-                    >
-                        {{ item.name || '检索' }}
-                    </el-button>
-                </template>
-                
-                <template v-else>
-                    <el-button class="tool-btn" >重置</el-button>
-                    <el-button class="tool-btn" type="primary">检索</el-button>
-                </template>
-            </div>
         </el-form>
     </div>
 </template>
@@ -86,30 +71,24 @@ const getComponentEvents = (item) => {
     .form-wrapper {
         display: flex;
         .query-wrapper {
-            width: 90%;
             display: flex;
             justify-content: flex-start;
             flex-wrap: wrap;
           
             .el-form-item {
-                margin: 5px 0px;
-                width: 400px;
+                margin: 5px 20px;
+                width: 330px;
 
-                .el-input {
-                    width: 200px;
-                }
-
+                
                 &>:deep(.el-form-item__label) {
-                    min-width: 150px;
+                    width: 120px;
+                }
+                :deep(.el-autocomplete) {
+                    width: 100%;
                 }
             }
         }
 
-        .tool-wrapper {
-            display: flex;
-            width: 10%;
-        }
-        
     }
 }
 </style>

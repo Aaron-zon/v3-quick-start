@@ -3,9 +3,7 @@
         <el-breadcrumb>
             <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index">
                 <!-- title -->
-                <span v-if="index === breadcrumbs.length - 1" class="no-redirect">{{ item.meta.title }}</span>
-
-                <!-- <a v-else @click.prevent="handleLink(item)" class="redirect">{{ item.meta.title }}</a> -->
+                <span class="no-redirect">{{ item.meta.title }}</span>
             </el-breadcrumb-item>
         </el-breadcrumb>
     </div>
@@ -13,9 +11,8 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { useRoute, useRouter} from 'vue-router'
+import { useRoute} from 'vue-router'
 const route = useRoute()
-const router = useRouter()
 
 const breadcrumbs = ref([])
 
@@ -23,6 +20,7 @@ const getBreadcrumb = () => {
     breadcrumbs.value = route.matched.filter(item => {
         return item.meta && item.meta.title && item.meta.breadcrumb !== false
     })
+    console.log(breadcrumbs.value)
 }
 
 watch(

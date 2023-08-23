@@ -17,7 +17,7 @@ export const constantRoutes = [
         children: [
             {
                 path: '',
-                component: () => import('@/views/test/index.vue'),
+                component: () => import('@/views/home/index.vue'),
                 name: 'Home',
                 meta: {
                     title: '首页',
@@ -68,7 +68,7 @@ export const constantRoutes = [
         children: [
           {
             path: "menu1",
-            component: () => import('@/views/test/index.vue'),
+            component: () => import('@/views/test2/index.vue'),
             redirect: "/menu/menu1/menu1-1",
             name: "Menu1",
             meta: {
@@ -77,7 +77,7 @@ export const constantRoutes = [
             children: [
               {
                 path: "menu1-1",
-                component: () => import('@/views/test/index.vue'),
+                component: () => import('@/views/test2/index.vue'),
                 name: "Menu1-1",
                 meta: {
                   title: "menu1-1"
@@ -85,7 +85,7 @@ export const constantRoutes = [
               },
               {
                 path: "menu1-2",
-                component: () => import('@/views/test/index.vue'),
+                component: () => import('@/views/test2/index.vue'),
                 redirect: "/menu/menu1/menu1-2/menu1-2-1",
                 name: "Menu1-2",
                 meta: {
@@ -94,7 +94,7 @@ export const constantRoutes = [
                 children: [
                   {
                     path: "menu1-2-1",
-                    component: () => import('@/views/test/index.vue'),
+                    component: () => import('@/views/test2/index.vue'),
                     name: "Menu1-2-1",
                     meta: {
                       title: "menu1-2-1"
@@ -102,7 +102,7 @@ export const constantRoutes = [
                   },
                   {
                     path: "menu1-2-2",
-                    component: () => import('@/views/test/index.vue'),
+                    component: () => import('@/views/test2/index.vue'),
                     name: "Menu1-2-2",
                     meta: {
                       title: "menu1-2-2"
@@ -112,7 +112,7 @@ export const constantRoutes = [
               },
               {
                 path: "menu1-3",
-                component: () => import('@/views/test/index.vue'),
+                component: () => import('@/views/test2/index.vue'),
                 name: "Menu1-3",
                 meta: {
                   title: "menu1-3"
@@ -122,7 +122,7 @@ export const constantRoutes = [
           },
           {
             path: "menu2",
-            component: () => import('@/views/test/index.vue'),
+            component: () => import('@/views/test2/index.vue'),
             name: "Menu2",
             meta: {
               title: "menu2"
