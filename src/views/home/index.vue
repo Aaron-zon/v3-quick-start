@@ -1,14 +1,14 @@
+<script setup>
+</script>
+
 <template>
     <div class="home-container app-container">
         Home
     </div>
-  </template>
+</template>
   
-  <script setup>
-  </script>
-  
-  <style scoped>
-  .home-container {
+<style scoped>
+.home-container {
 
-  }
-  </style>
+}
+</style>

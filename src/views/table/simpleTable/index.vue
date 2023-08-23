@@ -2,12 +2,7 @@
 import { ref } from 'vue'
 import { QUERY_COMPONENT_KEY } from '@/components/BasicForm/constants/index.js'
 import BaseSearch from '@/components/BasicSearch/index.vue'
-const formData = ref({
-    toolData: [],
-    modelData: {
-        select: ''
-    }
-})
+
 const cascaderOptions = ref([
     {
         value: 'guide',
@@ -276,7 +271,6 @@ const cascaderOptions = ref([
         ],
     },
 ]);
-
 const layouts = ref([
         {
             type: QUERY_COMPONENT_KEY.input,
@@ -366,7 +360,14 @@ const layouts = ref([
         },
         
 ])
-const toolData = ref([])
+const toolData = ref({
+    resetHandle: () => {
+        console.log('resetHandle')
+    },
+    searchHandle: () => {
+        console.log('searchHandle')
+    }
+})
 const modelData = ref({
     name: '周周',
     age: '18',

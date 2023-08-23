@@ -1,6 +1,16 @@
 <script setup>
 import BasicForm from '@/components/BasicForm/index.vue'
 const props = defineProps(['layouts', 'toolData', 'modelData'])
+
+/** 重置 */
+const resetHandle = () => {
+    props.toolData.resetHandle()
+}
+
+/** 检索 */
+const searchHandle = () => {
+    props.toolData.searchHandle()
+}
 </script>
 <template>
     <div class="basic-search-container">
@@ -10,19 +20,8 @@ const props = defineProps(['layouts', 'toolData', 'modelData'])
                 :modelData="props.modelData"
             />
             <div class="tool-wrapper">
-                <template v-if="props.toolData && props.toolData.length" >
-                    <el-button 
-                        v-for="(item, i) in props.toolData" 
-                        :key="i"
-                    >
-                        {{ item.name || '检索' }}
-                    </el-button>
-                </template>
-                
-                <template v-else>
-                    <el-button class="tool-btn" >重置</el-button>
-                    <el-button class="tool-btn" type="primary">检索</el-button>
-                </template>
+                <el-button class="tool-btn" @click="resetHandle">重置</el-button>
+                <el-button class="tool-btn" type="primary" @click="searchHandle">检索</el-button>
             </div>
         </el-card>
     </div>

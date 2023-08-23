@@ -15,3 +15,12 @@ login
 
 Mock 
     目前使用apiFox的云Mock
+
+```bash
+# 下载依赖
+pnpm i / npm i 
+
+# 启动项目
+pnpm dev / npm run dev
+
+```
