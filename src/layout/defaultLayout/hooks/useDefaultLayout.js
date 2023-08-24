@@ -3,7 +3,7 @@ import { useAppStore } from '@/store/modules/app'
 
 export default function useDefaultLayout() {
 
-    const appStore = useAppStore()
+    const appStore = useAppStore();
 
     /** 计算当前应该显示的class，来控制sidebar的显示隐藏 */
     const classList = computed(() => {

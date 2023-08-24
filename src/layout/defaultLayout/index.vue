@@ -1,3 +1,16 @@
+<script setup>
+import NavigationBar from '../components/NavigationBar/index.vue'
+import Sidebar from '../components/Sidebar/index.vue'
+import AppMain from '../components/AppMain/index.vue'
+import useDefaultLayout from './hooks/useDefaultLayout'
+
+/**
+ * classList: 计算当前应该显示的class，来控制sidebar的显示隐藏
+ */
+const { classList } = useDefaultLayout();
+
+</script>
+
 <template>
     <div class="layout-container" :class="classList">
         <!-- left menu -->
@@ -17,19 +30,6 @@
 
     </div>
 </template>
-
-<script setup>
-import NavigationBar from '../components/NavigationBar/index.vue'
-import Sidebar from '../components/Sidebar/index.vue'
-import AppMain from '../components/AppMain/index.vue'
-import useDefaultLayout from './hooks/useDefaultLayout'
-
-/**
- * classList: 计算当前应该显示的class，来控制sidebar的显示隐藏
- */
-const { classList } = useDefaultLayout()
-
-</script>
 
 <style lang="scss" scoped>
 .layout-container {

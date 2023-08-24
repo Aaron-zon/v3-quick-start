@@ -1,3 +1,12 @@
+<script setup>
+const props = defineProps({
+    collapse: {
+        type: Boolean,
+        default: true
+    }
+});
+</script>
+
 <template>
     <div class="sidebar-logo-container" :class="{ collapse: props.collapse }">
         <transition name="sidebar-logo-fade">
@@ -10,15 +19,6 @@
         </transition>
     </div>
 </template>
-
-<script setup>
-const props = defineProps({
-    collapse: {
-        type: Boolean,
-        default: true
-    }
-})
-</script>
 
 <style lang="scss" scoped>
 .sidebar-logo-container {

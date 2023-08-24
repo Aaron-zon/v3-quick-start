@@ -1,9 +1,3 @@
-<template>
-    <svg class="svg-icon" aria-hidden="true">
-        <use :href="symbolId" />
-    </svg>
-</template>
-
 <script setup>
 import { computed } from "vue";
 
@@ -16,9 +10,17 @@ const props = defineProps({
         type: String,
         required: true,
     }
-})
-const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+});
+
+// svg 的地址
+const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 </script>
+
+<template>
+    <svg class="svg-icon" aria-hidden="true">
+        <use :href="symbolId" />
+    </svg>
+</template>
 
 <style lang="scss" scoped>
 .svg-icon {

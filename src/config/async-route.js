@@ -5,5 +5,5 @@
 const asyncRouteSettings = {
     open: true,
     defaultRoles: ['DEFAULT_ROLE']
-}
-export default asyncRouteSettings
+};
+export default asyncRouteSettings;

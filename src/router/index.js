@@ -68,7 +68,6 @@ export const constantRoutes = [
         children: [
           {
             path: "menu1",
-            component: () => import('@/views/test2/index.vue'),
             redirect: "/menu/menu1/menu1-1",
             name: "Menu1",
             meta: {
@@ -130,7 +129,7 @@ export const constantRoutes = [
           }
         ]
     },
-]
+];
 
 export const asyncRoutes = [
     // {
@@ -147,7 +146,7 @@ export const asyncRoutes = [
     //         }
     //     ]
     // }
-]
+];
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -159,13 +158,13 @@ export function resetRouter() {
     // 注意：所有动态路由路由必须带有 Name 属性，否则可能会不能完全重置干净
     try {
         router.getRoutes().forEach((route) => {
-            const { name, meta } = route
+            const { name, meta } = route;
             if (name && meta.roles?.length) {
-                router.hasRoute(name) && router.removeRoute(name)
+                router.hasRoute(name) && router.removeRoute(name);
             }
         })
     } catch {
-        window.location.reload()
+        window.location.reload();
     }
 }
 

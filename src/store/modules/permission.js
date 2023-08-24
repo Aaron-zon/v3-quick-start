@@ -18,14 +18,14 @@ const hasPermission = (roles, route) => {
             
             if (route.meta?.roles !== undefined) { // 路由中存在roles信息
                 // check当前脚色是否再路由角色列表中
-                return route.meta.roles.includes(role)
+                return route.meta.roles.includes(role);
             } else {
                 // 路由中不存在roles信息
-                return false
+                return false;
             }
         })
     } else {
-        return true
+        return true;
     }
 }
 
@@ -37,36 +37,36 @@ const hasPermission = (roles, route) => {
  * @returns 
  */
 const filterAsyncRoutes = (routes, roles) => {
-    const res = []
+    const res = [];
     // 对传入路由表进行循环
     routes.forEach((route) => {
-        const r = { ...route }
+        const r = { ...route };
         if (hasPermission(roles, r)) {
             // 当前路由存在子路由进行递归
             if (r.children) {
-                r.children = filterAsyncRoutes(r.children, roles)
+                r.children = filterAsyncRoutes(r.children, roles);
             }
             // 如果没有子路由将当前路由信息存入res
-            res.push(r)
+            res.push(r);
         }
     })
-    return res
+    return res;
 }
 
 export const usePermissionStore = defineStore('permission', () => {
-    const routes = ref([])
-    const dynamicRoutes = ref([])
+    const routes = ref([]);
+    const dynamicRoutes = ref([]);
 
     const setRoutes = (roles) => {
         // 判断动态路由模式是否开启，开启执行 filterAsyncRoutes根据roles显示路由，未开启获取route中所有动态路由并显示
-        const accessedRoutes = asyncRouteSettings.open ? filterAsyncRoutes(asyncRoutes, roles) : asyncRoutes
-        routes.value = constantRoutes.concat(accessedRoutes)
-        dynamicRoutes.value = accessedRoutes
+        const accessedRoutes = asyncRouteSettings.open ? filterAsyncRoutes(asyncRoutes, roles) : asyncRoutes;
+        routes.value = constantRoutes.concat(accessedRoutes);
+        dynamicRoutes.value = accessedRoutes;
     }
 
-    return { routes, dynamicRoutes, setRoutes }
+    return { routes, dynamicRoutes, setRoutes };
 })
 
 export function usePermissionStoreHook() {
-    return usePermissionStore(store)
+    return usePermissionStore(store);
 }

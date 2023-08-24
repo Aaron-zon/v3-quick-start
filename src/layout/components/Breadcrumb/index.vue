@@ -1,3 +1,31 @@
+<script setup>
+import { ref, watch } from 'vue'
+import { useRoute} from 'vue-router'
+
+const route = useRoute();
+
+// 面包屑导航
+const breadcrumbs = ref([]);
+
+// 路由变化时修改面包屑导航
+const getBreadcrumb = () => {
+    breadcrumbs.value = route.matched.filter(item => {
+        return item.meta && item.meta.title && item.meta.breadcrumb !== false;
+    })
+}
+
+// 监听路由变化
+watch(
+    () => route.path,
+    (path) => {
+        if (path.startsWith("/redirect/")) {
+            return ;
+        }
+        getBreadcrumb();
+    }
+)
+getBreadcrumb();
+</script>
 <template>
     <div class="breadcrumb-container">
         <el-breadcrumb>
@@ -8,32 +36,6 @@
         </el-breadcrumb>
     </div>
 </template>
-
-<script setup>
-import { ref, watch } from 'vue'
-import { useRoute} from 'vue-router'
-const route = useRoute()
-
-const breadcrumbs = ref([])
-
-const getBreadcrumb = () => {
-    breadcrumbs.value = route.matched.filter(item => {
-        return item.meta && item.meta.title && item.meta.breadcrumb !== false
-    })
-    console.log(breadcrumbs.value)
-}
-
-watch(
-    () => route.path,
-    (path) => {
-        if (path.startsWith("/redirect/")) {
-            return
-        }
-        getBreadcrumb()
-    }
-)
-getBreadcrumb()
-</script>
 
 <style lang="scss" scoped>
 .breadcrumb-container {

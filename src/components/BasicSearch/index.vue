@@ -1,15 +1,17 @@
 <script setup>
 import BasicForm from '@/components/BasicForm/index.vue'
-const props = defineProps(['layouts', 'toolData', 'modelData'])
+import BasicToolbar from '@/components/BasicToolbar/index.vue'
+
+const props = defineProps(['layouts', 'toolData', 'modelData', 'resetHandle', 'searchHandle']);
 
 /** 重置 */
 const resetHandle = () => {
-    props.toolData.resetHandle()
+    props.resetHandle();
 }
 
 /** 检索 */
 const searchHandle = () => {
-    props.toolData.searchHandle()
+    props.searchHandle();
 }
 </script>
 <template>
@@ -20,8 +22,15 @@ const searchHandle = () => {
                 :modelData="props.modelData"
             />
             <div class="tool-wrapper">
-                <el-button class="tool-btn" @click="resetHandle">重置</el-button>
-                <el-button class="tool-btn" type="primary" @click="searchHandle">检索</el-button>
+                <template v-if="props.toolData && props.toolData.length">
+                    <BasicToolbar 
+                        :toolData="props.toolData"
+                    />
+                </template>
+                <template v-else>
+                    <el-button class="tool-btn" @click="resetHandle">重置</el-button>
+                    <el-button class="tool-btn" type="primary" @click="searchHandle">检索</el-button>
+                </template>
             </div>
         </el-card>
     </div>

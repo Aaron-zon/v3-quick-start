@@ -1,3 +1,35 @@
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from "vue-router"
+import SidebarLogo from './SidebarLogo.vue'
+import SidebarItem from './SidebarItem.vue'
+import { usePermissionStore } from '@/store/modules/permission'
+import { useAppStore } from '@/store/modules/app'
+import { getCssVariableValue } from "@/utils"
+
+const route = useRoute();
+const permissionSrote = usePermissionStore();
+const appStore = useAppStore();
+
+const v3SidebarMenuBgColor = getCssVariableValue("--v3-sidebar-menu-bg-color");
+const v3SidebarMenuTextColor = getCssVariableValue("--v3-sidebar-menu-text-color");
+const v3SidebarMenuActiveTextColor = getCssVariableValue("--v3-sidebar-menu-active-text-color");
+
+// 默认激活的菜单
+const activeMenu = computed(() => {
+    const { meta, path} = route;
+    if (meta?.activeMenu) {
+        return meta.activeMenu;
+    }
+    return path;
+})
+
+// 是否展开菜单 false: 未展开 true：展开
+const isCollapse = computed(() => {
+    return !appStore.sidebar.opened;
+})
+</script>
+
 <template>
     <div class="sidebar-container">
         <!-- logo -->
@@ -25,44 +57,6 @@
         </el-scrollbar>
     </div>
 </template>
-
-<script setup>
-import { computed, onMounted } from 'vue'
-import { useRoute } from "vue-router"
-import SidebarLogo from './SidebarLogo.vue'
-import SidebarItem from './SidebarItem.vue'
-import { usePermissionStore } from '@/store/modules/permission'
-import { useAppStore } from '@/store/modules/app'
-import { getCssVariableValue } from "@/utils"
-
-const route = useRoute()
-const permissionSrote = usePermissionStore()
-const appStore = useAppStore()
-
-const v3SidebarMenuBgColor = getCssVariableValue("--v3-sidebar-menu-bg-color")
-const v3SidebarMenuTextColor = getCssVariableValue("--v3-sidebar-menu-text-color")
-const v3SidebarMenuActiveTextColor = getCssVariableValue("--v3-sidebar-menu-active-text-color")
-
-onMounted(() => {
-    // if (!permissionSrote.routes.length) {
-    //     permissionSrote.setRoles('admin')
-    // }
-})
-
-// 默认激活的菜单
-const activeMenu = computed(() => {
-    const { meta, path} = route
-    if (meta?.activeMenu) {
-        return meta.activeMenu
-    }
-    return path
-})
-
-// 是否展开菜单 false: 未展开 true：展开
-const isCollapse = computed(() => {
-    return !appStore.sidebar.opened
-})
-</script>
 
 <style lang="scss" scoped>
 .sidebar-container {

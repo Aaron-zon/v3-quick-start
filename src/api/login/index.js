@@ -7,7 +7,7 @@ export function loginApi(data) {
         method: 'post',
         data
     })
-}
+};
 
 /** 获取用户详细信息 */
 export function getUserInfoApi() {
@@ -15,7 +15,7 @@ export function getUserInfoApi() {
         url: 'users/info',
         method: 'get'
     })
-}
+};
 
 export function test(data) {
     return request({
@@ -23,4 +23,4 @@ export function test(data) {
         method: 'get',
         data
     })
-}
+};

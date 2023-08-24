@@ -1,3 +1,32 @@
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAppStore } from '@/store/modules/app'
+import { useUserStore } from '@/store/modules/user'
+import { UserFilled } from '@element-plus/icons-vue'
+
+import Hamburger from '../Hamburger/index.vue'
+import Breadcrumb from '../Breadcrumb/index.vue'
+
+const router = useRouter();
+const appStore = useAppStore();
+const userStore = useUserStore();
+
+// Hamburger
+const sidebar = computed(() => appStore.sidebar);
+const toggleSidebar = () => {
+    appStore.toggleSidebar(false);
+}
+
+// 登出
+const logout = () => {
+    // 清除vuex的缓存数据
+    userStore.logout();
+    router.push("/login");
+}
+
+</script>
+
 <template>
     <div class="navigation-bar-container">
         <!-- left menu btn -->
@@ -28,35 +57,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAppStore } from '@/store/modules/app'
-import { useUserStore } from '@/store/modules/user'
-import { UserFilled } from '@element-plus/icons-vue'
-
-import Hamburger from '../Hamburger/index.vue'
-import Breadcrumb from '../Breadcrumb/index.vue'
-
-const router = useRouter()
-const appStore = useAppStore()
-const userStore = useUserStore()
-
-// Hamburger
-const sidebar = computed(() => appStore.sidebar)
-const toggleSidebar = () => {
-    appStore.toggleSidebar(false)
-}
-
-// 登出
-const logout = () => {
-    // 清除vuex的缓存数据
-    userStore.logout()
-    router.push("/login")
-}
-
-</script>
 
 <style lang="scss" scoped>
 
