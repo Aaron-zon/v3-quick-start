@@ -1,8 +1,41 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import BasicForm from '@/components/BasicForm/index.vue'
 import BasicToolbar from '@/components/BasicToolbar/index.vue'
 
 const props = defineProps(['dialogProps', 'layouts', 'dialogData', 'dialogTool']);
+const emit = defineEmits(['confirm', 'cancel']);
+
+const toolData = ref([
+    {
+        name: '取消',
+        events: {
+            click: () => {
+                // 调用父组件事件
+                emit('cancel')
+                // 调用属性中的取消事件
+                props.dialogProps.cancel && props.dialogProps.cancel();
+                // 关闭当前弹出框
+                props.dialogProps.show = false
+            }
+        }
+
+    },
+    {
+        name: '确定',
+        props: {
+            type: 'primary'
+        },
+        events: {
+            click: () => {
+                // 调用父组件事件
+                emit('confirm')
+                // 调用属性中的确定事件
+                props.dialogProps.confirm && props.dialogProps.confirm();
+            }
+        }
+    }
+])
 
 /** 获取dialog属性 */
 const getDialogBind = () => {
@@ -27,6 +60,12 @@ const getDialogEvents = () => {
     return events;
 }
 
+onMounted(() => {
+    if (props.dialogTool) {
+        toolData.value = props.dialogTool
+    }
+})
+
 </script>
 
 <template>
@@ -36,7 +75,7 @@ const getDialogEvents = () => {
             :modelData="props.dialogData"
         />
         <div class="toolbar-wrapper">
-            <BasicToolbar :toolData="dialogTool"/>
+            <BasicToolbar :toolData="toolData"/>
         </div>
 
     </el-dialog>

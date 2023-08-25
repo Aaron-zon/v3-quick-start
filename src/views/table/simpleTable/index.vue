@@ -1,39 +1,50 @@
 <script setup>
 import BaseSearch from '@/components/BasicSearch/index.vue'
-import BasicModal from '@/components/BasicModal/index.vue'
+import BasicDialog from '@/components/BasicDialog/index.vue'
 import BasicToolbar from '@/components/BasicToolbar/index.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 
-import { useSimpleTable, useSimpleTableSearch, useDialog } from './hooks/index.js'
+import { useSimpleTable, useTool, useDialog } from './hooks/index.js'
 
-const { currentPage, tableCol, tableData, tableToolData } = useSimpleTable();
-const { searchlayouts, searchTool, searchData } = useSimpleTableSearch();
-const { dialogProps, dialogLayouts, dialogTool, dialogData } = useDialog();
+const { tableSetting, tableCol, tableData, toolbarData } = useSimpleTable();
+const { searchLayouts, searchData } = useTool();
+const { dialogProps, dialogLayouts, dialogData } = useDialog();
 
+/** 检索 */
+const searchHandle = () => {
+    console.log('search')
+}
 </script>
 
 <template>
     <div class="simple-table-container app-container">
         <!-- 检索区域 -->
         <BaseSearch 
-            :layouts="searchlayouts"
-            :toolData="searchTool"
+            :layouts="searchLayouts"
             :modelData="searchData"
+            @search="searchHandle" 
         />
 
         <!-- table区域 -->
         <el-card >
             <div class="toolbar-wrapper">
-                <BasicToolbar :toolData="tableToolData" />
+                <BasicToolbar :toolData="toolbarData"/>
             </div>
 
             <div class="table-wrapper">
-                <BasicTable :tableCol="tableCol" :tableData="tableData"/>
+                <BasicTable 
+                    :tableSetting="tableSetting"
+                    :tableCol="tableCol" 
+                    :tableData="tableData" 
+                />
             </div>
         </el-card>
 
         <!-- 弹窗 -->
-        <BasicModal :dialogProps="dialogProps" :dialogData="dialogData" :layouts="dialogLayouts" :dialogTool="dialogTool"/>
+        <BasicDialog :dialogProps="dialogProps" 
+            :dialogData="dialogData" 
+            :layouts="dialogLayouts" 
+        />
     </div>
 </template>
 

@@ -1,18 +1,31 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import BasicForm from '@/components/BasicForm/index.vue'
 import BasicToolbar from '@/components/BasicToolbar/index.vue'
 
-const props = defineProps(['layouts', 'toolData', 'modelData', 'resetHandle', 'searchHandle']);
+const props = defineProps(['layouts', 'toolData', 'modelData']);
+const emit = defineEmits(['reset', 'search']);
 
+const baseModel = ref({});
 /** 重置 */
 const resetHandle = () => {
-    props.resetHandle();
+    let keys = Object.keys(props.modelData);
+    for (let key of keys) {
+        props.modelData[key] = baseModel.value[key];
+    }
+    emit('reset');
 }
 
 /** 检索 */
 const searchHandle = () => {
-    props.searchHandle();
+    emit('search');
 }
+
+onMounted(() => {
+    if (props?.modelData) {
+        baseModel.value = JSON.parse(JSON.stringify(props.modelData));
+    }
+})
 </script>
 <template>
     <div class="basic-search-container">

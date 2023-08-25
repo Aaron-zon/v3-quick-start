@@ -2,8 +2,6 @@
 import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js'
 
 const props = defineProps(['layouts', 'modelData']);
-console.log(props.layouts);
-console.log(props.modelData);
 
 /** 获取当前组件 */
 const getQueryComponentName = (item, i) => {
