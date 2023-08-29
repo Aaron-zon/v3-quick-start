@@ -1,26 +1,39 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, watch } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps(['className', 'height', 'width', 'autoResize', 'chartData']);
-const chart = ref(null);
+// echarts 实例
+let chart = null;
+// 绑定的DOM
 const chartEl = ref(null);
+
 onMounted(() => {
     nextTick(() => {
         initChart();
     })
 })
 
+// 监听用于显示的数据源
+watch(
+    () => props.chartData,
+    (newQuestion) => {
+        setOptions(newQuestion);
+    }
+)
+
+// 初始化echarts实例
 const initChart = () => {
-    chart.value = echarts.init(chartEl.value, 'macarons');
-    setOptions(props.chartData.newVisitis);
+    chart = echarts.init(chartEl.value);
+    setOptions(props.chartData);
+    window.addEventListener('resize', function() {
+        chart.resize();
+    });
 }
 
+// 设置echarts配置项
 const setOptions = ({ expectedData, actualData } = {}) => {
-    console.log(expectedData)
-    console.log(actualData)
-
-    chart.value.setOption({
+    chart.setOption({
         xAxis: {
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             boundaryGap: false,
