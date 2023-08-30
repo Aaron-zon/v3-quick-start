@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import PanelGroup from './components/PanelGroup/index.vue'
 import LineChart from './components/LineChart/index.vue'
+import OperateServe from './components/OperateServe/index.vue'
 
 // 点击卡片
 const panelGroupActive = (key) => {
@@ -39,6 +40,7 @@ const nowLineChartData = ref(lineChartData[0]);
     <div class="home-container app-container">
         <PanelGroup @active="panelGroupActive" />
         <LineChart :chartData="nowLineChartData" :width="lineChartWidth" :height="lineChartHeight" />
+        <OperateServe />
     </div>
 </template>
   
