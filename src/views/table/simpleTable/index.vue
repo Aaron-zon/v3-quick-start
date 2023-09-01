@@ -1,5 +1,5 @@
 <script setup>
-import BaseSearch from '@/components/BasicSearch/index.vue'
+import BasicSearch from '@/components/BasicSearch/index.vue'
 import BasicDialog from '@/components/BasicDialog/index.vue'
 import BasicToolbar from '@/components/BasicToolbar/index.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
@@ -36,7 +36,7 @@ const changePage = (page) => {
 <template>
     <div class="simple-table-container app-container">
         <!-- 检索区域 -->
-        <BaseSearch 
+        <BasicSearch 
             :layouts="searchLayouts"
             :modelData="searchData"
             @search="searchHandle" 

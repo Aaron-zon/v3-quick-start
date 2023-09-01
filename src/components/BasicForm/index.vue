@@ -107,8 +107,7 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
             flex-wrap: wrap;
           
             .el-form-item {
-                margin: 5px 20px;
-                margin-bottom: 20px;
+                margin: 20px 20px;
                 width: 350px;
 
                 

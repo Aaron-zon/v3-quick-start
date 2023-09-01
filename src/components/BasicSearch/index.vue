@@ -61,6 +61,7 @@ onMounted(() => {
                 flex: 9;
             }
             .tool-wrapper {
+                padding-top: 20px;
                 width: 10%;
                 flex: 1;
 
