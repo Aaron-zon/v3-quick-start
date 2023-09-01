@@ -6,14 +6,31 @@ import BasicTable from '@/components/BasicTable/index.vue'
 
 import { useSimpleTable, useTool, useDialog } from './hooks/index.js'
 
-const { tableSetting, tableCol, tableData, toolbarData } = useSimpleTable();
+const { tableSetting, tableCol, tableData, toolbarData, getTableData } = useSimpleTable();
 const { searchLayouts, searchData } = useTool();
-const { dialogProps, dialogLayouts, dialogData } = useDialog();
+const { dialogProps, dialogLayouts, dialogData, dialogRules } = useDialog();
 
 /** 检索 */
 const searchHandle = () => {
-    console.log('search')
+    getTableData();
 }
+
+/** 弹出框取消 */
+const dialogCancel = () => {
+
+}
+
+/** 弹出框确定 */
+const dialogConfirm = () => {
+    dialogProps.value.dialog.formRef.validate((valid, fields) => {
+        console.log(fields)
+    })
+}
+
+const changePage = (page) => {
+    getTableData(page);
+}
+
 </script>
 
 <template>
@@ -36,14 +53,19 @@ const searchHandle = () => {
                     :tableSetting="tableSetting"
                     :tableCol="tableCol" 
                     :tableData="tableData" 
+                    @changePage="changePage"
                 />
             </div>
         </el-card>
 
         <!-- 弹窗 -->
-        <BasicDialog :dialogProps="dialogProps" 
+        <BasicDialog 
+            :dialogProps="dialogProps" 
             :dialogData="dialogData" 
-            :layouts="dialogLayouts" 
+            :layouts="dialogLayouts"
+            :rules="dialogRules"
+            @cancel="dialogCancel"
+            @confirm="dialogConfirm"
         />
     </div>
 </template>

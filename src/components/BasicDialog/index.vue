@@ -3,9 +3,10 @@ import { ref, onMounted } from 'vue'
 import BasicForm from '@/components/BasicForm/index.vue'
 import BasicToolbar from '@/components/BasicToolbar/index.vue'
 
-const props = defineProps(['dialogProps', 'layouts', 'dialogData', 'dialogTool']);
+const props = defineProps(['dialogProps', 'layouts', 'dialogData', 'dialogTool', 'rules']);
 const emit = defineEmits(['confirm', 'cancel']);
-
+const basicDialog = ref(null);
+const basicFormRef = ref({});
 const toolData = ref([
     {
         name: '取消',
@@ -64,6 +65,11 @@ onMounted(() => {
     if (props.dialogTool) {
         toolData.value = props.dialogTool
     }
+    props.dialogProps.dialog = {
+        ref: basicDialog.value,
+        formRef: basicFormRef.value.formRef
+    }
+    props.dialogProps.dialog = basicFormRef.value;
 })
 
 </script>
@@ -71,8 +77,10 @@ onMounted(() => {
 <template>
     <el-dialog class="basic-modal-container" v-model="props.dialogProps.show" v-bind="getDialogBind()" v-on="getDialogEvents()">
         <BasicForm
+            :basicFormRef="basicFormRef"
             :layouts="props.layouts" 
             :modelData="props.dialogData"
+            :rules="props.rules"
         />
         <div class="toolbar-wrapper">
             <BasicToolbar :toolData="toolData"/>

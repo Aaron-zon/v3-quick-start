@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const props = defineProps(['tableSetting', 'tableData', 'tableCol', 'toolData']);
-
+const emit = defineEmits(['changePage'])
 // 分页
 const pagination = ref({
     layout: "prev, pager, next, jumper",
@@ -9,15 +9,18 @@ const pagination = ref({
     pageSize: 10,
     currentPage: 1,
     handleCurrentChange: async (page) => {
-        let result =  await props.tableData.getTableData(page);
-
-        if (result) {
-            pagination.value.currentPage = page;
-            pagination.value.total = props.tableData.total;
-        }
+        pagination.value.currentPage = page;
+        emit('changePage', page);
     }
 })
 
+watch(
+    () => props.tableData.total,
+    (newVal)=> {
+        pagination.value.total = newVal;
+        console.log(pagination.value.total);
+    }
+);
 /** 表格事件 */
 const getTableEvents = () => {
     return {

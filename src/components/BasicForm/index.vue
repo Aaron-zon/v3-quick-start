@@ -1,8 +1,14 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js'
 
-const props = defineProps(['layouts', 'modelData']);
-
+const props = defineProps(['layouts', 'modelData', 'rules', 'basicFormRef']);
+const formRef = ref(null);
+onMounted(() => {
+    if (props.basicFormRef) {
+        props.basicFormRef.formRef = formRef;
+    }
+})
 /** 获取当前组件 */
 const getQueryComponentName = (item, i) => {
     const componentType = QUERY_COMPONENT_TYPE[item.type];
@@ -64,10 +70,10 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
 
 <template>
     <div class="basic-from-container">
-        <el-form class="form-wrapper">
+        <el-form class="form-wrapper" ref="formRef" :rules="props.rules" :model="props.modelData">
             <div class="query-wrapper">
                 <template v-for="(item, i) in props.layouts" :key="i">
-                    <el-form-item :label="item.name" >
+                    <el-form-item :label="item.name" :prop="item.model" >
                         <!-- select外组件 -->
                         <component
                             :is="getQueryComponentName(item, i)" 
@@ -102,6 +108,7 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
           
             .el-form-item {
                 margin: 5px 20px;
+                margin-bottom: 20px;
                 width: 350px;
 
                 

@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { QUERY_COMPONENT_KEY } from '@/components/BasicForm/constants/index.js'
 import { getSimpleTableApi } from '@/api/table'
 
@@ -80,8 +80,6 @@ const searchData = ref({
 /** 弹出框属性 */
 const dialogProps = ref({
     show: false,
-    confirm: () => {console.log('props confirm')},
-    cancel: () => {console.log('props cancel')},
     props: {
         title: 'Table弹出框',
     }
@@ -95,11 +93,6 @@ const dialogLayouts = ref([
         props: {
             placeholder: '请输入名字'
         },
-        events: {
-            input: (data, ref) => {
-                console.log(modelData.value)
-            }
-        }
     },
     {
         type: QUERY_COMPONENT_KEY.autocomplete,
@@ -163,7 +156,17 @@ const dialogData = ref({
     select: ''
 })
 /** 弹出框 End */
-
+const dialogRules = reactive({
+    name: [
+        {required: true, message: '请输入名称', trigger: 'blur'},
+    ],
+    select: [
+        { required: true, message: '请输入科目', trigger: 'change'}
+    ],
+    datePickerDaterange: [
+        { type: 'date', required: true, message: '请输入日期', trigger: 'change'}
+    ]
+});
 
 /** 3.table Start */
 /** 每次检索最大数据条数 */
@@ -267,6 +270,7 @@ export const useSimpleTable = () => {
         tableCol,
         tableData,
         toolbarData,
+        getTableData,
     }
 }
 
@@ -289,6 +293,7 @@ export const useTool = (layouts, data) => {
 
 /** 弹窗模块 */
 export const useDialog = (layouts, data) => {
+
     onMounted(() => {
         if (layouts) {
             dialogLayouts.value = layouts;
@@ -302,6 +307,7 @@ export const useDialog = (layouts, data) => {
     return {
         dialogProps,
         dialogLayouts,
-        dialogData
+        dialogData,
+        dialogRules
     }
 }
