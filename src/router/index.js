@@ -53,6 +53,15 @@ export const constantRoutes = [
                     title: "Workable Table",
                     keepAlive: true
                 }
+            },
+            {
+                path: "baseExampleTable",
+                component: () => import('@/views/table/baseExampleTable/index.vue'),
+                name: "baseExampleTable",
+                meta: {
+                    title: "baseExampleTable",
+                    keepAlive: true
+                }
             }
         ]
     },
