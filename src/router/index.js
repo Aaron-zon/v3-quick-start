@@ -27,43 +27,64 @@ export const constantRoutes = [
         ]
     },
     {
-        path: "/table",
+        path: '/table',
         component: layout,
-        redirect: "/table/simpleTable",
-        name: "Table",
+        redirect: '/table/simpleTable',
+        name: 'Table',
         meta: {
-            title: "表格",
-            elIcon: "Grid"
+            title: '表格',
+            elIcon: 'Grid'
         },
         children: [
             {
-                path: "simpleTable",
+                path: 'simpleTable',
                 component: () => import('@/views/table/simpleTable/index.vue'),
-                name: "SimpleTable",
+                name: 'SimpleTable',
                 meta: {
-                    title: "Simple Table",
+                    title: 'Simple Table',
                     keepAlive: true
                 }
             },
             {
-                path: "workableTable",
+                path: 'workableTable',
                 component: () => import('@/views/table/workableTable/index.vue'),
-                name: "WorkableTable",
+                name: 'WorkableTable',
                 meta: {
-                    title: "Workable Table",
+                    title: 'Workable Table',
                     keepAlive: true
                 }
             },
             {
-                path: "baseExampleTable",
+                path: 'baseExampleTable',
                 component: () => import('@/views/table/baseExampleTable/index.vue'),
-                name: "baseExampleTable",
+                name: 'baseExampleTable',
                 meta: {
-                    title: "baseExampleTable",
-                    keepAlive: true
+                    title: 'baseExampleTable',
+                    keepAlive: true,
                 }
             }
         ]
+    },
+    {
+      path: '/form',
+      component: layout,
+      redirect: '/form/comprehensiveForm',
+      name: 'Form',
+      meta: {
+          title: '表单',
+      },
+      children: [
+        {
+          path: 'comprehensiveForm',
+          component: () => import('@/views/form/ComprehensiveForm/index.vue'),
+          name: 'ComprehensiveForm',
+          meta: {
+            title: '综合表单',
+            keepAlive: true,
+            elIcon: 'Tickets'
+          }
+        }
+      ]
     },
     {
         path: "/menu",

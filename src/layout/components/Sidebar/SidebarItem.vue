@@ -58,6 +58,7 @@ const resolvePath = (routePath) => {
 
     return path.resolve(props.basePath, routePath);
 }
+
 </script>
 
 <template>
@@ -67,7 +68,6 @@ const resolvePath = (routePath) => {
         v-if="!props.item.meta?.hidden" 
     >
         <!-- 单层 -->
-        <!-- <template v-if="theOnlyOneChild?.meta"> -->
         <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
             <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
                 <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
