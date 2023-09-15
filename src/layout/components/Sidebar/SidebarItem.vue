@@ -69,7 +69,7 @@ const resolvePath = (routePath) => {
     >
         <!-- 单层 -->
         <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
-            <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
+            <SidebarItemLink v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.menu !== false" :to="resolvePath(theOnlyOneChild.path)">
                 <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
                     <SvgIcon v-if="theOnlyOneChild.meta.svgIcon" :name="theOnlyOneChild.meta.svgIcon"></SvgIcon>
                     <component v-else-if="theOnlyOneChild.meta.elIcon" :is="theOnlyOneChild.meta.elIcon" class="el-icon" />

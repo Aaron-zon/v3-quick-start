@@ -42,7 +42,6 @@ export const constantRoutes = [
                 name: 'SimpleTable',
                 meta: {
                     title: 'Simple Table',
-                    keepAlive: true
                 }
             },
             {
@@ -51,7 +50,6 @@ export const constantRoutes = [
                 name: 'WorkableTable',
                 meta: {
                     title: 'Workable Table',
-                    keepAlive: true
                 }
             },
             {
@@ -60,7 +58,6 @@ export const constantRoutes = [
                 name: 'baseExampleTable',
                 meta: {
                     title: 'baseExampleTable',
-                    keepAlive: true,
                 }
             }
         ]
@@ -72,16 +69,23 @@ export const constantRoutes = [
       name: 'Form',
       meta: {
           title: '表单',
+          elIcon: 'Tickets'
       },
       children: [
         {
           path: 'comprehensiveForm',
-          component: () => import('@/views/form/ComprehensiveForm/index.vue'),
+          component: () => import('@/views/form/comprehensiveForm/index.vue'),
           name: 'ComprehensiveForm',
           meta: {
             title: '综合表单',
-            keepAlive: true,
-            elIcon: 'Tickets'
+          }
+        },
+        {
+          path: 'stepForm',
+          component: () => import('@/views/form/stepForm/index.vue'),
+          name: 'StepForm',
+          meta: {
+            title: '分步表单',
           }
         }
       ]
@@ -159,6 +163,27 @@ export const constantRoutes = [
           }
         ]
     },
+    {
+      path: '/classicCase',
+      component: layout,
+      redirect: '/classicCase/upload',
+      name: 'ClassicCase',
+      meta: {
+          title: '常用组件',
+          elIcon: 'More'
+      },
+      children: [
+        {
+          path: 'upload',
+          component: () => import('@/views/classicCase/upload/index.vue'),
+          name: 'Upload',
+          meta: {
+            title: '上传',
+            elIcon: 'UploadFilled'
+          }
+        }
+      ]
+    }
 ];
 
 export const asyncRoutes = [

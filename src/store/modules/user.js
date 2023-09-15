@@ -31,6 +31,11 @@ export const useUserStore = defineStore('user', () => {
         roles.value = data.roles?.length > 0 ? data.roles : asyncRouteSettings.defaultRoles;
     }
 
+    const visitorInfo = () => {
+        username.value = '游客';
+        roles.value = 'visitor';
+    }
+
     /** 切换角色 */
     const changeRoles = async (role) => {
         const newToken = "token-" + role;
@@ -78,7 +83,7 @@ export const useUserStore = defineStore('user', () => {
         roles.value = [];
     }
 
-    return { token, roles, username, setToken, setUserName, login, getInfo, logout, resetToken, setRoles };
+    return { token, roles, username, setToken, setUserName, login, getInfo, visitorInfo, logout, resetToken, setRoles };
 })
 
 /** 在 setup 外使用 */

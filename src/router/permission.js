@@ -11,13 +11,31 @@ import 'nprogress/nprogress.css'
 NProgress.configure({ showSpinner: false });
 
 router.beforeEach(async (to, _from, next) => {
+
     NProgress.start();
     const userStore = useUserStoreHook();
     const permissionStore = usePermissionStoreHook();
     // 判断用户是否已登录
     if (getToken()) {
+        const token = getToken();
+
+        // 游客访问时执行以下代码，不经过接口直接登录
+        if (token == 'visitor-user') {
+            
+            if (to.name === 'Login') {
+                next({name: 'Home'});
+                NProgress.done();
+            } else {
+                userStore.visitorInfo();
+                const roles = userStore.roles;
+                permissionStore.setRoutes(roles);
+                next();
+            }
+            return ;
+        }
+
         // 已登录且访问画面是login时直接跳转至Home画面
-        if (to.name === 'login') {
+        if (to.name === 'Login') {
             next({name: 'Home'});
             NProgress.done();
         } else { 

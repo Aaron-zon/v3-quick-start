@@ -33,4 +33,8 @@
     --v3-tagsview-tag-icon-hover-color: #ffffff;
     /** RightPanel 组件  */
     --v3-rightpanel-button-bg-color: #001428;
+
+    /** appMain 组件 */
+    --v3-appmain-height: calc(100vh - var(--v3-navigationbar-height));
+    --v3-appmain-background: #fff;
 }

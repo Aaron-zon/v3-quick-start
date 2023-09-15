@@ -12,7 +12,7 @@ const loginFormRef = ref(null)
  * loginFormRules：表单规则
  * handleLogin：登录按钮按下
  */
-const { loading, loginFormData, loginFormRules, handleLogin } = useLogin(loginFormRef)
+const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } = useLogin(loginFormRef)
 
 </script>
 
@@ -56,6 +56,7 @@ const { loading, loginFormData, loginFormRules, handleLogin } = useLogin(loginFo
                     </el-form-item>
 
                     <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin">登 录</el-button>
+                    <div class="visitor-wrapper" @click="visitorHandle">游客登录</div>
                 </el-form>
             </div>
         </div>
@@ -118,5 +119,13 @@ const { loading, loginFormData, loginFormRules, handleLogin } = useLogin(loginFo
         }
     }
 
+    .visitor-wrapper {
+        text-align: center;
+        font-size: 12px;
+        margin: 10px 0;
+        color: rgb(50,205,50);
+        cursor: pointer;
+        text-decoration:underline;
+    }
 }
 </style>

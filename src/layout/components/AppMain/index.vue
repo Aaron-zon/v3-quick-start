@@ -23,7 +23,7 @@ const key = computed(() => {
 
 <style lang="scss" scoped>
 .app-main-container {
-    min-height: calc(100vh - var(--v3-navigationbar-height));
+    min-height: var(--v3-appmain-height);
     width: 100%;
     min-width: 1024px;
     position: relative;

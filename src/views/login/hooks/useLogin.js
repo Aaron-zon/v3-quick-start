@@ -1,5 +1,6 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useUserStore } from '@/store/modules/user'
+import { getToken, removeToken, setToken } from '@/utils/cache/cookies'
 import router from '@/router'
 import Cookies from 'js-cookie'
 
@@ -66,6 +67,13 @@ export default function useLogin (loginFormRef) {
         })
     }
 
+    /** 游客登录 */
+    const visitorHandle = () => {
+        setToken('visitor-user');
+        // 跳转至 Home 画面
+        router.push({name: 'Home'});
+    }
+
     /** 页面初始化，检查是否有记住密码 */
     const init = () => {
         if (Cookies.get('user-remember') === 'true') {
@@ -79,6 +87,7 @@ export default function useLogin (loginFormRef) {
         loading, // loading是否启用
         loginFormData, // 表单数据
         loginFormRules, // 表单规则
-        handleLogin // 按钮按下
+        handleLogin, // 按钮按下
+        visitorHandle
     }
 }
