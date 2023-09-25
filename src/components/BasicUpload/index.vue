@@ -6,7 +6,7 @@ const props = defineProps([
     'btnName', // 按钮名字
     'descName', // 描述
 
-    'fileInfos', // 预备上传文件信息
+    'fileInfo', // 预备上传文件信息
     'url', // url
     'multiple', // 允许多文件上传
     'show-file-list', // 显示已上传文件
@@ -22,11 +22,11 @@ const emit = defineEmits([
 ]);
 
 const upload = ref(null);
-
+const aa = ref('asda');
 const handleChange = (file, files) => {
-    if (props.fileInfos) {
-        props.fileInfos.value = files;
-        props.fileInfos.ref = upload;
+    if (props.fileInfo) {
+        props.fileInfo.files = files;
+        props.fileInfo.ref = upload;
     }
     emit('change', {
         file,
@@ -43,7 +43,7 @@ const handleOnlyFileExceed = (files) => {
 
 /** 预览 */
 const handlePictureCardPreview = (file) => {
-
+    console.log('handlePictureCardPreview')
 }
 /** 下载 */
 const handleDownload = (file) => {
@@ -53,12 +53,18 @@ const handleDownload = (file) => {
 const handleRemove = (file) => {
 
 }
+
+defineExpose({
+    aa,
+    upload,
+    handlePictureCardPreview
+})
 </script>
 
 <template>
     <div class="basice-upload-container">
         <!-- 1.单文件上传按钮 -->
-        <template v-if="props.mode == 0 || props.mode == undefined">
+        <template v-if="props.mode == 1 || props.mode == undefined">
             <el-upload 
                 ref="upload"
                 :action="props.url || '#'" 
@@ -69,7 +75,7 @@ const handleRemove = (file) => {
                 :on-change="handleChange"
                 :on-exceed="handleOnlyFileExceed"
             >
-                <el-button type="primary">{{ props.btnName || '点击上传' }}</el-button>
+                <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
                 <template #tip>
                     <div class="el-upload__tip" v-if="props.descName">
                         {{ descName }}
@@ -79,7 +85,7 @@ const handleRemove = (file) => {
         </template>
 
         <!-- 2.多文件上传按钮 -->
-        <template v-else-if="props.mode == 1">
+        <template v-else-if="props.mode == 2">
             <el-upload 
                 :action="props.url || '#'" 
                 :auto-upload="false"
@@ -87,7 +93,7 @@ const handleRemove = (file) => {
                 multiple
                 :limit="props.limit || 1"
             >
-                <el-button type="primary">{{ props.btnName || '点击上传' }}</el-button>
+                <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
                 <template #tip>
                     <div class="el-upload__tip" v-if="props.descName">
                         {{ descName }}
@@ -97,7 +103,7 @@ const handleRemove = (file) => {
         </template>
 
         <!-- 3.缩略图上传 -->
-        <template v-else-if="mode == 2">
+        <template v-else-if="props.mode == 3">
             <el-upload ref="upload" 
                 :action="props.url || '#'" 
                 list-type="picture-card" 
@@ -138,7 +144,7 @@ const handleRemove = (file) => {
         </template>
 
         <!-- 4.多类型文件可拖拽上传 -->
-        <template v-else-if="mode == 3">
+        <template v-else-if="props.mode == 4">
             <el-upload
                 drag
                 :action="url || '#'"
@@ -150,7 +156,7 @@ const handleRemove = (file) => {
                 </div>
                 <template #tip>
                 <div class="el-upload__tip">
-                    {{ descName || '文件小于500kb' }}
+                    {{ descName }}
                 </div>
                 </template>
             </el-upload>

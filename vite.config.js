@@ -27,13 +27,14 @@ export default defineConfig(({mode}) => {
     server: {
       host: '0.0.0.0',
       port: 8888,
-      open: false,
+      open: true,
       strictPort: false,
       proxy: {
         '/api/v1': {
-          target: 'https://mock.apifox.cn/m1/3139849-0-default/qweasdzxc',
+          // target: 'https://mock.apifox.cn/m1/3139849-0-default/qweasdzxc',
+          target: 'http://localhost:9993/pino',
           ws: true,
-          changeOrigin: true
+          changeOrigin: true,
         }
       }
     }

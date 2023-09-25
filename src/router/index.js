@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { layout } from '@/layout/index.js'
 // 常驻路由
 export const constantRoutes = [
+  // 登录
     {
         path: '/login',
         name: 'Login',
@@ -11,6 +12,7 @@ export const constantRoutes = [
         },
         component: () => import('@/views/login/index.vue')
     },
+    // 首页
     {
         path: '/', 
         component: layout,
@@ -26,6 +28,7 @@ export const constantRoutes = [
             }
         ]
     },
+    // 表格
     {
         path: '/table',
         component: layout,
@@ -62,6 +65,7 @@ export const constantRoutes = [
             }
         ]
     },
+    // 表单
     {
       path: '/form',
       component: layout,
@@ -90,79 +94,7 @@ export const constantRoutes = [
         }
       ]
     },
-    {
-        path: "/menu",
-        component: layout,
-        redirect: "/menu/menu1",
-        name: "Menu",
-        meta: {
-          title: "多级菜单",
-          svgIcon: "menu"
-        },
-        children: [
-          {
-            path: "menu1",
-            redirect: "/menu/menu1/menu1-1",
-            name: "Menu1",
-            meta: {
-              title: "menu1"
-            },
-            children: [
-              {
-                path: "menu1-1",
-                component: () => import('@/views/test2/index.vue'),
-                name: "Menu1-1",
-                meta: {
-                  title: "menu1-1"
-                }
-              },
-              {
-                path: "menu1-2",
-                component: () => import('@/views/test2/index.vue'),
-                redirect: "/menu/menu1/menu1-2/menu1-2-1",
-                name: "Menu1-2",
-                meta: {
-                  title: "menu1-2"
-                },
-                children: [
-                  {
-                    path: "menu1-2-1",
-                    component: () => import('@/views/test2/index.vue'),
-                    name: "Menu1-2-1",
-                    meta: {
-                      title: "menu1-2-1"
-                    }
-                  },
-                  {
-                    path: "menu1-2-2",
-                    component: () => import('@/views/test2/index.vue'),
-                    name: "Menu1-2-2",
-                    meta: {
-                      title: "menu1-2-2"
-                    }
-                  }
-                ]
-              },
-              {
-                path: "menu1-3",
-                component: () => import('@/views/test2/index.vue'),
-                name: "Menu1-3",
-                meta: {
-                  title: "menu1-3"
-                }
-              }
-            ]
-          },
-          {
-            path: "menu2",
-            component: () => import('@/views/test2/index.vue'),
-            name: "Menu2",
-            meta: {
-              title: "menu2"
-            }
-          }
-        ]
-    },
+    // 常用组件
     {
       path: '/classicCase',
       component: layout,
@@ -173,6 +105,7 @@ export const constantRoutes = [
           elIcon: 'More'
       },
       children: [
+        // 上传文件
         {
           path: 'upload',
           component: () => import('@/views/classicCase/upload/index.vue'),
@@ -181,7 +114,52 @@ export const constantRoutes = [
             title: '上传',
             elIcon: 'UploadFilled'
           }
-        }
+        },
+        // 嵌套路由
+        {
+          path: "menu",
+          name: "Menu",
+          meta: {
+            title: "menu"
+          },
+          children: [
+            {
+              path: "menu-1",
+              component: () => import('@/views/test2/index.vue'),
+              name: "Menu-1",
+              meta: {
+                title: "menu-1"
+              }
+            },
+            {
+              path: "menu-2",
+              component: () => import('@/views/test2/index.vue'),
+              redirect: "/menu/menu1/menu1-2/menu1-2-1",
+              name: "Menu-2",
+              meta: {
+                title: "menu-2"
+              },
+              children: [
+                {
+                  path: "menu-2-1",
+                  component: () => import('@/views/test2/index.vue'),
+                  name: "Menu-2-1",
+                  meta: {
+                    title: "menu-2-1"
+                  }
+                },
+                {
+                  path: "menu-2-2",
+                  component: () => import('@/views/test2/index.vue'),
+                  name: "Menu-2-2",
+                  meta: {
+                    title: "menu-2-2"
+                  }
+                }
+              ]
+            },
+          ]
+        },
       ]
     }
 ];
