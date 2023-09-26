@@ -37,4 +37,6 @@
     /** appMain 组件 */
     --v3-appmain-height: calc(100vh - var(--v3-navigationbar-height));
     --v3-appmain-background: #fff;
+    --v3-appmain-scollbar-background: #F2F3F5;
+    --v3-appmain-scrollbar-thumb-background: #D7D7DA;
 }

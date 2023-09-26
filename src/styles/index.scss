@@ -8,6 +8,30 @@
     padding: 20px;
 }
 
+.app-scroll-container {
+    height: calc(var(--v3-appmain-height) - 50px);
+    padding: 20px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 16px;
+        background: var(--v3-appmain-scollbar-background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: var(--v3-appmain-scollbar-background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: var(--v3-appmain-scrollbar-thumb-background);
+    }
+}
+
 html {
     height: 100%;
     box-sizing: border-box;

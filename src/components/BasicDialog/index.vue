@@ -91,7 +91,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .basic-modal-container {
-
     .toolbar-wrapper {
         padding: 30px 0;
 

@@ -7,8 +7,8 @@ import svgLoader from 'vite-svg-loader'
 export default defineConfig(({mode}) => {
 
   const viteEnv = loadEnv(mode, process.cwd())
-  const { VITE_PUBLIC_PATH } = viteEnv
-
+  const { VITE_PUBLIC_PATH, VITE_PROXY_API } = viteEnv
+  console.log(viteEnv)
   return {
     base: VITE_PUBLIC_PATH,
     plugins: [
@@ -27,12 +27,11 @@ export default defineConfig(({mode}) => {
     server: {
       host: '0.0.0.0',
       port: 8888,
-      open: true,
+      open: false,
       strictPort: false,
       proxy: {
         '/api/v1': {
-          // target: 'https://mock.apifox.cn/m1/3139849-0-default/qweasdzxc',
-          target: 'http://localhost:9993/pino',
+          target: VITE_PROXY_API,
           ws: true,
           changeOrigin: true,
         }

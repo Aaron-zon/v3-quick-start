@@ -18,7 +18,6 @@ watch(
     () => props.tableData.total,
     (newVal)=> {
         pagination.value.total = newVal;
-        console.log(pagination.value.total);
     }
 );
 /** 表格事件 */

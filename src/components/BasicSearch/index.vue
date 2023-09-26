@@ -62,6 +62,7 @@ onMounted(() => {
             }
             .tool-wrapper {
                 padding-top: 20px;
+                padding-right: 5px;
                 width: 10%;
                 flex: 1;
 

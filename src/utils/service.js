@@ -52,24 +52,15 @@ function createRequest(service) {
 /**
  * 上传文件特定请求
  */
-export function createRequestUpload(service) {
-    return function(config) {
-        const token =  getToken();
-        const defaultConfig = {
-            headers: {
-                // 携带 Token
-                Authorization: token ? `Bearer ${token}` : undefined,
-                // 传输文件时使用
-                'Content-Type': 'multipart/form-data' 
-            },
-            timeout: 30000,
-            baseURL: import.meta.env.VITE_BASE_API,
-            data: {}
-        };
-        // 合并config，将默认配置 defaultConfig 和 当此请求的自定义配置 config 合并
-        const mergeConfig = merge(defaultConfig, config);
-        return service(mergeConfig);
+export function requestUpload(config) {
+    const defaultConfig = {
+        headers: {
+            // 传输文件时使用
+            'Content-Type': 'multipart/form-data' 
+        },
     }
+    const mergeConfig = merge(defaultConfig, config);
+    return request(mergeConfig);
 }
 
 /**
@@ -81,4 +72,3 @@ export function downloadRequest() {
 
 export const service = createService()
 export const request = createRequest(service)
-export const requestUpload = createRequestUpload(service)

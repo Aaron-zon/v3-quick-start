@@ -24,3 +24,27 @@ export function test(data) {
         data
     })
 };
+
+export function getUserList(data) {
+    return request({
+        url: 'users/userList',
+        method: 'get',
+        data
+    })
+};
+
+export function setUser(data) {
+    return request({
+        url: 'users/user',
+        method: 'put',
+        data
+    })
+};
+
+export function removeUser(data) {
+    return request({
+        url: 'users/user',
+        method: 'delete',
+        data
+    })
+};

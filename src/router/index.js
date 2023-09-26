@@ -44,25 +44,26 @@ export const constantRoutes = [
                 component: () => import('@/views/table/simpleTable/index.vue'),
                 name: 'SimpleTable',
                 meta: {
-                    title: 'Simple Table',
+                  title: '简单表格',
+                  elIcon: 'Grid'
                 }
             },
-            {
-                path: 'workableTable',
-                component: () => import('@/views/table/workableTable/index.vue'),
-                name: 'WorkableTable',
-                meta: {
-                    title: 'Workable Table',
-                }
-            },
-            {
-                path: 'baseExampleTable',
-                component: () => import('@/views/table/baseExampleTable/index.vue'),
-                name: 'baseExampleTable',
-                meta: {
-                    title: 'baseExampleTable',
-                }
-            }
+            // {
+            //     path: 'workableTable',
+            //     component: () => import('@/views/table/workableTable/index.vue'),
+            //     name: 'WorkableTable',
+            //     meta: {
+            //         title: 'Workable Table',
+            //     }
+            // },
+            // {
+            //     path: 'baseExampleTable',
+            //     component: () => import('@/views/table/baseExampleTable/index.vue'),
+            //     name: 'baseExampleTable',
+            //     meta: {
+            //         title: 'baseExampleTable',
+            //     }
+            // }
         ]
     },
     // 表单
@@ -96,19 +97,19 @@ export const constantRoutes = [
     },
     // 常用组件
     {
-      path: '/classicCase',
+      path: '/commonComponents',
       component: layout,
-      redirect: '/classicCase/upload',
-      name: 'ClassicCase',
+      redirect: '/commonComponents/upload',
+      name: 'CommonComponents',
       meta: {
           title: '常用组件',
-          elIcon: 'More'
+          elIcon: 'Menu'
       },
       children: [
         // 上传文件
         {
           path: 'upload',
-          component: () => import('@/views/classicCase/upload/index.vue'),
+          component: () => import('@/views/commonComponents/upload/index.vue'),
           name: 'Upload',
           meta: {
             title: '上传',
@@ -160,6 +161,26 @@ export const constantRoutes = [
             },
           ]
         },
+      ]
+    },
+    {
+      path: '/classicCase',
+      component: layout,
+      name: 'ClassicCase',
+      meta: {
+        title: '经典案例',
+        elIcon: 'CopyDocument'
+      },
+      children: [
+        {
+          path: 'userManage',
+          component: () => import('@/views/classicCase/usersManage/index.vue'),
+          name: 'UserManage',
+          meta: {
+            title: '用户管理',
+            elIcon: 'UserFilled'
+          }
+        }
       ]
     }
 ];

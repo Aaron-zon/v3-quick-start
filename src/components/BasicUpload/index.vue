@@ -22,7 +22,7 @@ const emit = defineEmits([
 ]);
 
 const upload = ref(null);
-const aa = ref('asda');
+
 const handleChange = (file, files) => {
     if (props.fileInfo) {
         props.fileInfo.files = files;
@@ -55,7 +55,6 @@ const handleRemove = (file) => {
 }
 
 defineExpose({
-    aa,
     upload,
     handlePictureCardPreview
 })
@@ -90,8 +89,9 @@ defineExpose({
                 :action="props.url || '#'" 
                 :auto-upload="false"
                 :disabled="props.disabled || false"
-                multiple
                 :limit="props.limit || 1"
+                multiple
+                :on-change="handleChange"
             >
                 <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
                 <template #tip>
@@ -108,6 +108,8 @@ defineExpose({
                 :action="props.url || '#'" 
                 list-type="picture-card" 
                 :auto-upload="false" 
+                :limit="props.limit || 1"
+                multiple
                 :on-change="handleChange"
             >
                 <el-icon><Plus /></el-icon>
@@ -148,11 +150,14 @@ defineExpose({
             <el-upload
                 drag
                 :action="url || '#'"
+                :auto-upload="false" 
+                :limit="props.limit || 1"
                 multiple
+                :on-change="handleChange"
             >
                 <el-icon class="el-icon--upload"><upload-filled /></el-icon>
                 <div class="el-upload__text">
-                Drop file here or <em>click to upload</em>
+                    拖动文件或 <em>点击这里</em>
                 </div>
                 <template #tip>
                 <div class="el-upload__tip">
