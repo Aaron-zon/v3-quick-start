@@ -8,7 +8,7 @@ export default defineConfig(({mode}) => {
 
   const viteEnv = loadEnv(mode, process.cwd())
   const { VITE_PUBLIC_PATH, VITE_PROXY_API } = viteEnv
-  console.log(viteEnv)
+
   return {
     base: VITE_PUBLIC_PATH,
     plugins: [
