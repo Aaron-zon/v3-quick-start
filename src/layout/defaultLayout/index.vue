@@ -18,7 +18,7 @@ const { classList } = useDefaultLayout();
         
         <div class="main-container">
             <!-- header -->
-            <div :class="{'fixed-header' : false}">
+            <div class="navigationBar" :class="{'fixed-header' : false}">
                 <!-- NavigationBar -->
                 <NavigationBar></NavigationBar>
                 <!-- TagsView -->

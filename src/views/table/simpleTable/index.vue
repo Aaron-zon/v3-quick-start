@@ -31,8 +31,6 @@ const changePage = (page) => {
     getTableData(page);
 }
 
-console.log('tableData:', tableData)
-
 </script>
 
 <template>

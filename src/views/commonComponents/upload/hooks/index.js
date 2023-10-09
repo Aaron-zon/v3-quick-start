@@ -1,6 +1,9 @@
 import { uploadFile, uploadFiles } from '@/api/classicCase/index.js'
 
 export const useUpload = () => {
+    // 基础url
+    const url = import.meta.env.VITE_PROXY_API2 + '/testUpload';
+
     /** 由组件默认方法上传到服务器 */
     const defaultUploadFile = (ref) => {
         debugger
@@ -28,6 +31,7 @@ export const useUpload = () => {
     }
 
     return {
+        url,
         uploadFile: defaultUploadFile,
         freeUploadFile,
         freeUploadFiles

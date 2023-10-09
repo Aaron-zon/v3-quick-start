@@ -1,5 +1,6 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { reactive, onMounted } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import BasicSearch from '@/components/BasicSearch/index.vue'
 import BasicTable from '@/components/BasicTable/index.vue'
 import BasicDialog from '@/components/BasicDialog/index.vue'
@@ -188,7 +189,6 @@ const dialogCancel = () => {}
 // 点击确定按钮
 const dialogConfirm = () => {}
 
-
 /** 表格 */
 // 表格设置
 const tableSetting = reactive({
@@ -203,11 +203,15 @@ const tableSetting = reactive({
 // 行数据格式
 const tableCol = [
     {
-        type: 'selection'
+        type: 'index',
+        label: 'No.',
+        align: 'center'
     },
     {
         prop: 'name',
         label: '姓名',
+        width: '120',
+        align: 'center'
     },
     {
         prop: 'department',
@@ -242,6 +246,31 @@ const tableData = reactive({
     total: 0,
 });
 
+const tableToolData = reactive({
+    show: true,
+    editFlg: true,
+    deleteFlg: true,
+    /**
+     * 点击修改按钮
+     */
+    handleEdit: () => {
+        dialogProps.show = true;
+    },
+    /**
+     * 点击删除按钮
+     */
+    handleDelete: () => {
+        ElMessageBox.confirm('请确认是否删除该用户！', '消息', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+        }).then(() => {
+            ElMessage({
+                type: 'info',
+                message: '用户删除成功！'
+            });
+        });
+    }
+})
 /**
  * 查询表格数据
  * @param {*} currentPage 当前页数
@@ -298,6 +327,7 @@ const changePage = (page) => {
                     :tableSetting="tableSetting"
                     :tableCol="tableCol" 
                     :tableData="tableData" 
+                    :toolData="tableToolData"
                     @changePage="changePage"
                 />
             </div>

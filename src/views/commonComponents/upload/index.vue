@@ -1,10 +1,10 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import BasicUpload from '@/components/BasicUpload/index.vue'
+import AvatarUpload from '@/components/AvatarUpload/index.vue'
 import { useUpload } from './hooks/index.js'
 
-const url = import.meta.env.VITE_PROXY_API2 + '/testUpload';
-const { uploadFile, freeUploadFile, freeUploadFiles } = useUpload();
+const { url, uploadFile, freeUploadFile, freeUploadFiles } = useUpload();
 
 /** 多文件自定义请求上传到服务器 */
 const freeUploadFilesHandle = async (fileInfo) => {
@@ -43,6 +43,11 @@ const mode3 = 3;
 const fileInfo4 = reactive({});
 // 模式
 const mode4 = 4;
+
+/** 上传头像 */
+const setAvatar = (base64) => {
+    console.log(base64);
+}
 
 </script>
 
@@ -84,6 +89,10 @@ const mode4 = 4;
                 <div class="btn-wrapper">
                     <el-button @click="freeUploadFilesHandle(fileInfo4)">多文件上传</el-button>
                 </div>
+            </div>
+
+            <div class="mode-wrapper avatar">
+                <AvatarUpload @setAvatar="setAvatar"/>
             </div>
         </div>
     </div>

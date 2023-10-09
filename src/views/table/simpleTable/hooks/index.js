@@ -155,7 +155,7 @@ const dialogData = ref({
     datePickerDaterange: '',
     select: ''
 })
-/** 弹出框 End */
+// 弹出框输入内容规则
 const dialogRules = reactive({
     name: [
         {required: true, message: '请输入名称', trigger: 'blur'},
@@ -167,6 +167,8 @@ const dialogRules = reactive({
         { type: 'date', required: true, message: '请输入日期', trigger: 'change'}
     ]
 });
+/** 弹出框 End */
+
 
 /** 3.table Start */
 /** 每次检索最大数据条数 */

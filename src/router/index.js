@@ -48,22 +48,6 @@ export const constantRoutes = [
                   elIcon: 'Grid'
                 }
             },
-            // {
-            //     path: 'workableTable',
-            //     component: () => import('@/views/table/workableTable/index.vue'),
-            //     name: 'WorkableTable',
-            //     meta: {
-            //         title: 'Workable Table',
-            //     }
-            // },
-            // {
-            //     path: 'baseExampleTable',
-            //     component: () => import('@/views/table/baseExampleTable/index.vue'),
-            //     name: 'baseExampleTable',
-            //     meta: {
-            //         title: 'baseExampleTable',
-            //     }
-            // }
         ]
     },
     // 表单
@@ -135,7 +119,6 @@ export const constantRoutes = [
             {
               path: "menu-2",
               component: () => import('@/views/test2/index.vue'),
-              redirect: "/menu/menu1/menu1-2/menu1-2-1",
               name: "Menu-2",
               meta: {
                 title: "menu-2"
@@ -179,6 +162,15 @@ export const constantRoutes = [
           meta: {
             title: '用户管理',
             elIcon: 'UserFilled'
+          }
+        },
+        {
+          path: 'personal',
+          component: () => import('@/views/classicCase/personal/index.vue'),
+          name: 'Personal',
+          meta: {
+            title: '个人设定',
+            elIcon: 'Avatar',
           }
         }
       ]
