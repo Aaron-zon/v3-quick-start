@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
     <el-row class="operate-serve-cantainer">
@@ -101,7 +99,7 @@
                 width: 50px;
                 height: 50px;
                 margin-left: 10px;
-                background: rgba(43,57,84,0.1);
+                background: rgba(43, 57, 84, 0.1);
                 border-radius: 5px;
                 display: flex;
                 justify-content: center;

@@ -1,33 +1,33 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from "vue-router"
-import SidebarLogo from './SidebarLogo.vue'
-import SidebarItem from './SidebarItem.vue'
-import { usePermissionStore } from '@/store/modules/permission'
-import { useAppStore } from '@/store/modules/app'
-import { getCssVariableValue } from "@/utils"
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import SidebarLogo from './SidebarLogo.vue';
+import SidebarItem from './SidebarItem.vue';
+import { usePermissionStore } from '@/store/modules/permission';
+import { useAppStore } from '@/store/modules/app';
+import { getCssVariableValue } from '@/utils';
 
 const route = useRoute();
 const permissionSrote = usePermissionStore();
 const appStore = useAppStore();
 
-const v3SidebarMenuBgColor = getCssVariableValue("--v3-sidebar-menu-bg-color");
-const v3SidebarMenuTextColor = getCssVariableValue("--v3-sidebar-menu-text-color");
-const v3SidebarMenuActiveTextColor = getCssVariableValue("--v3-sidebar-menu-active-text-color");
+const v3SidebarMenuBgColor = getCssVariableValue('--v3-sidebar-menu-bg-color');
+const v3SidebarMenuTextColor = getCssVariableValue('--v3-sidebar-menu-text-color');
+const v3SidebarMenuActiveTextColor = getCssVariableValue('--v3-sidebar-menu-active-text-color');
 
 // 默认激活的菜单
 const activeMenu = computed(() => {
-    const { meta, path} = route;
+    const { meta, path } = route;
     if (meta?.activeMenu) {
         return meta.activeMenu;
     }
     return path;
-})
+});
 
 // 是否展开菜单 false: 未展开 true：展开
 const isCollapse = computed(() => {
     return !appStore.sidebar.opened;
-})
+});
 </script>
 
 <template>
@@ -44,15 +44,13 @@ const isCollapse = computed(() => {
                 :active-text-color="v3SidebarMenuActiveTextColor"
                 :unique-opened="true"
                 :collapse-transition="false"
-                mode="vertical"
-            >
-                <SidebarItem 
+                mode="vertical">
+                <SidebarItem
                     v-for="route in permissionSrote.routes"
                     :key="route.path"
                     :item="route"
                     :base-path="route.path"
-                    :is-collapse="isCollapse"
-                />
+                    :is-collapse="isCollapse" />
             </el-menu>
         </el-scrollbar>
     </div>
@@ -62,7 +60,7 @@ const isCollapse = computed(() => {
 .sidebar-container {
     @mixin tip-line {
         &::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
@@ -75,7 +73,7 @@ const isCollapse = computed(() => {
     .sidebar-logo-container {
         background-color: var(--v3-sidebarlogo-bg-color);
     }
-    
+
     .el-scrollbar {
         background-color: var(--v3-sidebar-menu-bg-color);
 
@@ -83,7 +81,6 @@ const isCollapse = computed(() => {
             width: 100%;
             border: none;
             background-color: var(--v3-sidebar-menu-bg-color);
-
 
             .sidebar-item-container {
                 min-height: var(--v3-sidebar-menu-item-height);
@@ -121,7 +118,6 @@ const isCollapse = computed(() => {
                 }
             }
         }
-        
     }
 }
 </style>

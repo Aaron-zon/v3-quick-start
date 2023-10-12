@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from 'vue';
 
 // 表单位置设定
 const containerRadio = ref('center');
@@ -21,41 +21,49 @@ const ruleForm = ref({
 // 表单规则
 const rules = reactive({
     name: [
-        {required: true, message: '请输入姓名', trigger: 'blur'},
-        {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
+        { required: true, message: '请输入姓名', trigger: 'blur' },
+        { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
     ],
     phone: [
-        {required: true, message: '请输入手机号', trigger: 'blur'},
-        {min: 1, max: 11, message: '长度在 1 到 11 个字符', trigger: 'blur'}
-    ]
+        { required: true, message: '请输入手机号', trigger: 'blur' },
+        { min: 1, max: 11, message: '长度在 1 到 11 个字符', trigger: 'blur' },
+    ],
 });
 
 const submitForm = (refName) => {
-
-}
+    alert("立即创建")
+};
 
 const resetForm = (refName) => {
-
-}
+    alert("重置")
+};
 </script>
 
 <template>
     <div class="comprehensive-form-container app-container">
-        <el-card>
+        <el-card class="form-card">
             <template #header>
                 <div class="card-header">
                     <span>Card name</span>
                 </div>
             </template>
             <!-- 1. 表单位置设定 -->
-            <el-row :class="{'form-center': containerRadio == 'center', 'form-left': containerRadio == 'left'}">
+            <el-row
+                :class="{
+                    'form-center': containerRadio == 'center',
+                    'form-left': containerRadio == 'left',
+                }">
                 <el-radio-group class="set-wrapper" v-model="containerRadio" size="large">
                     <el-radio-button label="left">居左</el-radio-button>
                     <el-radio-button label="center">居中</el-radio-button>
                 </el-radio-group>
             </el-row>
             <!-- 2. 表单的label设定 -->
-            <el-row :class="{'form-center': containerRadio == 'center', 'form-left': containerRadio == 'left'}">
+            <el-row
+                :class="{
+                    'form-center': containerRadio == 'center',
+                    'form-left': containerRadio == 'left',
+                }">
                 <el-radio-group class="set-wrapper" v-model="labelRadio" size="large">
                     <el-radio-button label="left">左对齐</el-radio-button>
                     <el-radio-button label="right">右对齐</el-radio-button>
@@ -63,9 +71,20 @@ const resetForm = (refName) => {
                 </el-radio-group>
             </el-row>
             <!-- 3. 表单详细 -->
-            <el-row class="form-wrapper" :class="{'form-center': containerRadio == 'center', 'form-left': containerRadio == 'left'}">
+            <el-row
+                class="form-wrapper"
+                :class="{
+                    'form-center': containerRadio == 'center',
+                    'form-left': containerRadio == 'left',
+                }">
                 <el-col :lg="12" :xl="12" :md="20" :sm="20" :xs="24">
-                    <el-form ref="ruleFormRef" label-width="100px" :model="ruleForm" :rules="rules" :label-position="labelRadio" status-icon>
+                    <el-form
+                        ref="ruleFormRef"
+                        label-width="100px"
+                        :model="ruleForm"
+                        :rules="rules"
+                        :label-position="labelRadio"
+                        status-icon>
                         <!-- 3.1 用户姓名 -->
                         <el-form-item label="用户姓名" prop="name">
                             <el-input v-model="ruleForm.name" />
@@ -115,7 +134,9 @@ const resetForm = (refName) => {
                         </el-form-item>
                         <!-- 3.10 功能按钮 -->
                         <el-form-item class="button-wrapper">
-                            <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                            <el-button type="primary" @click="submitForm('ruleForm')"
+                                >立即创建</el-button
+                            >
                             <el-button @click="resetForm('ruleForm')">重置</el-button>
                         </el-form-item>
                     </el-form>
@@ -127,12 +148,15 @@ const resetForm = (refName) => {
 
 <style lang="scss" scoped>
 .comprehensive-form-container {
+
     .set-wrapper {
         margin: 10px 40px;
     }
 
     .form-wrapper {
+        margin: 0 auto;
         margin-bottom: 100px;
+        width: 800px;
 
         .button-wrapper {
             margin-left: 100px;

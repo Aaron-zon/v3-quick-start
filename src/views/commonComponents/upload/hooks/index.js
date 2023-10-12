@@ -1,4 +1,4 @@
-import { uploadFile, uploadFiles } from '@/api/classicCase/index.js'
+import { uploadFile, uploadFiles } from '@/api/classicCase/index.js';
 
 export const useUpload = () => {
     // 基础url
@@ -6,9 +6,9 @@ export const useUpload = () => {
 
     /** 由组件默认方法上传到服务器 */
     const defaultUploadFile = (ref) => {
-        debugger
+        debugger;
         ref.upload.submit();
-    }
+    };
 
     /** 自定义请求上传到服务器 单文件 */
     const freeUploadFile = async (file) => {
@@ -17,7 +17,7 @@ export const useUpload = () => {
         const res = await uploadFile(formData);
         console.log(res);
         return res;
-    }
+    };
 
     /** 自定义请求上传到服务器 多文件 */
     const freeUploadFiles = async (files) => {
@@ -28,12 +28,12 @@ export const useUpload = () => {
         const res = await uploadFiles(formData);
         console.log(res);
         return res;
-    }
+    };
 
     return {
         url,
         uploadFile: defaultUploadFile,
         freeUploadFile,
-        freeUploadFiles
-    }
-}
+        freeUploadFiles,
+    };
+};

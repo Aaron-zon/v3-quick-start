@@ -1,21 +1,20 @@
 <script setup>
-import { computed } from "vue"
-import { useRoute } from "vue-router"
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const key = computed(() => {
     return route.path;
-})
-
+});
 </script>
 
 <template>
     <main class="app-main-container">
         <router-view v-slot="{ Component }">
             <!-- <transition name="no-transform" mode="out-in"> -->
-                <!-- <keep-alive> -->
-                    <component :is="Component" :key="key"/>
-                <!-- </keep-alive> -->
+            <!-- <keep-alive> -->
+            <component :is="Component" :key="key" />
+            <!-- </keep-alive> -->
             <!-- </transition> -->
         </router-view>
     </main>

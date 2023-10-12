@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import store from '@/store'
-import { usePermissionStore } from "./permission"
-import router, { resetRouter } from '@/router'
-import { loginApi, getUserInfoApi } from "@/api/login"
-import { getToken, removeToken, setToken } from '@/utils/cache/cookies'
-import asyncRouteSettings from '@/config/async-route'
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import store from '@/store';
+import { usePermissionStore } from './permission';
+import router, { resetRouter } from '@/router';
+import { loginApi, getUserInfoApi } from '@/api/login';
+import { getToken, removeToken, setToken } from '@/utils/cache/cookies';
+import asyncRouteSettings from '@/config/async-route';
 
 export const useUserStore = defineStore('user', () => {
     const username = ref(getToken() || '');
@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', () => {
         token.value = data.token;
 
         return data;
-    }
+    };
 
     /** 获取用户详细信息 */
     const getInfo = async () => {
@@ -29,16 +29,16 @@ export const useUserStore = defineStore('user', () => {
         username.value = data.username;
         // 检查返回的roles是否为空数组，如果是设置为默认角色
         roles.value = data.roles?.length > 0 ? data.roles : asyncRouteSettings.defaultRoles;
-    }
+    };
 
     const visitorInfo = () => {
         username.value = '游客';
         roles.value = 'visitor';
-    }
+    };
 
     /** 切换角色 */
     const changeRoles = async (role) => {
-        const newToken = "token-" + role;
+        const newToken = 'token-' + role;
         token.value = newToken;
         setToken(newToken);
         await getInfo();
@@ -47,22 +47,20 @@ export const useUserStore = defineStore('user', () => {
         // 清除有权限检查的路由
         resetRouter();
         // 将符合当前角色权限的路由加入当前路由表
-        permissionStore.dynamicRoutes.forEach(item => {
+        permissionStore.dynamicRoutes.forEach((item) => {
             router.addRoute(item);
-        })
-
-        
-    }
+        });
+    };
 
     /** 设置权限 */
     const setRoles = (value) => {
         roles.value = value;
-    }
+    };
 
     /** 设置用户名称 */
     const setUserName = (name) => {
         username.value = name;
-    }
+    };
 
     /** 登出 */
     const logout = () => {
@@ -74,17 +72,29 @@ export const useUserStore = defineStore('user', () => {
         roles.value = [];
         // 重置路由
         resetRouter();
-    }
-    
+    };
+
     /** 重置Token */
     const resetToken = () => {
         removeToken();
         token.value = '';
         roles.value = [];
-    }
+    };
 
-    return { token, roles, username, setToken, setUserName, login, getInfo, visitorInfo, logout, resetToken, setRoles };
-})
+    return {
+        token,
+        roles,
+        username,
+        setToken,
+        setUserName,
+        login,
+        getInfo,
+        visitorInfo,
+        logout,
+        resetToken,
+        setRoles,
+    };
+});
 
 /** 在 setup 外使用 */
 export function useUserStoreHook() {

@@ -1,18 +1,18 @@
 <script setup>
-import { Fold, Expand } from '@element-plus/icons-vue'
+import { Fold, Expand } from '@element-plus/icons-vue';
 
 const emit = defineEmits(['toggle-click']);
 const props = defineProps({
     isActive: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 
 // click handle
 const toggleSidebar = () => {
-    emit("toggle-click");
-}
+    emit('toggle-click');
+};
 </script>
 
 <template>

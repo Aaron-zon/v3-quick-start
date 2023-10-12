@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const emit = defineEmits(['active']);
 // 激活的卡片
@@ -8,25 +8,24 @@ const activeCode = ref(0);
 const active = (key) => {
     emit('active', key);
     activeCode.value = key;
-}
-
+};
 </script>
 
 <template>
     <el-row class="panel-group-cantainer">
         <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
-            <el-card shadow="hover" class="top-card" :class="{'active-card': activeCode == 0}" @click="active(0)">
+            <el-card
+                shadow="hover"
+                class="top-card"
+                :class="{ 'active-card': activeCode == 0 }"
+                @click="active(0)">
                 <el-row>
                     <el-col class="card-panel-content-wrapper" :span="16">
-                        <div class="title">
-                            月总销量（9）
-                        </div>
+                        <div class="title">月总销量（9）</div>
                         <div class="content">
                             <p>￥11,214.00</p>
                         </div>
-                        <div class="description">
-                            自上月增长 10%
-                        </div>
+                        <div class="description">自上月增长 10%</div>
                     </el-col>
                     <el-col class="card-panel-icon-wrapper" :span="8">
                         <SvgIcon name="money-cny-circle-line" />
@@ -35,18 +34,18 @@ const active = (key) => {
             </el-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
-            <el-card shadow="hover" class="top-card" :class="{'active-card': activeCode == 1}" @click="active(1)">
+            <el-card
+                shadow="hover"
+                class="top-card"
+                :class="{ 'active-card': activeCode == 1 }"
+                @click="active(1)">
                 <el-row>
                     <el-col class="card-panel-content-wrapper" :span="16">
-                        <div class="title">
-                            月总销量（9）
-                        </div>
+                        <div class="title">月总销量（9）</div>
                         <div class="content">
                             <p>￥11,214.00</p>
                         </div>
-                        <div class="description">
-                            自上月增长 10%
-                        </div>
+                        <div class="description">自上月增长 10%</div>
                     </el-col>
                     <el-col class="card-panel-icon-wrapper" :span="8">
                         <SvgIcon name="money-cny-circle-line" />
@@ -55,18 +54,18 @@ const active = (key) => {
             </el-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
-            <el-card shadow="hover" class="top-card" :class="{'active-card': activeCode == 2}" @click="active(2)">
+            <el-card
+                shadow="hover"
+                class="top-card"
+                :class="{ 'active-card': activeCode == 2 }"
+                @click="active(2)">
                 <el-row>
                     <el-col class="card-panel-content-wrapper" :span="16">
-                        <div class="title">
-                            月总销量（9）
-                        </div>
+                        <div class="title">月总销量（9）</div>
                         <div class="content">
                             <p>￥11,214.00</p>
                         </div>
-                        <div class="description">
-                            自上月增长 10%
-                        </div>
+                        <div class="description">自上月增长 10%</div>
                     </el-col>
                     <el-col class="card-panel-icon-wrapper" :span="8">
                         <SvgIcon name="money-cny-circle-line" />
@@ -75,18 +74,18 @@ const active = (key) => {
             </el-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
-            <el-card shadow="hover" class="top-card" :class="{'active-card': activeCode == 3}" @click="active(3)">
+            <el-card
+                shadow="hover"
+                class="top-card"
+                :class="{ 'active-card': activeCode == 3 }"
+                @click="active(3)">
                 <el-row>
                     <el-col class="card-panel-content-wrapper" :span="16">
-                        <div class="title">
-                            月总销量（9）
-                        </div>
+                        <div class="title">月总销量（9）</div>
                         <div class="content">
                             <p>￥11,214.00</p>
                         </div>
-                        <div class="description">
-                            自上月增长 10%
-                        </div>
+                        <div class="description">自上月增长 10%</div>
                     </el-col>
                     <el-col class="card-panel-icon-wrapper" :span="8">
                         <SvgIcon name="money-cny-circle-line" />
@@ -108,10 +107,10 @@ const active = (key) => {
         cursor: pointer;
 
         &.active-card {
-            background: linear-gradient(90deg,rgba(43,57,84,0.6), #2B3954);
+            background: linear-gradient(90deg, rgba(43, 57, 84, 0.6), #2b3954);
             color: #fff;
         }
-        
+
         :deep(.el-card__body) {
             height: calc(100% - 40px);
         }
@@ -132,7 +131,7 @@ const active = (key) => {
                 .content {
                     flex: 3;
                     display: flex;
-                    
+
                     & > p {
                         width: 100%;
                         margin: auto 10px;
@@ -157,6 +156,5 @@ const active = (key) => {
             }
         }
     }
-
 }
 </style>

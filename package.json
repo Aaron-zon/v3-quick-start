@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "prettier --write  \"src/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\""
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "element-plus": "^2.3.8",
     "js-cookie": "^3.0.5",
@@ -26,10 +28,12 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@aaron-zon/prettier-config": "^1.0.6",
     "@vitejs/plugin-vue": "^4.2.3",
     "fast-glob": "^3.3.1",
+    "prettier": "^3.0.3",
     "vite": "^4.4.0",
     "vite-plugin-svg-icons": "^2.0.1"
-  }
-  
+  },
+  "prettier": "@aaron-zon/prettier-config"
 }

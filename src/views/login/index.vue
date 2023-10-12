@@ -1,46 +1,48 @@
 <script setup>
-import { ref } from 'vue'
-import { User, Lock } from '@element-plus/icons-vue'
-import useLogin from './hooks/useLogin'
+import { ref } from 'vue';
+import { User, Lock } from '@element-plus/icons-vue';
+import useLogin from './hooks/useLogin';
 
 /** 表单区域DOM */
-const loginFormRef = ref(null)
+const loginFormRef = ref(null);
 
-/** 
+/**
  * loading：登录时按钮loading效果
  * loginFormData：表单数据
  * loginFormRules：表单规则
  * handleLogin：登录按钮按下
  */
-const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } = useLogin(loginFormRef)
-
+const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } =
+    useLogin(loginFormRef);
 </script>
 
 <template>
     <div class="login-container">
         <div class="login-card">
-
             <div class="title">
                 <img src="@/assets/layout/logo-text-2.png" />
             </div>
 
             <div class="content">
-                <el-form ref="loginFormRef" :model="loginFormData" :rules="loginFormRules" @keyup.enter="handleLogin">
+                <el-form
+                    ref="loginFormRef"
+                    :model="loginFormData"
+                    :rules="loginFormRules"
+                    @keyup.enter="handleLogin">
                     <!-- account -->
                     <el-form-item prop="account">
-                        <el-input 
+                        <el-input
                             v-model="loginFormData.account"
                             placeholder="账户"
                             type="text"
                             tabindex="1"
                             :prefix-icon="User"
                             size="large"
-                            :disabled="loading"
-                        />
+                            :disabled="loading" />
                     </el-form-item>
                     <!-- password -->
                     <el-form-item prop="password">
-                        <el-input 
+                        <el-input
                             v-model="loginFormData.password"
                             placeholder="密码"
                             type="password"
@@ -48,14 +50,19 @@ const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } = u
                             :prefix-icon="Lock"
                             size="large"
                             show-password
-                            :disabled="loading"
-                        />
+                            :disabled="loading" />
                     </el-form-item>
                     <el-form-item prop="remember" class="remember-box">
                         <el-checkbox v-model="loginFormData.remember">记住密码</el-checkbox>
                     </el-form-item>
 
-                    <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin">登 录</el-button>
+                    <el-button
+                        :loading="loading"
+                        type="primary"
+                        size="large"
+                        @click.prevent="handleLogin"
+                        >登 录</el-button
+                    >
                     <div class="visitor-wrapper" @click="visitorHandle">游客登录</div>
                 </el-form>
             </div>
@@ -77,7 +84,7 @@ const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } = u
         box-shadow: 0 0 10px #dcdfe6;
         background: #fff;
         overflow: hidden;
-        
+
         .title {
             display: flex;
             justify-content: center;
@@ -123,9 +130,9 @@ const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } = u
         text-align: center;
         font-size: 12px;
         margin: 10px 0;
-        color: rgb(50,205,50);
+        color: rgb(50, 205, 50);
         cursor: pointer;
-        text-decoration:underline;
+        text-decoration: underline;
     }
 }
 </style>

@@ -1,15 +1,15 @@
 <script setup>
-import { computed } from "vue";
+import { computed } from 'vue';
 
 const props = defineProps({
     prefix: {
         type: String,
-        default: 'icon'
+        default: 'icon',
     },
     name: {
         type: String,
         required: true,
-    }
+    },
 });
 
 // svg 的地址

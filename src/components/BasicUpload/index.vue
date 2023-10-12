@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { genFileId } from 'element-plus'
+import { ref } from 'vue';
+import { genFileId } from 'element-plus';
 const props = defineProps([
     'mode', // 上传控件模式
     'btnName', // 按钮名字
@@ -10,7 +10,7 @@ const props = defineProps([
     'url', // url
     'multiple', // 允许多文件上传
     'show-file-list', // 显示已上传文件
-    'autoUpload',  // 是否自动上传
+    'autoUpload', // 是否自动上传
     'disabled', // 是否禁用上传
     'limit', // 上传最大容许数
     'drag', // 是否启动拖拽上传
@@ -30,50 +30,45 @@ const handleChange = (file, files) => {
     }
     emit('change', {
         file,
-        fileList: files
+        fileList: files,
     });
-}
+};
 
 const handleOnlyFileExceed = (files) => {
     upload.value.clearFiles();
     const file = files[0];
     file.uid = genFileId();
     upload.value.handleStart(file);
-}
+};
 
 /** 预览 */
 const handlePictureCardPreview = (file) => {
-    console.log('handlePictureCardPreview')
-}
+    console.log('handlePictureCardPreview');
+};
 /** 下载 */
-const handleDownload = (file) => {
-
-}
+const handleDownload = (file) => {};
 /** 删除 */
-const handleRemove = (file) => {
-
-}
+const handleRemove = (file) => {};
 
 defineExpose({
     upload,
-    handlePictureCardPreview
-})
+    handlePictureCardPreview,
+});
 </script>
 
 <template>
     <div class="basice-upload-container">
         <!-- 1.单文件上传按钮 -->
         <template v-if="props.mode == 1 || props.mode == undefined">
-            <el-upload 
+            <el-upload
                 ref="upload"
-                :action="props.url || '#'" 
+                :action="props.url || '#'"
                 :disabled="props.disabled || false"
                 :auto-upload="props.autoUpload || false"
                 :show-file-list="props.showFileList || true"
                 :limit="1"
                 :on-change="handleChange"
-                :on-exceed="handleOnlyFileExceed"
-            >
+                :on-exceed="handleOnlyFileExceed">
                 <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
                 <template #tip>
                     <div class="el-upload__tip" v-if="props.descName">
@@ -85,14 +80,13 @@ defineExpose({
 
         <!-- 2.多文件上传按钮 -->
         <template v-else-if="props.mode == 2">
-            <el-upload 
-                :action="props.url || '#'" 
+            <el-upload
+                :action="props.url || '#'"
                 :auto-upload="false"
                 :disabled="props.disabled || false"
                 :limit="props.limit || 1"
                 multiple
-                :on-change="handleChange"
-            >
+                :on-change="handleChange">
                 <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
                 <template #tip>
                     <div class="el-upload__tip" v-if="props.descName">
@@ -104,14 +98,14 @@ defineExpose({
 
         <!-- 3.缩略图上传 -->
         <template v-else-if="props.mode == 3">
-            <el-upload ref="upload" 
-                :action="props.url || '#'" 
-                list-type="picture-card" 
-                :auto-upload="false" 
+            <el-upload
+                ref="upload"
+                :action="props.url || '#'"
+                list-type="picture-card"
+                :auto-upload="false"
                 :limit="props.limit || 1"
                 multiple
-                :on-change="handleChange"
-            >
+                :on-change="handleChange">
                 <el-icon><Plus /></el-icon>
                 <template #file="{ file }">
                     <div>
@@ -119,24 +113,21 @@ defineExpose({
                         <span class="el-upload-list__item-actions">
                             <span
                                 class="el-upload-list__item-preview"
-                                @click="handlePictureCardPreview(file)"
-                            >
+                                @click="handlePictureCardPreview(file)">
                                 <el-icon><zoom-in /></el-icon>
                             </span>
 
                             <span
                                 v-if="!disabled"
                                 class="el-upload-list__item-delete"
-                                @click="handleDownload(file)"
-                            >
+                                @click="handleDownload(file)">
                                 <el-icon><Download /></el-icon>
                             </span>
 
                             <span
                                 v-if="!disabled"
                                 class="el-upload-list__item-delete"
-                                @click="handleRemove(file)"
-                            >
+                                @click="handleRemove(file)">
                                 <el-icon><Delete /></el-icon>
                             </span>
                         </span>
@@ -150,24 +141,20 @@ defineExpose({
             <el-upload
                 drag
                 :action="url || '#'"
-                :auto-upload="false" 
+                :auto-upload="false"
                 :limit="props.limit || 1"
                 multiple
-                :on-change="handleChange"
-            >
+                :on-change="handleChange">
                 <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-                <div class="el-upload__text">
-                    拖动文件或 <em>点击这里</em>
-                </div>
+                <div class="el-upload__text">拖动文件或 <em>点击这里</em></div>
                 <template #tip>
-                <div class="el-upload__tip">
-                    {{ descName }}
-                </div>
+                    <div class="el-upload__tip">
+                        {{ descName }}
+                    </div>
                 </template>
             </el-upload>
         </template>
     </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

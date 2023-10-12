@@ -1,20 +1,20 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import { layout } from '@/layout/index.js'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { layout } from '@/layout/index.js';
 // 常驻路由
 export const constantRoutes = [
-  // 登录
+    // 登录
     {
         path: '/login',
         name: 'Login',
         meta: {
             title: '登录',
-            hidden: true
+            hidden: true,
         },
-        component: () => import('@/views/login/index.vue')
+        component: () => import('@/views/login/index.vue'),
     },
     // 首页
     {
-        path: '/', 
+        path: '/',
         component: layout,
         children: [
             {
@@ -23,10 +23,10 @@ export const constantRoutes = [
                 name: 'Home',
                 meta: {
                     title: '首页',
-                    svgIcon: 'dashboard'
-                }
-            }
-        ]
+                    svgIcon: 'dashboard',
+                },
+            },
+        ],
     },
     // 表格
     {
@@ -36,7 +36,7 @@ export const constantRoutes = [
         name: 'Table',
         meta: {
             title: '表格',
-            elIcon: 'Grid'
+            elIcon: 'Grid',
         },
         children: [
             {
@@ -44,137 +44,137 @@ export const constantRoutes = [
                 component: () => import('@/views/table/simpleTable/index.vue'),
                 name: 'SimpleTable',
                 meta: {
-                  title: '简单表格',
-                  elIcon: 'Grid'
-                }
+                    title: '简单表格',
+                    elIcon: 'Grid',
+                },
             },
-        ]
+        ],
     },
     // 表单
     {
-      path: '/form',
-      component: layout,
-      redirect: '/form/comprehensiveForm',
-      name: 'Form',
-      meta: {
-          title: '表单',
-          elIcon: 'Tickets'
-      },
-      children: [
-        {
-          path: 'comprehensiveForm',
-          component: () => import('@/views/form/comprehensiveForm/index.vue'),
-          name: 'ComprehensiveForm',
-          meta: {
-            title: '综合表单',
-          }
+        path: '/form',
+        component: layout,
+        redirect: '/form/comprehensiveForm',
+        name: 'Form',
+        meta: {
+            title: '表单',
+            elIcon: 'Tickets',
         },
-        {
-          path: 'stepForm',
-          component: () => import('@/views/form/stepForm/index.vue'),
-          name: 'StepForm',
-          meta: {
-            title: '分步表单',
-          }
-        }
-      ]
+        children: [
+            {
+                path: 'comprehensiveForm',
+                component: () => import('@/views/form/comprehensiveForm/index.vue'),
+                name: 'ComprehensiveForm',
+                meta: {
+                    title: '综合表单',
+                },
+            },
+            {
+                path: 'stepForm',
+                component: () => import('@/views/form/stepForm/index.vue'),
+                name: 'StepForm',
+                meta: {
+                    title: '分步表单',
+                },
+            },
+        ],
     },
     // 常用组件
     {
-      path: '/commonComponents',
-      component: layout,
-      redirect: '/commonComponents/upload',
-      name: 'CommonComponents',
-      meta: {
-          title: '常用组件',
-          elIcon: 'Menu'
-      },
-      children: [
-        // 上传文件
-        {
-          path: 'upload',
-          component: () => import('@/views/commonComponents/upload/index.vue'),
-          name: 'Upload',
-          meta: {
-            title: '上传',
-            elIcon: 'UploadFilled'
-          }
+        path: '/commonComponents',
+        component: layout,
+        redirect: '/commonComponents/upload',
+        name: 'CommonComponents',
+        meta: {
+            title: '常用组件',
+            elIcon: 'Menu',
         },
-        // 嵌套路由
-        {
-          path: "menu",
-          name: "Menu",
-          meta: {
-            title: "menu"
-          },
-          children: [
+        children: [
+            // 上传文件
             {
-              path: "menu-1",
-              component: () => import('@/views/test2/index.vue'),
-              name: "Menu-1",
-              meta: {
-                title: "menu-1"
-              }
-            },
-            {
-              path: "menu-2",
-              component: () => import('@/views/test2/index.vue'),
-              name: "Menu-2",
-              meta: {
-                title: "menu-2"
-              },
-              children: [
-                {
-                  path: "menu-2-1",
-                  component: () => import('@/views/test2/index.vue'),
-                  name: "Menu-2-1",
-                  meta: {
-                    title: "menu-2-1"
-                  }
+                path: 'upload',
+                component: () => import('@/views/commonComponents/upload/index.vue'),
+                name: 'Upload',
+                meta: {
+                    title: '上传',
+                    elIcon: 'UploadFilled',
                 },
-                {
-                  path: "menu-2-2",
-                  component: () => import('@/views/test2/index.vue'),
-                  name: "Menu-2-2",
-                  meta: {
-                    title: "menu-2-2"
-                  }
-                }
-              ]
             },
-          ]
-        },
-      ]
+            // 嵌套路由
+            {
+                path: 'menu',
+                name: 'Menu',
+                meta: {
+                    title: 'menu',
+                },
+                children: [
+                    {
+                        path: 'menu-1',
+                        component: () => import('@/views/test2/index.vue'),
+                        name: 'Menu-1',
+                        meta: {
+                            title: 'menu-1',
+                        },
+                    },
+                    {
+                        path: 'menu-2',
+                        component: () => import('@/views/test2/index.vue'),
+                        name: 'Menu-2',
+                        meta: {
+                            title: 'menu-2',
+                        },
+                        children: [
+                            {
+                                path: 'menu-2-1',
+                                component: () => import('@/views/test2/index.vue'),
+                                name: 'Menu-2-1',
+                                meta: {
+                                    title: 'menu-2-1',
+                                },
+                            },
+                            {
+                                path: 'menu-2-2',
+                                component: () => import('@/views/test2/index.vue'),
+                                name: 'Menu-2-2',
+                                meta: {
+                                    title: 'menu-2-2',
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
     },
     {
-      path: '/classicCase',
-      component: layout,
-      name: 'ClassicCase',
-      meta: {
-        title: '经典案例',
-        elIcon: 'CopyDocument'
-      },
-      children: [
-        {
-          path: 'userManage',
-          component: () => import('@/views/classicCase/usersManage/index.vue'),
-          name: 'UserManage',
-          meta: {
-            title: '用户管理',
-            elIcon: 'UserFilled'
-          }
+        path: '/classicCase',
+        component: layout,
+        name: 'ClassicCase',
+        meta: {
+            title: '经典案例',
+            elIcon: 'CopyDocument',
         },
-        {
-          path: 'personal',
-          component: () => import('@/views/classicCase/personal/index.vue'),
-          name: 'Personal',
-          meta: {
-            title: '个人设定',
-            elIcon: 'Avatar',
-          }
-        }
-      ]
-    }
+        children: [
+            {
+                path: 'userManage',
+                component: () => import('@/views/classicCase/usersManage/index.vue'),
+                name: 'UserManage',
+                meta: {
+                    title: '用户管理',
+                    elIcon: 'UserFilled',
+                },
+            },
+            {
+                path: 'personal',
+                component: () => import('@/views/classicCase/personal/index.vue'),
+                name: 'Personal',
+                meta: {
+                    title: '个人设定',
+                    elIcon: 'Avatar',
+                },
+            },
+        ],
+    },
 ];
 
 export const asyncRoutes = [
@@ -197,7 +197,7 @@ export const asyncRoutes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes: constantRoutes,
-})
+});
 
 /** 重置路由 */
 export function resetRouter() {
@@ -208,11 +208,10 @@ export function resetRouter() {
             if (name && meta.roles?.length) {
                 router.hasRoute(name) && router.removeRoute(name);
             }
-        })
+        });
     } catch {
         window.location.reload();
     }
 }
 
-
-export default router
+export default router;

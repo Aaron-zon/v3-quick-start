@@ -1,10 +1,10 @@
 <script setup>
-import { isExternal } from "@/utils/validate"
+import { isExternal } from '@/utils/validate';
 
 const props = defineProps({
     to: {
-        required: true
-    }
+        required: true,
+    },
 });
 </script>
 
@@ -17,5 +17,4 @@ const props = defineProps({
     </router-link>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,24 +1,23 @@
 <script setup>
-import NavigationBar from '../components/NavigationBar/index.vue'
-import Sidebar from '../components/Sidebar/index.vue'
-import AppMain from '../components/AppMain/index.vue'
-import useDefaultLayout from './hooks/useDefaultLayout'
+import NavigationBar from '../components/NavigationBar/index.vue';
+import Sidebar from '../components/Sidebar/index.vue';
+import AppMain from '../components/AppMain/index.vue';
+import useDefaultLayout from './hooks/useDefaultLayout';
 
 /**
  * classList: 计算当前应该显示的class，来控制sidebar的显示隐藏
  */
 const { classList } = useDefaultLayout();
-
 </script>
 
 <template>
     <div class="layout-container" :class="classList">
         <!-- left menu -->
         <Sidebar></Sidebar>
-        
+
         <div class="main-container">
             <!-- header -->
-            <div class="navigationBar" :class="{'fixed-header' : false}">
+            <div class="navigationBar" :class="{ 'fixed-header': false }">
                 <!-- NavigationBar -->
                 <NavigationBar></NavigationBar>
                 <!-- TagsView -->
@@ -26,8 +25,6 @@ const { classList } = useDefaultLayout();
             <!-- main -->
             <AppMain></AppMain>
         </div>
-        
-
     </div>
 </template>
 
@@ -63,12 +60,12 @@ const { classList } = useDefaultLayout();
     z-index: 1001;
     overflow: hidden;
     transition: width 0.28s;
-    width: var(--v3-sidebar-width); 
+    width: var(--v3-sidebar-width);
 }
 // hide situation
 .hideSidebar {
     .sidebar-container {
-       width: var(--v3-sidebar-hide-width); 
+        width: var(--v3-sidebar-hide-width);
     }
 
     .main-container {
@@ -79,5 +76,4 @@ const { classList } = useDefaultLayout();
         width: calc(100% - var(--v3-sidebar-hide-width));
     }
 }
-
 </style>

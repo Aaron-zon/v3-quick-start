@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive} from 'vue'
+import { ref, reactive } from 'vue';
 
 // 当前步骤
 const active = ref(0);
@@ -18,13 +18,11 @@ const ruleForm = ref({
 // 表单规则
 const rules = reactive({
     name: [
-        {required: true, message: '请输入收货人姓名', trigger: 'blur'},
-        {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
+        { required: true, message: '请输入收货人姓名', trigger: 'blur' },
+        { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
     ],
-    phone: [
-        {required: true, message: '请输入收货人手机号', trigger: 'blur'},
-    ]
-})
+    phone: [{ required: true, message: '请输入收货人手机号', trigger: 'blur' }],
+});
 
 /** 下一步按钮按下 */
 const nextForm = () => {
@@ -32,13 +30,13 @@ const nextForm = () => {
         if (valid) {
             active.value = 1;
         }
-    })
-}
+    });
+};
 
 /** 上一步按钮按下 */
 const prevForm = () => {
     active.value = 0;
-}
+};
 
 /** 提交按钮按下 */
 const submitForm = () => {
@@ -47,15 +45,14 @@ const submitForm = () => {
     setTimeout(() => {
         submitLoading.value = false;
         active.value = 2;
-    }, 1000)
-}
+    }, 1000);
+};
 
 /** 完成按钮按下 */
 const success = () => {
     ruleFormRef.value.resetFields();
     active.value = 0;
-}
-
+};
 </script>
 
 <template>
@@ -74,16 +71,19 @@ const success = () => {
             <!-- 成功状态 -->
             <el-row class="result-wrapper" v-if="active == 2">
                 <el-col :lg="10" :xl="10" :md="20" :sm="20" :xs="24">
-                    <el-result
-                        icon="success"
-                    >
-                    </el-result>
+                    <el-result icon="success"> </el-result>
                 </el-col>
             </el-row>
             <!-- 表单区域 -->
-            <el-row class="form-wrapper" :class="{'form-wrapper-space': active != 2}">
+            <el-row class="form-wrapper" :class="{ 'form-wrapper-space': active != 2 }">
                 <el-col :lg="10" :xl="10" :md="20" :sm="20" :xs="24">
-                    <el-form ref="ruleFormRef" :class="{'success': active == 2}" label-width="100px" :model="ruleForm" :rules="rules" status-icon >
+                    <el-form
+                        ref="ruleFormRef"
+                        :class="{ success: active == 2 }"
+                        label-width="100px"
+                        :model="ruleForm"
+                        :rules="rules"
+                        status-icon>
                         <el-form-item label="收货人" prop="name">
                             <el-input v-if="active == 0" v-model="ruleForm.name" />
                             <div class="red-only" v-else>{{ ruleForm.name }}</div>
@@ -102,12 +102,23 @@ const success = () => {
                         </el-form-item>
                     </el-form>
                     <div class="button-wrapper">
-                        <el-button v-show="active == 0" type="primary" @click="nextForm()">下一步</el-button>
-                        <el-button v-show="active == 1" type="primary" @click="submitForm()" :loading="submitLoading">提交</el-button>
-                        <el-button v-show="active == 1" type="primary" @click="prevForm()">上一步</el-button>
-                        <el-button v-show="active == 2" type="primary" @click="success()">完成</el-button>
+                        <el-button v-show="active == 0" type="primary" @click="nextForm()"
+                            >下一步</el-button
+                        >
+                        <el-button
+                            v-show="active == 1"
+                            type="primary"
+                            @click="submitForm()"
+                            :loading="submitLoading"
+                            >提交</el-button
+                        >
+                        <el-button v-show="active == 1" type="primary" @click="prevForm()"
+                            >上一步</el-button
+                        >
+                        <el-button v-show="active == 2" type="primary" @click="success()"
+                            >完成</el-button
+                        >
                     </div>
-                    
                 </el-col>
             </el-row>
         </el-card>
@@ -129,7 +140,7 @@ const success = () => {
                 padding: 0 100px;
             }
         }
-        
+
         .result-wrapper {
             display: flex;
             justify-content: center;
@@ -157,6 +168,5 @@ const success = () => {
             }
         }
     }
-    
 }
 </style>

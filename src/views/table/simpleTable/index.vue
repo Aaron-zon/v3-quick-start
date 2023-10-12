@@ -1,10 +1,10 @@
 <script setup>
-import BasicSearch from '@/components/BasicSearch/index.vue'
-import BasicDialog from '@/components/BasicDialog/index.vue'
-import BasicToolbar from '@/components/BasicToolbar/index.vue'
-import BasicTable from '@/components/BasicTable/index.vue'
+import BasicSearch from '@/components/BasicSearch/index.vue';
+import BasicDialog from '@/components/BasicDialog/index.vue';
+import BasicToolbar from '@/components/BasicToolbar/index.vue';
+import BasicTable from '@/components/BasicTable/index.vue';
 
-import { useSimpleTable, useTool, useDialog } from './hooks/index.js'
+import { useSimpleTable, useTool, useDialog } from './hooks/index.js';
 
 const { tableSetting, tableCol, tableData, toolbarData, getTableData } = useSimpleTable();
 const { searchLayouts, searchData } = useTool();
@@ -13,60 +13,51 @@ const { dialogProps, dialogLayouts, dialogData, dialogRules } = useDialog();
 /** 检索 */
 const searchHandle = () => {
     getTableData();
-}
+};
 
 /** 弹出框取消 */
-const dialogCancel = () => {
-
-}
+const dialogCancel = () => {};
 
 /** 弹出框确定 */
 const dialogConfirm = () => {
     dialogProps.value.dialog.formRef.validate((valid, fields) => {
-        console.log(fields)
-    })
-}
+        console.log(fields);
+    });
+};
 
 const changePage = (page) => {
     getTableData(page);
-}
-
+};
 </script>
 
 <template>
     <div class="simple-table-container app-container">
         <!-- 检索区域 -->
-        <BasicSearch 
-            :layouts="searchLayouts"
-            :modelData="searchData"
-            @search="searchHandle" 
-        />
+        <BasicSearch :layouts="searchLayouts" :modelData="searchData" @search="searchHandle" />
 
         <!-- table区域 -->
-        <el-card >
+        <el-card>
             <div class="toolbar-wrapper">
-                <BasicToolbar :toolData="toolbarData"/>
+                <BasicToolbar :toolData="toolbarData" />
             </div>
 
             <div class="table-wrapper">
-                <BasicTable 
+                <BasicTable
                     :tableSetting="tableSetting"
-                    :tableCol="tableCol" 
-                    :tableData="tableData" 
-                    @changePage="changePage"
-                />
+                    :tableCol="tableCol"
+                    :tableData="tableData"
+                    @changePage="changePage" />
             </div>
         </el-card>
 
         <!-- 弹窗 -->
-        <BasicDialog 
-            :dialogProps="dialogProps" 
-            :dialogData="dialogData" 
+        <BasicDialog
+            :dialogProps="dialogProps"
+            :dialogData="dialogData"
             :layouts="dialogLayouts"
             :rules="dialogRules"
             @cancel="dialogCancel"
-            @confirm="dialogConfirm"
-        />
+            @confirm="dialogConfirm" />
     </div>
 </template>
 

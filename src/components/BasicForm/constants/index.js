@@ -8,7 +8,7 @@ export const QUERY_COMPONENT_KEY = {
     datePicker: 'datePicker',
     timePicker: 'timePicker',
     timeSelect: 'timeSelect',
-}
+};
 
 export const QUERY_COMPONENT_TYPE = {
     default: 'el-input',
@@ -20,5 +20,4 @@ export const QUERY_COMPONENT_TYPE = {
     datePicker: 'el-date-picker',
     timePicker: 'el-time-picker',
     timeSelect: 'el-time-select',
-}
-
+};

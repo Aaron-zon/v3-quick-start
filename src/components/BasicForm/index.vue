@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js'
+import { ref, onMounted } from 'vue';
+import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js';
 
 const props = defineProps(['layouts', 'modelData', 'rules', 'basicFormRef']);
 const formRef = ref(null);
@@ -8,7 +8,7 @@ onMounted(() => {
     if (props.basicFormRef) {
         props.basicFormRef.formRef = formRef;
     }
-})
+});
 /** 获取当前组件 */
 const getQueryComponentName = (item, i) => {
     const componentType = QUERY_COMPONENT_TYPE[item.type];
@@ -17,12 +17,12 @@ const getQueryComponentName = (item, i) => {
         return QUERY_COMPONENT_TYPE['default'];
     }
     return componentType;
-}
+};
 
 /** 判断组件是否是共生组件 */
 const checkParagenesis = (item) => {
     return [QUERY_COMPONENT_KEY.select].includes(item.type);
-}
+};
 
 /** 获取组件属性 */
 const getComponentBind = (item) => {
@@ -31,8 +31,8 @@ const getComponentBind = (item) => {
     }
 
     return {
-        ...item.props
-    }
+        ...item.props,
+    };
 };
 
 /** 获取组件事件 */
@@ -41,10 +41,10 @@ const getComponentEvents = (item) => {
     const modelData = props.modelData;
     Object.entries(item.events || {}).forEach((data) => {
         const [key, fn] = data;
-        events[key] = (...params) => fn({modelData}, ...params);
-    })
+        events[key] = (...params) => fn({ modelData }, ...params);
+    });
     return events;
-}
+};
 
 /** 返回自动补全组件的下拉列表数据 */
 const autocompleteQuerySearch = function (queryString, cb) {
@@ -53,7 +53,7 @@ const autocompleteQuerySearch = function (queryString, cb) {
         ? this.options.filter(autocompleteFilter(queryString, autocompleteMode))
         : this.options;
     cb(results);
-}
+};
 
 /** 根据输入值对自动补全组件的数据进行筛选 */
 const autocompleteFilter = (queryString, autocompleteMode) => {
@@ -63,9 +63,8 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
             result = restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
         }
         return result;
-    }
-}
-
+    };
+};
 </script>
 
 <template>
@@ -73,21 +72,19 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
         <el-form class="form-wrapper" ref="formRef" :rules="props.rules" :model="props.modelData">
             <div class="query-wrapper">
                 <template v-for="(item, i) in props.layouts" :key="i">
-                    <el-form-item :label="item.name" :prop="item.model" >
+                    <el-form-item :label="item.name" :prop="item.model">
                         <!-- select外组件 -->
                         <component
-                            :is="getQueryComponentName(item, i)" 
+                            :is="getQueryComponentName(item, i)"
                             v-model="props.modelData[item.model]"
                             v-bind="getComponentBind(item)"
-                            v-on="getComponentEvents(item)"
-                        >
+                            v-on="getComponentEvents(item)">
                             <template v-if="checkParagenesis(item)" #default>
-                                <el-option 
-                                    v-for="(option, oIdx) in item.props.options" 
-                                    :key="oIdx" 
-                                    :label="option.label" 
-                                    :value="option.value" 
-                                />
+                                <el-option
+                                    v-for="(option, oIdx) in item.props.options"
+                                    :key="oIdx"
+                                    :label="option.label"
+                                    :value="option.value" />
                             </template>
                         </component>
                     </el-form-item>
@@ -105,13 +102,13 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
             display: flex;
             justify-content: flex-start;
             flex-wrap: wrap;
-          
+
             .el-form-item {
                 margin: 20px 20px;
                 width: 280px;
                 margin: 10px 10px;
-                
-                &>:deep(.el-form-item__label) {
+
+                & > :deep(.el-form-item__label) {
                     width: 90px;
                 }
                 :deep(.el-autocomplete) {
@@ -119,7 +116,6 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
                 }
             }
         }
-
     }
 }
 </style>

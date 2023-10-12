@@ -1,6 +1,6 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { useRoute} from 'vue-router'
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
@@ -9,21 +9,21 @@ const breadcrumbs = ref([]);
 
 // 路由变化时修改面包屑导航
 const getBreadcrumb = () => {
-    breadcrumbs.value = route.matched.filter(item => {
+    breadcrumbs.value = route.matched.filter((item) => {
         return item.meta && item.meta.title && item.meta.breadcrumb !== false;
-    })
-}
+    });
+};
 
 // 监听路由变化
 watch(
     () => route.path,
     (path) => {
-        if (path.startsWith("/redirect/")) {
-            return ;
+        if (path.startsWith('/redirect/')) {
+            return;
         }
         getBreadcrumb();
-    }
-)
+    },
+);
 getBreadcrumb();
 </script>
 <template>
@@ -62,6 +62,5 @@ getBreadcrumb();
             color: rgb(64, 158, 255) !important;
         }
     }
-    
 }
 </style>

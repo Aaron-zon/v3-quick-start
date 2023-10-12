@@ -1,6 +1,6 @@
 import { ref, onMounted, reactive } from 'vue';
-import { QUERY_COMPONENT_KEY } from '@/components/BasicForm/constants/index.js'
-import { getSimpleTableApi } from '@/api/table'
+import { QUERY_COMPONENT_KEY } from '@/components/BasicForm/constants/index.js';
+import { getSimpleTableApi } from '@/api/table';
 
 /** 1.检索区域 Start */
 /** 检索栏结构 */
@@ -10,7 +10,7 @@ const searchLayouts = ref([
         name: '姓名:',
         model: 'name',
         props: {
-            placeholder: '请输入名字'
+            placeholder: '请输入名字',
         },
     },
     {
@@ -28,8 +28,8 @@ const searchLayouts = ref([
                 { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
                 { value: 'babel', link: 'https://github.com/babel/babel' },
             ],
-        }
-    }, 
+        },
+    },
     {
         type: QUERY_COMPONENT_KEY.select,
         name: '科目:',
@@ -53,7 +53,7 @@ const searchLayouts = ref([
                     label: '科目4',
                 },
             ],
-        }
+        },
     },
     {
         type: QUERY_COMPONENT_KEY.datePicker,
@@ -62,18 +62,18 @@ const searchLayouts = ref([
         props: {
             placeholder: '请输入日期',
             type: 'daterange',
-            'start-placeholder': "开始日期",
-            'end-placeholder': "结束日期",
-        }
-    }, 
+            'start-placeholder': '开始日期',
+            'end-placeholder': '结束日期',
+        },
+    },
 ]);
 /** 检索栏数据 */
 const searchData = ref({
     name: '',
     autocomplete: '',
     datePickerDaterange: '',
-    select: ''
-})
+    select: '',
+});
 /** 检索区域 End */
 
 /** 2.弹出框 Start */
@@ -82,7 +82,7 @@ const dialogProps = ref({
     show: false,
     props: {
         title: 'Table弹出框',
-    }
+    },
 });
 /** 弹出框结构 */
 const dialogLayouts = ref([
@@ -91,7 +91,7 @@ const dialogLayouts = ref([
         name: '姓名:',
         model: 'name',
         props: {
-            placeholder: '请输入名字'
+            placeholder: '请输入名字',
         },
     },
     {
@@ -109,8 +109,8 @@ const dialogLayouts = ref([
                 { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
                 { value: 'babel', link: 'https://github.com/babel/babel' },
             ],
-        }
-    }, 
+        },
+    },
     {
         type: QUERY_COMPONENT_KEY.select,
         name: '科目:',
@@ -134,7 +134,7 @@ const dialogLayouts = ref([
                     label: '科目4',
                 },
             ],
-        }
+        },
     },
     {
         type: QUERY_COMPONENT_KEY.datePicker,
@@ -143,32 +143,27 @@ const dialogLayouts = ref([
         props: {
             placeholder: '请输入日期',
             type: 'daterange',
-            'start-placeholder': "开始日期",
-            'end-placeholder': "结束日期",
-        }
-    }, 
-])
+            'start-placeholder': '开始日期',
+            'end-placeholder': '结束日期',
+        },
+    },
+]);
 /** 弹出框数据 */
 const dialogData = ref({
     name: '',
     autocomplete: '',
     datePickerDaterange: '',
-    select: ''
-})
+    select: '',
+});
 // 弹出框输入内容规则
 const dialogRules = reactive({
-    name: [
-        {required: true, message: '请输入名称', trigger: 'blur'},
-    ],
-    select: [
-        { required: true, message: '请输入科目', trigger: 'change'}
-    ],
+    name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
+    select: [{ required: true, message: '请输入科目', trigger: 'change' }],
     datePickerDaterange: [
-        { type: 'date', required: true, message: '请输入日期', trigger: 'change'}
-    ]
+        { type: 'date', required: true, message: '请输入日期', trigger: 'change' },
+    ],
 });
 /** 弹出框 End */
-
 
 /** 3.table Start */
 /** 每次检索最大数据条数 */
@@ -179,36 +174,35 @@ const tableData = ref({
     pageSize: 10,
     data: [],
     currentPage: 1,
-    getTableData: null
+    getTableData: null,
 });
 /** 表格功能键栏 */
 const toolbarData = ref([
     {
         name: '新增',
         props: {
-            type: 'primary'
-        }, 
+            type: 'primary',
+        },
         events: {
             click: () => {
                 dialogProps.value.show = true;
-            }
-        }
-
-    }
-])
+            },
+        },
+    },
+]);
 /** 表格设定 */
 const tableSetting = ref({
     loading: true, // 表格加载状态
     events: {
         'selection-change': (val) => {
-            console.log(val)
-        }
-    }
-})
+            console.log(val);
+        },
+    },
+});
 /** 表格列设定 */
 const tableCol = ref([
     {
-        type: 'selection'
+        type: 'selection',
     },
     {
         prop: 'name',
@@ -233,8 +227,8 @@ const tableCol = ref([
     {
         prop: 'endDate',
         label: '结束时间',
-    }
-])
+    },
+]);
 /** table End */
 
 /** 表格模块 */
@@ -242,7 +236,7 @@ export const useSimpleTable = () => {
     onMounted(() => {
         getTableData();
         tableData.value.getTableData = getTableData;
-    })
+    });
 
     /** 获取表格数据 */
     const getTableData = async (currentPage = 1) => {
@@ -251,20 +245,20 @@ export const useSimpleTable = () => {
         const res = await getSimpleTableApi({
             currentPage: currentPage.value,
             size: size.value,
-            currentPage
+            currentPage,
         });
 
         // 数据渲染
         if (res.code == 200) {
-            tableData.value.total = res.data.total
-            tableData.value.data = res.data.list
+            tableData.value.total = res.data.total;
+            tableData.value.data = res.data.list;
             tableData.value.currentPage = currentPage;
-        } 
+        }
         // 关闭loading
         tableSetting.value.loading = false;
         // 返回获取数据是否成功
-        return res.code == 200
-    }
+        return res.code == 200;
+    };
 
     return {
         size,
@@ -273,8 +267,8 @@ export const useSimpleTable = () => {
         tableData,
         toolbarData,
         getTableData,
-    }
-}
+    };
+};
 
 /** 工具模块 */
 export const useTool = (layouts, data) => {
@@ -285,17 +279,16 @@ export const useTool = (layouts, data) => {
         if (data) {
             searchData.value = data;
         }
-    })
+    });
 
     return {
         searchLayouts,
         searchData,
-    }
-}
+    };
+};
 
 /** 弹窗模块 */
 export const useDialog = (layouts, data) => {
-
     onMounted(() => {
         if (layouts) {
             dialogLayouts.value = layouts;
@@ -304,12 +297,12 @@ export const useDialog = (layouts, data) => {
         if (data) {
             dialogData.value = data;
         }
-    })
+    });
 
     return {
         dialogProps,
         dialogLayouts,
         dialogData,
-        dialogRules
-    }
-}
+        dialogRules,
+    };
+};

@@ -1,7 +1,7 @@
 // 全局 CSS 变量
-@import "./variables.css";
+@import './variables.css';
 // Transition
-@import "./transition.scss";
+@import './transition.scss';
 
 // 业务画面外边距
 .app-container {
@@ -73,7 +73,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+    font-family:
+        Helvetica Neue,
+        Helvetica,
+        PingFang SC,
+        Hiragino Sans GB,
+        Microsoft YaHei,
+        Arial,
+        sans-serif;
 }
 
 #app {
@@ -99,15 +106,14 @@ a {
 a,
 a:focus,
 a:hover {
-  color: inherit;
-  outline: none;
-  text-decoration: none;
+    color: inherit;
+    outline: none;
+    text-decoration: none;
 }
 
 div:focus {
-  outline: none;
+    outline: none;
 }
-
 
 h1 {
     font-size: 3.2em;
@@ -133,4 +139,3 @@ button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
-

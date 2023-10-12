@@ -11,6 +11,12 @@ dependencies:
   axios:
     specifier: ^1.4.0
     version: 1.4.0
+  dayjs:
+    specifier: ^1.11.10
+    version: 1.11.10
+  echarts:
+    specifier: ^5.4.3
+    version: 5.4.3
   element-plus:
     specifier: ^2.3.8
     version: 2.3.8(vue@3.3.4)
@@ -49,12 +55,18 @@ dependencies:
     version: 4.2.4(vue@3.3.4)
 
 devDependencies:
+  '@aaron-zon/prettier-config':
+    specifier: ^1.0.6
+    version: 1.0.6
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
     version: 4.2.3(vite@4.4.0)(vue@3.3.4)
   fast-glob:
     specifier: ^3.3.1
     version: 3.3.1
+  prettier:
+    specifier: ^3.0.3
+    version: 3.0.3
   vite:
     specifier: ^4.4.0
     version: 4.4.0(sass@1.63.6)
@@ -63,6 +75,10 @@ devDependencies:
     version: 2.0.1(vite@4.4.0)
 
 packages:
+
+  /@aaron-zon/prettier-config@1.0.6:
+    resolution: {integrity: sha512-q+qHi++zJlCWePr/Y1qhzBAdh1nfqPEHtZVB1Rx5xjgRW8MVZ3W1IXrWLMSYtfhRW6m/5ItZvV52s4HvFSyn6A==}
+    dev: true
 
   /@babel/helper-string-parser@7.22.5:
     resolution: {integrity: sha512-mM4COjgZox8U+JcXQwPijIZLElkgEpO5rsERVDJTc2qfCDfERyob6k5WegS14SX18IIjv+XD+GrqNumY5JRCDw==}
@@ -758,8 +774,8 @@ packages:
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
-  /dayjs@1.11.9:
-    resolution: {integrity: sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==}
+  /dayjs@1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
     dev: false
 
   /debug@2.6.9:
@@ -890,6 +906,13 @@ packages:
       domhandler: 5.0.3
     dev: false
 
+  /echarts@5.4.3:
+    resolution: {integrity: sha512-mYKxLxhzy6zyTi/FaEbJMOZU1ULGEQHaeIeuMR5L+JnJTpz+YR03mnnpBhbR4+UYJAgiXgpyTVLffPAjOTLkZA==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.4.4
+    dev: false
+
   /element-plus@2.3.8(vue@3.3.4):
     resolution: {integrity: sha512-yHQR0/tG2LvPkpGUt7Te/hPmP2XW/BytBNUbx+EFO54VnGCOE3upmQcVffNp1PLgwg9sthYDXontUWpnpmLPJw==}
     peerDependencies:
@@ -903,7 +926,7 @@ packages:
       '@types/lodash-es': 4.17.8
       '@vueuse/core': 9.13.0(vue@3.3.4)
       async-validator: 4.2.5
-      dayjs: 1.11.9
+      dayjs: 1.11.10
       escape-html: 1.0.3
       lodash: 4.17.21
       lodash-es: 4.17.21
@@ -1679,6 +1702,12 @@ packages:
       posthtml-render: 1.4.0
     dev: true
 
+  /prettier@3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
@@ -1984,6 +2013,10 @@ packages:
     resolution: {integrity: sha512-/y956gpUo9ZNCb99YjxG7OaslxZWHfCHAUUfshwqOXmxUIvqLjVO581BT+gM59+QV9tFe6/CGG53tsA1Y7RSdg==}
     dev: true
 
+  /tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
   /union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
     engines: {node: '>=0.10.0'}
@@ -2119,3 +2152,9 @@ packages:
       '@vue/runtime-dom': 3.3.4
       '@vue/server-renderer': 3.3.4(vue@3.3.4)
       '@vue/shared': 3.3.4
+
+  /zrender@5.4.4:
+    resolution: {integrity: sha512-0VxCNJ7AGOMCWeHVyTrGzUgrK4asT4ml9PEkeGirAkKNYXYzoPJCLvmyfdoOXcjTHPs10OZVMfD1Rwg16AZyYw==}
+    dependencies:
+      tslib: 2.3.0
+    dev: false

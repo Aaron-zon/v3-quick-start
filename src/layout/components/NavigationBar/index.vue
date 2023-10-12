@@ -1,12 +1,12 @@
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAppStore } from '@/store/modules/app'
-import { useUserStore } from '@/store/modules/user'
-import { UserFilled } from '@element-plus/icons-vue'
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAppStore } from '@/store/modules/app';
+import { useUserStore } from '@/store/modules/user';
+import { UserFilled } from '@element-plus/icons-vue';
 
-import Hamburger from '../Hamburger/index.vue'
-import Breadcrumb from '../Breadcrumb/index.vue'
+import Hamburger from '../Hamburger/index.vue';
+import Breadcrumb from '../Breadcrumb/index.vue';
 
 const router = useRouter();
 const appStore = useAppStore();
@@ -16,15 +16,14 @@ const userStore = useUserStore();
 const sidebar = computed(() => appStore.sidebar);
 const toggleSidebar = () => {
     appStore.toggleSidebar(false);
-}
+};
 
 // 登出
 const logout = () => {
     // 清除vuex的缓存数据
     userStore.logout();
-    router.push("/login");
-}
-
+    router.push('/login');
+};
 </script>
 
 <template>
@@ -37,7 +36,6 @@ const logout = () => {
 
         <!-- right menu -->
         <div class="right-menu">
-
             <!-- user btn -->
             <el-dropdown class="right-menu-item">
                 <div class="right-menu-avatar">
@@ -50,21 +48,18 @@ const logout = () => {
                             <span>Logout</span>
                         </el-dropdown-item>
                     </el-dropdown-menu>
-
                 </template>
-
             </el-dropdown>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-
 .navigation-bar-container {
     height: var(--v3-navigationbar-height);
     overflow: hidden;
     background: var(--v3-navigationbar-background);
-    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
     .hamburger-container {
         display: block;
@@ -76,7 +71,7 @@ const logout = () => {
         cursor: pointer;
 
         &:hover {
-            background: rgba(0, 0, 0, .025)
+            background: rgba(0, 0, 0, 0.025);
         }
     }
 
@@ -92,7 +87,7 @@ const logout = () => {
         height: 100%;
         align-items: center;
         margin-right: 10px;
-        
+
         // line-height: var(--v3-navigationbar-height);
 
         .right-menu-item {
@@ -110,10 +105,8 @@ const logout = () => {
                 span {
                     font-size: 16px;
                 }
-                
             }
         }
     }
 }
-
 </style>

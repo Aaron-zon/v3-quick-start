@@ -1,30 +1,30 @@
 <script setup>
-
-const emits = defineEmits(['setAvatar'])
-const srcUrl = 'https://avatars.githubusercontent.com/u/47178158?s=400&v=4';
+import { ref } from 'vue';
+const emits = defineEmits(['setAvatar']);
+const srcUrl = ref('https://avatars.githubusercontent.com/u/47178158?s=400&v=4');
 
 const handleChange = (file) => {
-    console.log(file)
     const reader = new FileReader();
     // 转换为base64
     reader.readAsDataURL(file.raw);
 
     reader.onload = () => {
         // 读取成功,赋值给数据变量
-        emits('setAvatar', reader.result)
+        emits('setAvatar', reader.result);
+        srcUrl.value = reader.result;
     };
-}
+};
 </script>
 
 <template>
-    <el-upload ref="avatarUpload"
-        class="avatar-upload-container" 
+    <el-upload
+        ref="avatarUpload"
+        class="avatar-upload-container"
         :auto-upload="false"
         :show-file-list="false"
         :limit="1"
-        action="#" 
-        :on-change="handleChange"
-    >
+        action="#"
+        :on-change="handleChange">
         <el-avatar :src="srcUrl" :size="180" />
         <div class="edit-avatar">
             <el-icon><EditPen /></el-icon>
@@ -32,9 +32,7 @@ const handleChange = (file) => {
         </div>
     </el-upload>
 
-    <div class="set-avatar-container">
-
-    </div>
+    <div class="set-avatar-container"></div>
 </template>
 
 <style lang="scss" scoped>
@@ -68,5 +66,4 @@ const handleChange = (file) => {
         }
     }
 }
-
 </style>
