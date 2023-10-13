@@ -7,6 +7,7 @@ import { UserFilled } from '@element-plus/icons-vue';
 
 import Hamburger from '../Hamburger/index.vue';
 import Breadcrumb from '../Breadcrumb/index.vue';
+import Notify from '@/components/Notify/index.vue';
 
 const router = useRouter();
 const appStore = useAppStore();
@@ -37,6 +38,7 @@ const logout = () => {
         <!-- right menu -->
         <div class="right-menu">
             <!-- user btn -->
+            <Notify class="right-menu-item" />
             <el-dropdown class="right-menu-item">
                 <div class="right-menu-avatar">
                     <el-avatar :icon="UserFilled" :size="30" />
@@ -91,7 +93,6 @@ const logout = () => {
         // line-height: var(--v3-navigationbar-height);
 
         .right-menu-item {
-            height: 30px;
             padding: 0 10px;
             cursor: pointer;
 
