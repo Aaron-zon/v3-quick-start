@@ -4,6 +4,7 @@ import { ElMessage } from 'element-plus';
 import { Bell } from '@element-plus/icons-vue';
 import { notifyData, messageData, todoData } from './data.js';
 import NotifyList from './NotifyList.vue';
+// 计算消息数
 const badgeValue = computed(() => {
     let value = 0;
     for (let i = 0; i < data.value.length; i++) {
@@ -12,9 +13,13 @@ const badgeValue = computed(() => {
     return value;
 });
 
+// 最大显示数
 const badgeMax = 99;
+// 弹出框宽度
 const popoverWidth = 350;
+// 当前tab名称
 const activeName = ref('通知');
+// tab模板
 const data = ref([
     {
         name: '通知',
@@ -34,7 +39,7 @@ const data = ref([
         list: todoData,
     },
 ]);
-
+// 点击历史记录
 const handleHistory = () => {
     ElMessage.success(`跳转到${activeName.value}历史页面`);
 };
@@ -87,5 +92,8 @@ const handleHistory = () => {
 
 :deep(.el-badge__content) {
     box-sizing: border-box;
+    height: 16px;
+    min-width: 16px;
+    padding: 3px;
 }
 </style>

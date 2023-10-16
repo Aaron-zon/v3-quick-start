@@ -2,10 +2,13 @@
 @import './variables.css';
 // Transition
 @import './transition.scss';
+// mixin
+@import "./mixins.scss";
 
 // 业务画面外边距
 .app-container {
     padding: 20px;
+    min-width: 1024px;
 }
 
 .app-margin-container {
@@ -18,23 +21,7 @@
     padding: 20px;
     overflow: auto;
 
-    &::-webkit-scrollbar {
-        width: 8px;
-        height: 16px;
-        background: var(--v3-appmain-scollbar-background);
-    }
-
-    &::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        background-color: var(--v3-appmain-scollbar-background);
-    }
-
-    &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: var(--v3-appmain-scrollbar-thumb-background);
-    }
+    @extend %scrollbar;
 }
 
 .app-margin-scroll-container {
@@ -43,23 +30,7 @@
     margin: 20px;
     overflow: auto;
 
-    &::-webkit-scrollbar {
-        width: 8px;
-        height: 16px;
-        background: var(--v3-appmain-scollbar-background);
-    }
-
-    &::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        background-color: var(--v3-appmain-scollbar-background);
-    }
-
-    &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: var(--v3-appmain-scrollbar-thumb-background);
-    }
+    @extend %scrollbar;
 }
 
 html {
@@ -81,6 +52,8 @@ body {
         Microsoft YaHei,
         Arial,
         sans-serif;
+
+    @extend %scrollbar;
 }
 
 #app {
@@ -138,4 +111,16 @@ button:hover {
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+/*鼠标点击后移开，恢复本身样式*/
+.el-button:focus:not(.el-button:hover) {
+    border: 1px solid var(--el-button-border-color);
+    color: var(--el-button-text-color);
+    background: var(--el-button-bg-color);
+}
+
+.el-dialog {
+    overflow: hidden;
+    min-width: 400px;
 }

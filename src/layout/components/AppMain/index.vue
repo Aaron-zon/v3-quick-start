@@ -24,7 +24,6 @@ const key = computed(() => {
 .app-main-container {
     min-height: var(--v3-appmain-height);
     width: 100%;
-    min-width: 1024px;
     position: relative;
     overflow: hidden;
     background-color: var(--v3-body-bg-color);

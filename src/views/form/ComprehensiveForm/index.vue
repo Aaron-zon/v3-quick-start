@@ -31,11 +31,11 @@ const rules = reactive({
 });
 
 const submitForm = (refName) => {
-    alert("立即创建")
+    alert('立即创建');
 };
 
 const resetForm = (refName) => {
-    alert("重置")
+    alert('重置');
 };
 </script>
 
@@ -148,14 +148,13 @@ const resetForm = (refName) => {
 
 <style lang="scss" scoped>
 .comprehensive-form-container {
-
     .set-wrapper {
         margin: 10px 40px;
     }
 
     .form-wrapper {
         margin: 0 auto;
-        margin-bottom: 100px;
+        margin-bottom: 50px;
         width: 800px;
 
         .button-wrapper {

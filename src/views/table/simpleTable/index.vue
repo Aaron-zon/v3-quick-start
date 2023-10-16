@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import BasicSearch from '@/components/BasicSearch/index.vue';
 import BasicDialog from '@/components/BasicDialog/index.vue';
 import BasicToolbar from '@/components/BasicToolbar/index.vue';
@@ -6,7 +7,8 @@ import BasicTable from '@/components/BasicTable/index.vue';
 
 import { useSimpleTable, useTool, useDialog } from './hooks/index.js';
 
-const { tableSetting, tableCol, tableData, toolbarData, getTableData } = useSimpleTable();
+const { tableSetting, tableCol, tableData, toolbarData, rightToolData, getTableData } =
+    useSimpleTable();
 const { searchLayouts, searchData } = useTool();
 const { dialogProps, dialogLayouts, dialogData, dialogRules } = useDialog();
 
@@ -15,15 +17,13 @@ const searchHandle = () => {
     getTableData();
 };
 
+// 弹出框实例
+const dialog = ref(null);
 /** 弹出框取消 */
 const dialogCancel = () => {};
 
 /** 弹出框确定 */
-const dialogConfirm = () => {
-    dialogProps.value.dialog.formRef.validate((valid, fields) => {
-        console.log(fields);
-    });
-};
+const dialogConfirm = () => {};
 
 const changePage = (page) => {
     getTableData(page);
@@ -38,7 +38,7 @@ const changePage = (page) => {
         <!-- table区域 -->
         <el-card>
             <div class="toolbar-wrapper">
-                <BasicToolbar :toolData="toolbarData" />
+                <BasicToolbar :toolData="toolbarData" :rightToolData="rightToolData" />
             </div>
 
             <div class="table-wrapper">
@@ -52,6 +52,7 @@ const changePage = (page) => {
 
         <!-- 弹窗 -->
         <BasicDialog
+            ref="dialog"
             :dialogProps="dialogProps"
             :dialogData="dialogData"
             :layouts="dialogLayouts"

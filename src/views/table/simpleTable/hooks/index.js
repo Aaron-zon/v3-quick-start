@@ -82,6 +82,7 @@ const dialogProps = ref({
     show: false,
     props: {
         title: 'Table弹出框',
+        width: '40%'
     },
 });
 /** 弹出框结构 */
@@ -190,6 +191,18 @@ const toolbarData = ref([
         },
     },
 ]);
+const rightToolData = ref([
+    {
+        props: {
+            icon: 'Download'
+        },
+        events: {
+            click: () => {
+                alert('下载文件')
+            }
+        }
+    }
+])
 /** 表格设定 */
 const tableSetting = ref({
     loading: true, // 表格加载状态
@@ -266,6 +279,7 @@ export const useSimpleTable = () => {
         tableCol,
         tableData,
         toolbarData,
+        rightToolData,
         getTableData,
     };
 };

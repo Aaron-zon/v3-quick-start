@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineExpose } from 'vue';
 import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js';
 
 const props = defineProps(['layouts', 'modelData', 'rules', 'basicFormRef']);
@@ -65,6 +65,10 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
         return result;
     };
 };
+
+defineExpose({
+    ref: formRef,
+});
 </script>
 
 <template>
