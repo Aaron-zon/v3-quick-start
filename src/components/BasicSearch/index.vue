@@ -37,9 +37,9 @@ onMounted(() => {
                 </template>
                 <template v-else>
                     <el-button class="tool-btn" @click="resetHandle">重置</el-button>
-                    <el-button class="tool-btn" type="primary" @click="searchHandle"
-                        >检索</el-button
-                    >
+                    <el-button class="tool-btn" type="primary" @click="searchHandle">
+                        检索
+                    </el-button>
                 </template>
             </div>
         </el-card>
@@ -58,13 +58,12 @@ onMounted(() => {
                 flex: 9;
             }
             .tool-wrapper {
-                padding-top: 10px;
                 padding-right: 5px;
                 width: 10%;
                 flex: 1;
-
                 display: flex;
                 justify-content: center;
+                align-items: center;
             }
         }
     }

@@ -105,7 +105,7 @@ const autocompleteFilter = (queryString, autocompleteMode) => {
 
             .el-form-item {
                 margin: 20px 20px;
-                width: 280px;
+                width: 300px;
                 margin: 10px 10px;
 
                 & > :deep(.el-form-item__label) {

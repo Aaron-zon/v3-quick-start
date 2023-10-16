@@ -56,8 +56,8 @@ dependencies:
 
 devDependencies:
   '@aaron-zon/prettier-config':
-    specifier: ^1.0.6
-    version: 1.0.6
+    specifier: ^1.0.7
+    version: 1.0.7
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
     version: 4.2.3(vite@4.4.0)(vue@3.3.4)
@@ -76,8 +76,8 @@ devDependencies:
 
 packages:
 
-  /@aaron-zon/prettier-config@1.0.6:
-    resolution: {integrity: sha512-q+qHi++zJlCWePr/Y1qhzBAdh1nfqPEHtZVB1Rx5xjgRW8MVZ3W1IXrWLMSYtfhRW6m/5ItZvV52s4HvFSyn6A==}
+  /@aaron-zon/prettier-config@1.0.7:
+    resolution: {integrity: sha512-vfCy4Z620PlZw19LlM/ShLpsmN5r73ktRzmkFLkrDA5WzD3aRDAQ03HBmXuE79Tbb5oDQynObFpl3lKjCeK9Mg==}
     dev: true
 
   /@babel/helper-string-parser@7.22.5:
@@ -656,7 +656,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
 
   /class-utils@0.3.6:
     resolution: {integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==}
@@ -1122,8 +1122,8 @@ packages:
       universalify: 2.0.0
     dev: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -1777,7 +1777,7 @@ packages:
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /run-parallel@1.2.0:
@@ -2117,7 +2117,7 @@ packages:
       rollup: 3.27.2
       sass: 1.63.6
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /vue-demi@0.14.5(vue@3.3.4):

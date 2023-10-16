@@ -86,6 +86,6 @@ const handleHistory = () => {
 }
 
 :deep(.el-badge__content) {
-    height: 16px;
+    box-sizing: border-box;
 }
 </style>
