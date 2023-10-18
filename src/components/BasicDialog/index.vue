@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineExpose } from 'vue';
+import { ref, onMounted } from 'vue';
 import { merge } from 'lodash-es';
 import BasicForm from '@/components/BasicForm/index.vue';
 import BasicToolbar from '@/components/BasicToolbar/index.vue';

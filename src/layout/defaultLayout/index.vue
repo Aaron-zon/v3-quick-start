@@ -1,5 +1,6 @@
 <script setup>
 import NavigationBar from '../components/NavigationBar/index.vue';
+import TagsView from '../components/TagsView/index.vue';
 import Sidebar from '../components/Sidebar/index.vue';
 import AppMain from '../components/AppMain/index.vue';
 import useDefaultLayout from './hooks/useDefaultLayout';
@@ -21,6 +22,7 @@ const { classList } = useDefaultLayout();
                 <!-- NavigationBar -->
                 <NavigationBar></NavigationBar>
                 <!-- TagsView -->
+                <TagsView></TagsView>
             </div>
             <!-- main -->
             <AppMain></AppMain>
