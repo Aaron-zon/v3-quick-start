@@ -24,6 +24,7 @@ export const constantRoutes = [
                 meta: {
                     title: '首页',
                     svgIcon: 'dashboard',
+                    affix: true
                 },
             },
         ],
