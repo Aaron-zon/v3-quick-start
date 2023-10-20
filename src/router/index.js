@@ -84,7 +84,6 @@ export const constantRoutes = [
     {
         path: '/commonComponents',
         component: layout,
-        redirect: '/commonComponents/upload',
         name: 'CommonComponents',
         meta: {
             title: '常用组件',

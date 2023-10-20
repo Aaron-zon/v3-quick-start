@@ -36,7 +36,7 @@
     --v3-rightpanel-button-bg-color: #001428;
 
     /** appMain 组件 */
-    --v3-appmain-height: calc(100vh - var(--v3-navigationbar-height));
+    --v3-appmain-height: calc(100vh - var(--v3-header-height));
     --v3-appmain-background: #fff;
     --v3-appmain-scollbar-background: #f2f3f5;
     --v3-appmain-scrollbar-thumb-background: #d7d7da;

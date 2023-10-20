@@ -22,7 +22,7 @@ const { classList } = useDefaultLayout();
                 <!-- NavigationBar -->
                 <NavigationBar></NavigationBar>
                 <!-- TagsView -->
-                <!-- <TagsView></TagsView> -->
+                <TagsView></TagsView>
             </div>
             <!-- main -->
             <AppMain></AppMain>

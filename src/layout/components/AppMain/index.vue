@@ -12,17 +12,18 @@ const key = computed(() => {
     <main class="app-main-container">
         <router-view v-slot="{ Component }">
             <!-- <transition name="no-transform" mode="out-in"> -->
-            <!-- <keep-alive> -->
-            <component :is="Component" :key="key" />
-            <!-- </keep-alive> -->
-            <!-- </transition> -->
+            <transition name="fade-transform" mode="out-in">
+                <!-- <keep-alive :include=""></keep-alive> -->
+                <!-- <keep-alive> -->
+                <component :is="Component" :key="key" />
+                <!-- </keep-alive> -->
+            </transition>
         </router-view>
     </main>
 </template>
 
 <style lang="scss" scoped>
 .app-main-container {
-    min-height: var(--v3-appmain-height);
     width: 100%;
     position: relative;
     overflow: hidden;
