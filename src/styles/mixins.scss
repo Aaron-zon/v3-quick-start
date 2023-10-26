@@ -1,3 +1,20 @@
+/**
+* $level_style 主轴对其方式
+* $vertical_style 主轴方向
+* $isWrapper 换行方式
+*/
+@mixin flex($level_style: space-between, $vertical_style: row, $isWrapper: nowrap) {
+    display: flex;
+    align-items: center;
+    justify-content: $level_style;
+    flex-wrap: $isWrapper;
+    flex-direction: $vertical_style;
+}
+
+@mixin minWidth() {
+    min-width: 1200px;
+}
+
 %scrollbar {
     &::-webkit-scrollbar {
         width: 8px;

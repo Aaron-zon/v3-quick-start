@@ -49,6 +49,15 @@ export const constantRoutes = [
                     elIcon: 'Grid',
                 },
             },
+            {
+                path: 'workableTable',
+                component: () => import('@/views/table/workableTable/index.vue'),
+                name: 'WorkableTable',
+                meta: {
+                    title: '可操作表格',
+                    elIcon: 'Grid',
+                },
+            },
         ],
     },
     // 表单

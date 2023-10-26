@@ -8,7 +8,6 @@
 // 业务画面外边距
 .app-container {
     padding: 20px;
-    min-width: 1024px;
 }
 
 .app-margin-container {
@@ -123,4 +122,9 @@ button:focus-visible {
 .el-dialog {
     overflow: hidden;
     min-width: 400px;
+}
+
+.ek-table .cell {
+    padding: 0 12px;
+    white-space: normal;
 }

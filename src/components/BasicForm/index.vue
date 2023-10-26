@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineExpose } from 'vue';
+import { ref, onMounted } from 'vue';
 import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js';
 
 const props = defineProps(['layouts', 'modelData', 'rules', 'basicFormRef']);

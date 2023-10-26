@@ -70,5 +70,5 @@ export const usePermissionStore = defineStore('permission', () => {
 });
 
 export function usePermissionStoreHook() {
-    return usePermissionStore(store);
+    return usePermissionStore();
 }

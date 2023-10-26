@@ -76,7 +76,7 @@ const isCollapse = computed(() => {
 
     .el-scrollbar {
         background-color: var(--v3-sidebar-menu-bg-color);
-
+        height: calc(100% - var(--v3-header-height));
         .el-menu {
             width: 100%;
             border: none;

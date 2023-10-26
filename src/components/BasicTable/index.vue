@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 const props = defineProps(['tableSetting', 'tableData', 'tableCol', 'toolData']);
-const emit = defineEmits(['changePage']);
+const emits = defineEmits(['changePage', 'edit', 'delete']);
 // 分页
 const pagination = ref({
     layout: 'prev, pager, next, jumper',
@@ -10,7 +10,7 @@ const pagination = ref({
     currentPage: 1,
     handleCurrentChange: async (page) => {
         pagination.value.currentPage = page;
-        emit('changePage', page);
+        emits('changePage', page);
     },
 });
 
@@ -18,7 +18,7 @@ watch(
     () => props.tableData.total,
     (newVal) => {
         pagination.value.total = newVal;
-    },
+    }
 );
 /** 表格事件 */
 const getTableEvents = () => {
@@ -43,12 +43,12 @@ const getColBind = (col) => {
 
 /** 修改按钮按下 */
 const handleEdit = (row, data) => {
-    props.toolData.handleEdit(row, data);
+    emits('edit', { row, data });
 };
 
 /** 删除按钮按下 */
 const handleDelete = (row, data) => {
-    props.toolData.handleDelete(row, data);
+    emits('delete', { row, data });
 };
 
 onMounted(() => {
@@ -71,7 +71,11 @@ onMounted(() => {
                 <el-table-column v-bind="getColBind(col)" />
             </template>
             <!-- 操作 -->
-            <el-table-column label="操作" fixed="right" align="center" v-if="props?.toolData?.show">
+            <el-table-column
+                label="操作"
+                :fixed="props?.toolData?.fixed || 'right'"
+                :align="'center'"
+                v-if="props?.toolData?.show">
                 <template #default="scope">
                     <el-button
                         v-if="props.toolData.editFlg"
@@ -111,6 +115,7 @@ onMounted(() => {
 .basic-table-container {
     .table-wrapper {
         margin-bottom: 20px;
+        width: 100%;
     }
     .pager-wrapper {
         display: flex;

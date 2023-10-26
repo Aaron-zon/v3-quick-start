@@ -7,8 +7,7 @@ import BasicTable from '@/components/BasicTable/index.vue';
 
 import { useSimpleTable, useTool, useDialog } from './hooks/index.js';
 
-const { tableSetting, tableCol, tableData, toolbarData, rightToolData, getTableData } =
-    useSimpleTable();
+const { tableSetting, tableCol, tableData, toolbarData, rightToolData, getTableData } = useSimpleTable();
 const { searchLayouts, searchData } = useTool();
 const { dialogProps, dialogLayouts, dialogData, dialogRules } = useDialog();
 

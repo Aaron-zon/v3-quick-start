@@ -9,6 +9,9 @@ import Hamburger from '../Hamburger/index.vue';
 import Breadcrumb from '../Breadcrumb/index.vue';
 import Notify from '@/components/Notify/index.vue';
 
+import { useSettings } from '@/store/modules/settings.js';
+const { layoutMode, setLayoutMode } = useSettings();
+
 const router = useRouter();
 const appStore = useAppStore();
 const userStore = useUserStore();
@@ -29,11 +32,17 @@ const logout = () => {
 
 <template>
     <div class="navigation-bar-container">
-        <!-- left menu btn -->
-        <Hamburger :is-active="sidebar.opened" @toggle-click="toggleSidebar"></Hamburger>
+        <template v-if="layoutMode == 'Left'">
+            <!-- left menu btn -->
+            <Hamburger :is-active="sidebar.opened" @toggle-click="toggleSidebar"></Hamburger>
+            <!-- message btn -->
+            <Breadcrumb></Breadcrumb>
+        </template>
+        <template v-if="layoutMode == 'Top'">
+            <!-- Logo -->
 
-        <!-- message btn -->
-        <Breadcrumb></Breadcrumb>
+            <!-- Menu -->
+        </template>
 
         <!-- right menu -->
         <div class="right-menu">
@@ -48,6 +57,12 @@ const logout = () => {
                     <el-dropdown-menu>
                         <el-dropdown-item @click="logout">
                             <span>Logout</span>
+                        </el-dropdown-item>
+                        <el-dropdown-item @click="setLayoutMode('Left')">
+                            <span>Left</span>
+                        </el-dropdown-item>
+                        <el-dropdown-item @click="setLayoutMode('Top')">
+                            <span>Top</span>
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </template>

@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import svgLoader from 'vite-svg-loader'
 
-export default defineConfig(({mode}) => {
+export default defineConfig(({ mode }) => {
 
   const viteEnv = loadEnv(mode, process.cwd())
   const { VITE_PUBLIC_PATH, VITE_PROXY_API } = viteEnv
