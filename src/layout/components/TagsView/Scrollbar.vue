@@ -1,11 +1,31 @@
 <script setup>
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue';
+
+const scrollTo = (direction, distance) => {
+    //   let scrollLeft = 0
+    //   const { scrollbarContentRefWidth, scrollbarRefWidth, lastDistance } = getWidth()
+    //   // 没有横向滚动条，直接结束
+    //   if (scrollbarRefWidth > scrollbarContentRefWidth) return
+    //   if (direction === "left") {
+    //     scrollLeft = Math.max(0, currentScrollLeft - distance)
+    //   } else {
+    //     scrollLeft = Math.min(currentScrollLeft + distance, currentScrollLeft + lastDistance)
+    //   }
+    //   scrollbarRef.value!.setScrollLeft(scrollLeft)
+};
 </script>
 
 <template>
     <div class="scrollbar-container">
+        <!-- <el-icon class="arrow left" @click="scrollTo('left')">
+            <ArrowLeft />
+        </el-icon> -->
         <el-scrollbar>
             <slot />
         </el-scrollbar>
+        <!-- <el-icon class="arrow right" @click="scrollTo('right')">
+            <ArrowRight />
+        </el-icon> -->
     </div>
 </template>
     

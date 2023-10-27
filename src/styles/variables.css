@@ -8,6 +8,8 @@
     /** NavigationBar 组件 */
     --v3-navigationbar-height: 50px;
     --v3-navigationbar-background: #fff;
+    --v3-text-active-color: #303133;
+    --v3-menu-active-color: #409eff;
     /** Sidebar 组件 */
     --v3-sidebar-width: 220px;
     --v3-sidebar-hide-width: 58px;

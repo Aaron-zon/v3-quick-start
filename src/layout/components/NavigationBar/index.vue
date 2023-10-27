@@ -7,6 +7,8 @@ import { UserFilled } from '@element-plus/icons-vue';
 
 import Hamburger from '../Hamburger/index.vue';
 import Breadcrumb from '../Breadcrumb/index.vue';
+import NavigationLogo from './NavigationLogo.vue';
+import Sidebar from '../Sidebar/index.vue';
 import Notify from '@/components/Notify/index.vue';
 
 import { useSettings } from '@/store/modules/settings.js';
@@ -16,6 +18,7 @@ const router = useRouter();
 const appStore = useAppStore();
 const userStore = useUserStore();
 
+const isTop = computed(() => layoutMode === 'Top');
 // Hamburger
 const sidebar = computed(() => appStore.sidebar);
 const toggleSidebar = () => {
@@ -31,17 +34,19 @@ const logout = () => {
 </script>
 
 <template>
-    <div class="navigation-bar-container">
+    <div class="navigation-bar-container" :class="{ topLayout: isTop }">
         <template v-if="layoutMode == 'Left'">
             <!-- left menu btn -->
             <Hamburger :is-active="sidebar.opened" @toggle-click="toggleSidebar"></Hamburger>
             <!-- message btn -->
             <Breadcrumb></Breadcrumb>
         </template>
+
         <template v-if="layoutMode == 'Top'">
             <!-- Logo -->
-
+            <NavigationLogo />
             <!-- Menu -->
+            <Sidebar />
         </template>
 
         <!-- right menu -->
@@ -73,6 +78,8 @@ const logout = () => {
 
 <style lang="scss" scoped>
 .navigation-bar-container {
+    position: relative;
+    // display: flex;
     height: var(--v3-navigationbar-height);
     overflow: hidden;
     background: var(--v3-navigationbar-background);
@@ -91,13 +98,11 @@ const logout = () => {
             background: rgba(0, 0, 0, 0.025);
         }
     }
-
     .breadcrumb-container {
         float: left;
         height: 100%;
         line-height: var(--v3-navigationbar-height);
     }
-
     .right-menu {
         display: flex;
         float: right;
@@ -120,6 +125,31 @@ const logout = () => {
                 }
                 span {
                     font-size: 16px;
+                }
+            }
+        }
+    }
+
+    &.topLayout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .navigation-logo-container {
+            width: var(--v3-sidebar-width);
+        }
+
+        .sidebar-container {
+            flex: 1;
+            :deep(.el-sub-menu) {
+                &.is-active {
+                    .el-sub-menu__title {
+                        color: var(--v3-menu-active-color) !important;
+                    }
+                }
+            }
+            :deep(.el-menu-item) {
+                &.is-active {
+                    color: var(--v3-menu-active-color) !important;
                 }
             }
         }
