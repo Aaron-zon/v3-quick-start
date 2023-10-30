@@ -3,7 +3,11 @@
 * $vertical_style 主轴方向
 * $isWrapper 换行方式
 */
-@mixin flex($level_style: space-between, $vertical_style: row, $isWrapper: nowrap) {
+@mixin flex(
+    $level_style: space-between,
+    $vertical_style: row,
+    $isWrapper: nowrap
+) {
     display: flex;
     align-items: center;
     justify-content: $level_style;

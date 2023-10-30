@@ -1,7 +1,12 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-const props = defineProps(['tableSetting', 'tableData', 'tableCol', 'toolData']);
-const emits = defineEmits(['changePage', 'edit', 'delete']);
+const props = defineProps([
+    'tableSetting',
+    'tableData',
+    'tableCol',
+    'toolData',
+]);
+const emits = defineEmits(['changePage', 'edit', 'delete', 'cellClickHandle']);
 // 分页
 const pagination = ref({
     layout: 'prev, pager, next, jumper',
@@ -18,7 +23,7 @@ watch(
     () => props.tableData.total,
     (newVal) => {
         pagination.value.total = newVal;
-    }
+    },
 );
 /** 表格事件 */
 const getTableEvents = () => {
@@ -39,6 +44,10 @@ const getColBind = (col) => {
     return {
         ...col,
     };
+};
+
+const cellClickHandle = (scope) => {
+    emits('cellClickHandle', { ...scope });
 };
 
 /** 修改按钮按下 */
@@ -68,7 +77,24 @@ onMounted(() => {
             v-bind="getTableBinds()"
             v-on="getTableEvents()">
             <template v-for="(col, colIdx) in props.tableCol" :key="colIdx">
-                <el-table-column v-bind="getColBind(col)" />
+                <el-table-column v-bind="getColBind(col)">
+                    <!-- 链接 -->
+                    <template #default="scope" v-if="col.link">
+                        <el-link
+                            class="col-link"
+                            @click="cellClickHandle(scope)">
+                            {{ scope.row[col.prop] }}
+                        </el-link>
+                    </template>
+                    <!-- 按钮 -->
+                    <template #default="scope" v-if="col.btn">
+                        <el-button
+                            type="primary"
+                            @click="cellClickHandle(scope)">
+                            {{ scope.row[col.prop] }}
+                        </el-button>
+                    </template>
+                </el-table-column>
             </template>
             <!-- 操作 -->
             <el-table-column
@@ -116,6 +142,16 @@ onMounted(() => {
     .table-wrapper {
         margin-bottom: 20px;
         width: 100%;
+
+        .can-choose {
+            cursor: pointer;
+        }
+
+        .col-link {
+            cursor: pointer;
+            color: var(--el-link-hover-text-color);
+            text-decoration: underline;
+        }
     }
     .pager-wrapper {
         display: flex;

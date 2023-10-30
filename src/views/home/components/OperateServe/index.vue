@@ -40,7 +40,9 @@
                     </a>
                 </el-col>
                 <el-col :xs="24" :sm="8" :lg="6" :xl="6">
-                    <a href="http://www.bankcomm.com/BankCommSite/default.shtml" target="_black">
+                    <a
+                        href="http://www.bankcomm.com/BankCommSite/default.shtml"
+                        target="_black">
                         <el-card class="serve-item">
                             <el-row>
                                 <div class="serve-icon">
@@ -63,7 +65,9 @@
                                 </div>
                                 <div class="serve-title">
                                     <p class="title">著作权保护中心</p>
-                                    <p class="desciption">著作权保护中心快速入口</p>
+                                    <p class="desciption">
+                                        著作权保护中心快速入口
+                                    </p>
                                 </div>
                             </el-row>
                         </el-card>

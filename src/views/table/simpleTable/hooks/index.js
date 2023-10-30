@@ -21,11 +21,23 @@ const searchLayouts = ref([
             placeholder: '输入/选择分组',
             options: [
                 { value: 'vue', link: 'https://github.com/vuejs/vue' },
-                { value: 'element', link: 'https://github.com/ElemeFE/element' },
-                { value: 'cooking', link: 'https://github.com/ElemeFE/cooking' },
-                { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
+                {
+                    value: 'element',
+                    link: 'https://github.com/ElemeFE/element',
+                },
+                {
+                    value: 'cooking',
+                    link: 'https://github.com/ElemeFE/cooking',
+                },
+                {
+                    value: 'mint-ui',
+                    link: 'https://github.com/ElemeFE/mint-ui',
+                },
                 { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
-                { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
+                {
+                    value: 'vue-router',
+                    link: 'https://github.com/vuejs/vue-router',
+                },
                 { value: 'babel', link: 'https://github.com/babel/babel' },
             ],
         },
@@ -82,7 +94,7 @@ const dialogProps = ref({
     show: false,
     props: {
         title: 'Table弹出框',
-        width: '40%'
+        width: '40%',
     },
 });
 /** 弹出框结构 */
@@ -103,11 +115,23 @@ const dialogLayouts = ref([
             placeholder: '输入/选择分组',
             options: [
                 { value: 'vue', link: 'https://github.com/vuejs/vue' },
-                { value: 'element', link: 'https://github.com/ElemeFE/element' },
-                { value: 'cooking', link: 'https://github.com/ElemeFE/cooking' },
-                { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
+                {
+                    value: 'element',
+                    link: 'https://github.com/ElemeFE/element',
+                },
+                {
+                    value: 'cooking',
+                    link: 'https://github.com/ElemeFE/cooking',
+                },
+                {
+                    value: 'mint-ui',
+                    link: 'https://github.com/ElemeFE/mint-ui',
+                },
                 { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
-                { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
+                {
+                    value: 'vue-router',
+                    link: 'https://github.com/vuejs/vue-router',
+                },
                 { value: 'babel', link: 'https://github.com/babel/babel' },
             ],
         },
@@ -161,7 +185,12 @@ const dialogRules = reactive({
     name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
     select: [{ required: true, message: '请输入科目', trigger: 'change' }],
     datePickerDaterange: [
-        { type: 'date', required: true, message: '请输入日期', trigger: 'change' },
+        {
+            type: 'date',
+            required: true,
+            message: '请输入日期',
+            trigger: 'change',
+        },
     ],
 });
 /** 弹出框 End */
@@ -194,15 +223,15 @@ const toolbarData = ref([
 const rightToolData = ref([
     {
         props: {
-            icon: 'Download'
+            icon: 'Download',
         },
         events: {
             click: () => {
-                alert('下载文件')
-            }
-        }
-    }
-])
+                alert('下载文件');
+            },
+        },
+    },
+]);
 /** 表格设定 */
 const tableSetting = ref({
     loading: true, // 表格加载状态

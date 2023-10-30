@@ -14,15 +14,27 @@ const appStore = useAppStore();
 const settings = useSettings();
 
 const v3SidebarMenuBgColor = getCssVariableValue('--v3-sidebar-menu-bg-color');
-const v3SidebarMenuTextColor = getCssVariableValue('--v3-sidebar-menu-text-color');
-const v3SidebarMenuActiveTextColor = getCssVariableValue('--v3-sidebar-menu-active-text-color');
+const v3SidebarMenuTextColor = getCssVariableValue(
+    '--v3-sidebar-menu-text-color',
+);
+const v3SidebarMenuActiveTextColor = getCssVariableValue(
+    '--v3-sidebar-menu-active-text-color',
+);
 
 const isLeft = computed(() => settings.layoutMode === 'Left');
 const isTop = computed(() => settings.layoutMode === 'Top');
-const backgroundColor = computed(() => (isLeft.value ? v3SidebarMenuBgColor : undefined));
-const textColor = computed(() => (isLeft.value ? v3SidebarMenuTextColor : undefined));
-const activeColor = computed(() => (isLeft.value ? v3SidebarMenuActiveTextColor : undefined));
-const sidebarMode = computed(() => (settings.layoutMode == 'Left' ? 'vertical' : 'horizontal'));
+const backgroundColor = computed(() =>
+    isLeft.value ? v3SidebarMenuBgColor : undefined,
+);
+const textColor = computed(() =>
+    isLeft.value ? v3SidebarMenuTextColor : undefined,
+);
+const activeColor = computed(() =>
+    isLeft.value ? v3SidebarMenuActiveTextColor : undefined,
+);
+const sidebarMode = computed(() =>
+    settings.layoutMode == 'Left' ? 'vertical' : 'horizontal',
+);
 // 默认激活的菜单
 const activeMenu = computed(() => {
     const { meta, path } = route;
@@ -40,9 +52,13 @@ const isCollapse = computed(() => {
 </script>
 
 <template>
-    <div class="sidebar-container" :class="{ leftLayout: isLeft, topLayout: isTop }">
+    <div
+        class="sidebar-container"
+        :class="{ leftLayout: isLeft, topLayout: isTop }">
         <!-- logo -->
-        <SidebarLogo :collapse="isCollapse" v-if="settings.layoutMode == 'Left'"></SidebarLogo>
+        <SidebarLogo
+            :collapse="isCollapse"
+            v-if="settings.layoutMode == 'Left'"></SidebarLogo>
         <!-- menu -->
         <el-scrollbar>
             <el-menu
@@ -118,7 +134,9 @@ const isCollapse = computed(() => {
                 :deep(.el-sub-menu) {
                     &.is-active {
                         .el-sub-menu__title {
-                            color: var(--v3-sidebar-menu-active-text-color) !important;
+                            color: var(
+                                --v3-sidebar-menu-active-text-color
+                            ) !important;
                             @include tip-line;
                         }
                     }

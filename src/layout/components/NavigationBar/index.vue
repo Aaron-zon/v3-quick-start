@@ -37,7 +37,9 @@ const logout = () => {
     <div class="navigation-bar-container" :class="{ topLayout: isTop }">
         <template v-if="layoutMode == 'Left'">
             <!-- left menu btn -->
-            <Hamburger :is-active="sidebar.opened" @toggle-click="toggleSidebar"></Hamburger>
+            <Hamburger
+                :is-active="sidebar.opened"
+                @toggle-click="toggleSidebar"></Hamburger>
             <!-- message btn -->
             <Breadcrumb></Breadcrumb>
         </template>

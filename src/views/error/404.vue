@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-    <div class="app-container">Test 2</div>
+    <div>404</div>
 </template>
 
 <style lang="scss" scoped></style>

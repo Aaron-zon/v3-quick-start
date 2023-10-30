@@ -53,7 +53,10 @@ const resetForm = (refName) => {
                     'form-center': containerRadio == 'center',
                     'form-left': containerRadio == 'left',
                 }">
-                <el-radio-group class="set-wrapper" v-model="containerRadio" size="large">
+                <el-radio-group
+                    class="set-wrapper"
+                    v-model="containerRadio"
+                    size="large">
                     <el-radio-button label="left">居左</el-radio-button>
                     <el-radio-button label="center">居中</el-radio-button>
                 </el-radio-group>
@@ -64,7 +67,10 @@ const resetForm = (refName) => {
                     'form-center': containerRadio == 'center',
                     'form-left': containerRadio == 'left',
                 }">
-                <el-radio-group class="set-wrapper" v-model="labelRadio" size="large">
+                <el-radio-group
+                    class="set-wrapper"
+                    v-model="labelRadio"
+                    size="large">
                     <el-radio-button label="left">左对齐</el-radio-button>
                     <el-radio-button label="right">右对齐</el-radio-button>
                     <el-radio-button label="top">顶部对齐</el-radio-button>
@@ -103,7 +109,9 @@ const resetForm = (refName) => {
                         </el-form-item>
                         <!-- 3.5 选择商家 -->
                         <el-form-item label="选择商家" prop="merchant">
-                            <el-select v-model="ruleForm.merchant" placeholder="请选择商家">
+                            <el-select
+                                v-model="ruleForm.merchant"
+                                placeholder="请选择商家">
                                 <el-option label="淘宝" value="shanghai" />
                                 <el-option label="京东" value="beijing" />
                             </el-select>
@@ -111,7 +119,9 @@ const resetForm = (refName) => {
                         <!-- 3.6 经营模式 -->
                         <el-form-item label="经营模式" prop="type">
                             <el-checkbox-group v-model="ruleForm.type">
-                                <el-checkbox label="美食/餐厅线上活动" name="type" />
+                                <el-checkbox
+                                    label="美食/餐厅线上活动"
+                                    name="type" />
                                 <el-checkbox label="地推活动" name="type" />
                                 <el-checkbox label="线下主题活动" name="type" />
                                 <el-checkbox label="单纯品牌曝光" name="type" />
@@ -134,10 +144,14 @@ const resetForm = (refName) => {
                         </el-form-item>
                         <!-- 3.10 功能按钮 -->
                         <el-form-item class="button-wrapper">
-                            <el-button type="primary" @click="submitForm('ruleForm')"
+                            <el-button
+                                type="primary"
+                                @click="submitForm('ruleForm')"
                                 >立即创建</el-button
                             >
-                            <el-button @click="resetForm('ruleForm')">重置</el-button>
+                            <el-button @click="resetForm('ruleForm')"
+                                >重置</el-button
+                            >
                         </el-form-item>
                     </el-form>
                 </el-col>

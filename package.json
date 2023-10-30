@@ -11,28 +11,28 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
-    "element-plus": "^2.3.8",
+    "element-plus": "^2.4.1",
     "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.4",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
-    "pinia": "^2.1.4",
-    "sass": "^1.63.6",
+    "pinia": "^2.1.7",
+    "sass": "^1.69.5",
     "vite-svg-loader": "^4.0.0",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@aaron-zon/prettier-config": "^1.0.7",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@aaron-zon/prettier-config": "^1.0.9",
+    "@vitejs/plugin-vue": "^4.4.0",
     "fast-glob": "^3.3.1",
     "prettier": "^3.0.3",
-    "vite": "^4.4.0",
+    "vite": "^4.5.0",
     "vite-plugin-svg-icons": "^2.0.1"
   },
   "prettier": "@aaron-zon/prettier-config"

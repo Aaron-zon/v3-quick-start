@@ -99,7 +99,7 @@ watch(
     },
     {
         deep: true,
-    }
+    },
 );
 
 onMounted(() => {
@@ -122,7 +122,10 @@ onMounted(() => {
                 :class="isActive(tag) ? 'active' : ''"
                 :to="{ path: tag.path }">
                 {{ tag.meta.title }}
-                <el-icon v-if="!isAffix(tag)" :size="12" @click.prevent.stop="closeSelectedTag(tag)">
+                <el-icon
+                    v-if="!isAffix(tag)"
+                    :size="12"
+                    @click.prevent.stop="closeSelectedTag(tag)">
                     <Close />
                 </el-icon>
             </router-link>
@@ -162,7 +165,9 @@ onMounted(() => {
                 border-color: var(--v3-tagsview-tag-active-border-color);
                 &::before {
                     content: '';
-                    background-color: var(--v3-tagsview-tag-active-before-color);
+                    background-color: var(
+                        --v3-tagsview-tag-active-before-color
+                    );
                     display: inline-block;
                     width: 8px;
                     height: 8px;
@@ -177,7 +182,9 @@ onMounted(() => {
                 vertical-align: middle;
                 border-radius: 50%;
                 &:hover {
-                    background-color: var(--v3-tagsview-tag-icon-hover-bg-color);
+                    background-color: var(
+                        --v3-tagsview-tag-icon-hover-bg-color
+                    );
                     color: var(--v3-tagsview-tag-icon-hover-color);
                 }
             }

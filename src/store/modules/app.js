@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-
+/**
+ * 菜单服务
+ */
 export const useAppStore = defineStore('app', () => {
+    // 左侧菜单栏状态
     const sidebar = reactive({
         opened: false, // 收缩菜单
         withoutAnimation: false, // 动画效果
@@ -13,7 +16,7 @@ export const useAppStore = defineStore('app', () => {
         sidebar.withoutAnimation = withoutAnimation;
     };
 
-    // close sidebar
+    // 关闭菜单
     const closeSidebar = (withoutAnimation) => {
         sidebar.opened = false;
         sidebar.withoutAnimation = withoutAnimation;

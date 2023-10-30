@@ -18,7 +18,10 @@ const getToolEvents = (item) => {
     <div class="basic-toolbar-container">
         <div class="left-toolbar">
             <template v-for="(item, i) in props.toolData" :key="i">
-                <el-button class="tool-btn" v-bind="getToolBind(item)" v-on="getToolEvents(item)">
+                <el-button
+                    class="tool-btn"
+                    v-bind="getToolBind(item)"
+                    v-on="getToolEvents(item)">
                     {{ item.name }}
                 </el-button>
             </template>
@@ -36,7 +39,10 @@ const getToolEvents = (item) => {
                     </template>
                 </el-button>
 
-                <el-button v-else v-bind="getToolBind(item)" v-on="getToolEvents(item)" />
+                <el-button
+                    v-else
+                    v-bind="getToolBind(item)"
+                    v-on="getToolEvents(item)" />
             </template>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from 'vue';
 import BasicUpload from '@/components/BasicUpload/index.vue';
 import { useUpload } from './hooks/index.js';
 const { url, uploadFile, freeUploadFile } = useUpload();
@@ -20,7 +20,11 @@ const freeUploadFileHandle = (fileInfo) => {
 
 <template>
     <h2>单文件上传</h2>
-    <BasicUpload ref="basicUpload" :mode="mode" :fileInfo="fileInfo" :url="url" />
+    <BasicUpload
+        ref="basicUpload"
+        :mode="mode"
+        :fileInfo="fileInfo"
+        :url="url" />
     <div class="btn-wrapper">
         <el-button @click="uploadFile(basicUpload)">默认上传</el-button>
         <el-button @click="freeUploadFileHandle(fileInfo)">上传文件</el-button>

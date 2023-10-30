@@ -29,7 +29,9 @@ getBreadcrumb();
 <template>
     <div class="breadcrumb-container">
         <el-breadcrumb>
-            <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index">
+            <el-breadcrumb-item
+                v-for="(item, index) in breadcrumbs"
+                :key="index">
                 <!-- title -->
                 <span class="no-redirect">{{ item.meta.title }}</span>
             </el-breadcrumb-item>

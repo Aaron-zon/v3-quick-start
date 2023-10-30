@@ -75,7 +75,9 @@ const success = () => {
                 </el-col>
             </el-row>
             <!-- 表单区域 -->
-            <el-row class="form-wrapper" :class="{ 'form-wrapper-space': active != 2 }">
+            <el-row
+                class="form-wrapper"
+                :class="{ 'form-wrapper-space': active != 2 }">
                 <el-col :lg="10" :xl="10" :md="20" :sm="20" :xs="24">
                     <el-form
                         ref="ruleFormRef"
@@ -85,24 +87,43 @@ const success = () => {
                         :rules="rules"
                         status-icon>
                         <el-form-item label="收货人" prop="name">
-                            <el-input v-if="active == 0" v-model="ruleForm.name" />
-                            <div class="red-only" v-else>{{ ruleForm.name }}</div>
+                            <el-input
+                                v-if="active == 0"
+                                v-model="ruleForm.name" />
+                            <div class="red-only" v-else>
+                                {{ ruleForm.name }}
+                            </div>
                         </el-form-item>
                         <el-form-item label="收货人电话" prop="phone">
-                            <el-input v-if="active == 0" v-model="ruleForm.phone" />
-                            <div class="red-only" v-else>{{ ruleForm.phone }}</div>
+                            <el-input
+                                v-if="active == 0"
+                                v-model="ruleForm.phone" />
+                            <div class="red-only" v-else>
+                                {{ ruleForm.phone }}
+                            </div>
                         </el-form-item>
                         <el-form-item label="收货地址" prop="address">
-                            <el-input v-if="active == 0" v-model="ruleForm.address" />
-                            <div class="red-only" v-else>{{ ruleForm.address }}</div>
+                            <el-input
+                                v-if="active == 0"
+                                v-model="ruleForm.address" />
+                            <div class="red-only" v-else>
+                                {{ ruleForm.address }}
+                            </div>
                         </el-form-item>
                         <el-form-item label="保金" prop="insurance">
-                            <el-input v-if="active == 0" v-model="ruleForm.insurance" />
-                            <div class="red-only" v-else>{{ ruleForm.insurance }}</div>
+                            <el-input
+                                v-if="active == 0"
+                                v-model="ruleForm.insurance" />
+                            <div class="red-only" v-else>
+                                {{ ruleForm.insurance }}
+                            </div>
                         </el-form-item>
                     </el-form>
                     <div class="button-wrapper">
-                        <el-button v-show="active == 0" type="primary" @click="nextForm()"
+                        <el-button
+                            v-show="active == 0"
+                            type="primary"
+                            @click="nextForm()"
                             >下一步</el-button
                         >
                         <el-button
@@ -112,10 +133,16 @@ const success = () => {
                             :loading="submitLoading"
                             >提交</el-button
                         >
-                        <el-button v-show="active == 1" type="primary" @click="prevForm()"
+                        <el-button
+                            v-show="active == 1"
+                            type="primary"
+                            @click="prevForm()"
                             >上一步</el-button
                         >
-                        <el-button v-show="active == 2" type="primary" @click="success()"
+                        <el-button
+                            v-show="active == 2"
+                            type="primary"
+                            @click="success()"
                             >完成</el-button
                         >
                     </div>

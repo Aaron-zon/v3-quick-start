@@ -2,7 +2,13 @@
 import { ref, onMounted, nextTick, watch } from 'vue';
 import * as echarts from 'echarts';
 
-const props = defineProps(['className', 'height', 'width', 'autoResize', 'chartData']);
+const props = defineProps([
+    'className',
+    'height',
+    'width',
+    'autoResize',
+    'chartData',
+]);
 // echarts 实例
 let chart = null;
 // 绑定的DOM

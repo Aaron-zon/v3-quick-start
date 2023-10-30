@@ -53,6 +53,9 @@ const filterAsyncRoutes = (routes, roles) => {
     return res;
 };
 
+/**
+ * 路由服务
+ */
 export const usePermissionStore = defineStore('permission', () => {
     const routes = ref([]);
     const dynamicRoutes = ref([]);

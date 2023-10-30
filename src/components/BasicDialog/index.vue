@@ -4,7 +4,13 @@ import { merge } from 'lodash-es';
 import BasicForm from '@/components/BasicForm/index.vue';
 import BasicToolbar from '@/components/BasicToolbar/index.vue';
 
-const props = defineProps(['dialogProps', 'layouts', 'dialogData', 'dialogTool', 'rules']);
+const props = defineProps([
+    'dialogProps',
+    'layouts',
+    'dialogData',
+    'dialogTool',
+    'rules',
+]);
 const emit = defineEmits(['confirm', 'cancel']);
 //
 const basicDialog = ref(null);

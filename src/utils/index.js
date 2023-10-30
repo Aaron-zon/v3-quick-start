@@ -2,9 +2,9 @@
 export function getCssVariableValue(cssVariableName) {
     let cssVariableValue = '';
     try {
-        cssVariableValue = getComputedStyle(document.documentElement).getPropertyValue(
-            cssVariableName,
-        );
+        cssVariableValue = getComputedStyle(
+            document.documentElement,
+        ).getPropertyValue(cssVariableName);
     } catch (error) {
         console.error(error);
     }

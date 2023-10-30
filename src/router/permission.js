@@ -50,7 +50,9 @@ router.beforeEach(async (to, _from, next) => {
                     } else {
                         // 没有开启动态路由功能，则启用默认角色
                         userStore.setRoles(asyncRouteSettings.defaultRoles);
-                        permissionStore.setRoutes(asyncRouteSettings.defaultRoles);
+                        permissionStore.setRoutes(
+                            asyncRouteSettings.defaultRoles,
+                        );
                     }
                     // 将'有访问权限的动态路由' 添加到 Router 中
                     permissionStore.dynamicRoutes.forEach((route) => {

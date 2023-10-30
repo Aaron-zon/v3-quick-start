@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { QUERY_COMPONENT_TYPE, QUERY_COMPONENT_KEY } from './constants/index.js';
+import {
+    QUERY_COMPONENT_TYPE,
+    QUERY_COMPONENT_KEY,
+} from './constants/index.js';
 
 const props = defineProps(['layouts', 'modelData', 'rules', 'basicFormRef']);
 const formRef = ref(null);
@@ -13,7 +16,9 @@ onMounted(() => {
 const getQueryComponentName = (item, i) => {
     const componentType = QUERY_COMPONENT_TYPE[item.type];
     if (componentType == null) {
-        console.warn(`queryData中第${i}个数据没有设定正确的type, 当前显示默认组件`);
+        console.warn(
+            `queryData中第${i}个数据没有设定正确的type, 当前显示默认组件`,
+        );
         return QUERY_COMPONENT_TYPE['default'];
     }
     return componentType;
@@ -26,8 +31,13 @@ const checkParagenesis = (item) => {
 
 /** 获取组件属性 */
 const getComponentBind = (item) => {
-    if (item.type == QUERY_COMPONENT_KEY.autocomplete && !item.props['fetch-suggestions']) {
-        item.props['fetch-suggestions'] = autocompleteQuerySearch.bind(item.props);
+    if (
+        item.type == QUERY_COMPONENT_KEY.autocomplete &&
+        !item.props['fetch-suggestions']
+    ) {
+        item.props['fetch-suggestions'] = autocompleteQuerySearch.bind(
+            item.props,
+        );
     }
 
     return {
@@ -58,9 +68,14 @@ const autocompleteQuerySearch = function (queryString, cb) {
 /** 根据输入值对自动补全组件的数据进行筛选 */
 const autocompleteFilter = (queryString, autocompleteMode) => {
     return (restaurant) => {
-        let result = restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) != -1;
+        let result =
+            restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) !=
+            -1;
         if (autocompleteMode == 'left') {
-            result = restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
+            result =
+                restaurant.value
+                    .toLowerCase()
+                    .indexOf(queryString.toLowerCase()) === 0;
         }
         return result;
     };
@@ -73,7 +88,11 @@ defineExpose({
 
 <template>
     <div class="basic-from-container">
-        <el-form class="form-wrapper" ref="formRef" :rules="props.rules" :model="props.modelData">
+        <el-form
+            class="form-wrapper"
+            ref="formRef"
+            :rules="props.rules"
+            :model="props.modelData">
             <div class="query-wrapper">
                 <template v-for="(item, i) in props.layouts" :key="i">
                     <el-form-item :label="item.name" :prop="item.model">

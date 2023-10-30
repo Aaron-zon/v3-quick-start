@@ -14,14 +14,15 @@ const mode3 = 3;
 const freeUploadFilesHandle = async (fileInfo) => {
     freeUploadFiles(fileInfo.files);
 };
-
 </script>
 
 <template>
     <h2>图片上传</h2>
     <BasicUpload :mode="mode3" :fileInfo="fileInfo3" :url="url" :limit="3" />
     <div class="btn-wrapper">
-        <el-button @click="freeUploadFilesHandle(fileInfo3)">多文件上传</el-button>
+        <el-button @click="freeUploadFilesHandle(fileInfo3)"
+            >多文件上传</el-button
+        >
     </div>
 </template>
 

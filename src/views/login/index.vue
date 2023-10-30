@@ -53,7 +53,9 @@ const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } =
                             :disabled="loading" />
                     </el-form-item>
                     <el-form-item prop="remember" class="remember-box">
-                        <el-checkbox v-model="loginFormData.remember">记住密码</el-checkbox>
+                        <el-checkbox v-model="loginFormData.remember"
+                            >记住密码</el-checkbox
+                        >
                     </el-form-item>
 
                     <el-button
@@ -63,7 +65,9 @@ const { loading, loginFormData, loginFormRules, handleLogin, visitorHandle } =
                         @click.prevent="handleLogin"
                         >登 录</el-button
                     >
-                    <div class="visitor-wrapper" @click="visitorHandle">游客登录</div>
+                    <div class="visitor-wrapper" @click="visitorHandle">
+                        游客登录
+                    </div>
                 </el-form>
             </div>
         </div>

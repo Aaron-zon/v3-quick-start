@@ -69,7 +69,9 @@ defineExpose({
                 :limit="1"
                 :on-change="handleChange"
                 :on-exceed="handleOnlyFileExceed">
-                <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
+                <el-button type="primary">{{
+                    props.btnName || '选择上传文件'
+                }}</el-button>
                 <template #tip>
                     <div class="el-upload__tip" v-if="props.descName">
                         {{ descName }}
@@ -87,7 +89,9 @@ defineExpose({
                 :limit="props.limit || 1"
                 multiple
                 :on-change="handleChange">
-                <el-button type="primary">{{ props.btnName || '选择上传文件' }}</el-button>
+                <el-button type="primary">{{
+                    props.btnName || '选择上传文件'
+                }}</el-button>
                 <template #tip>
                     <div class="el-upload__tip" v-if="props.descName">
                         {{ descName }}
@@ -109,7 +113,10 @@ defineExpose({
                 <el-icon><Plus /></el-icon>
                 <template #file="{ file }">
                     <div>
-                        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
+                        <img
+                            class="el-upload-list__item-thumbnail"
+                            :src="file.url"
+                            alt="" />
                         <span class="el-upload-list__item-actions">
                             <span
                                 class="el-upload-list__item-preview"

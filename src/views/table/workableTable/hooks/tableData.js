@@ -1,7 +1,5 @@
-
 import { ref, reactive } from 'vue';
 import { getSimpleTableApi } from '@/api/table';
-
 
 export const useTable = () => {
     const size = ref(10);
@@ -10,7 +8,7 @@ export const useTable = () => {
     const tableModel = ref({
         total: 0, // 总页数
         currentPage: 1, // 当前页数
-        data: [] // 表格数据
+        data: [], // 表格数据
     });
 
     /** 获取表格数据 */
@@ -44,10 +42,13 @@ export const useTable = () => {
             label: '姓名',
             width: '120',
             align: 'center',
+            link: true,
         },
         {
             prop: 'department',
             label: '部门',
+            btn: true,
+            align: 'center',
         },
         {
             prop: 'position',
@@ -78,6 +79,9 @@ export const useTable = () => {
         events: {
             // 点击表格多选框
             'selection-change': (val) => {
+                console.log(val);
+            },
+            'cell-click': (val) => {
                 console.log(val);
             },
         },
@@ -114,6 +118,6 @@ export const useTable = () => {
         getTableModel,
         tableCol,
         tableSetting,
-        tableToolData
-    }
-}
+        tableToolData,
+    };
+};

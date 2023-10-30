@@ -67,15 +67,27 @@ const resolvePath = (routePath) => {
 <template>
     <div
         class="sidebar-item-container"
-        :class="{ 'simple-mode': props.isCollapse && !isTop, 'first-level': props.isFirstLevel }"
+        :class="{
+            'simple-mode': props.isCollapse && !isTop,
+            'first-level': props.isFirstLevel,
+        }"
         v-if="!props.item.meta?.hidden">
         <!-- 单层 -->
-        <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
+        <template
+            v-if="
+                !alwaysShowRootMenu &&
+                theOnlyOneChild &&
+                !theOnlyOneChild.children
+            ">
             <SidebarItemLink
-                v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.menu !== false"
+                v-if="
+                    theOnlyOneChild.meta && theOnlyOneChild.meta.menu !== false
+                "
                 :to="resolvePath(theOnlyOneChild.path)">
                 <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
-                    <SvgIcon v-if="theOnlyOneChild.meta.svgIcon" :name="theOnlyOneChild.meta.svgIcon"></SvgIcon>
+                    <SvgIcon
+                        v-if="theOnlyOneChild.meta.svgIcon"
+                        :name="theOnlyOneChild.meta.svgIcon"></SvgIcon>
                     <component
                         v-else-if="theOnlyOneChild.meta.elIcon"
                         :is="theOnlyOneChild.meta.elIcon"
@@ -90,9 +102,16 @@ const resolvePath = (routePath) => {
         <!-- 多层 -->
         <el-sub-menu v-else :index="resolvePath(props.item.path)" teleported>
             <template #title>
-                <SvgIcon v-if="props.item.meta && props.item.meta.svgIcon" :name="props.item.meta.svgIcon" />
-                <component v-else-if="props.item.meta?.elIcon" :is="props.item.meta.elIcon" class="el-icon"></component>
-                <span v-if="props.item.meta && props.item.meta.title">{{ props.item.meta.title }}</span>
+                <SvgIcon
+                    v-if="props.item.meta && props.item.meta.svgIcon"
+                    :name="props.item.meta.svgIcon" />
+                <component
+                    v-else-if="props.item.meta?.elIcon"
+                    :is="props.item.meta.elIcon"
+                    class="el-icon"></component>
+                <span v-if="props.item.meta && props.item.meta.title">{{
+                    props.item.meta.title
+                }}</span>
             </template>
 
             <template v-if="props.item.children">

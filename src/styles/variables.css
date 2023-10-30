@@ -4,7 +4,9 @@
     /** 全局背景色 */
     --v3-body-bg-color: #f2f3f5;
     /** Header 区域 = NavigationBar 组件 + TagsView 组件 */
-    --v3-header-height: calc(var(--v3-navigationbar-height) + var(--v3-tagsview-height));
+    --v3-header-height: calc(
+        var(--v3-navigationbar-height) + var(--v3-tagsview-height)
+    );
     /** NavigationBar 组件 */
     --v3-navigationbar-height: 50px;
     --v3-navigationbar-background: #fff;

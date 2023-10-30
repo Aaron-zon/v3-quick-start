@@ -1,10 +1,9 @@
 <script setup>
-import fileUploadExample from './fileUploadExample.vue'
+import fileUploadExample from './fileUploadExample.vue';
 import filesUploadExample from './filesUploadExample.vue';
-import imageUploadExample from './imageUploadExample.vue'
-import dragUploadExample from './dragUploadExample.vue'
-import avatarUploadExample from './avatarUploadExample.vue'
-
+import imageUploadExample from './imageUploadExample.vue';
+import dragUploadExample from './dragUploadExample.vue';
+import avatarUploadExample from './avatarUploadExample.vue';
 </script>
 
 <template>

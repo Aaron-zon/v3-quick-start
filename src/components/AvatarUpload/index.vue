@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 const emits = defineEmits(['setAvatar']);
-const srcUrl = ref('https://avatars.githubusercontent.com/u/47178158?s=400&v=4');
+const srcUrl = ref(
+    'https://avatars.githubusercontent.com/u/47178158?s=400&v=4',
+);
 
 const handleChange = (file) => {
     const reader = new FileReader();

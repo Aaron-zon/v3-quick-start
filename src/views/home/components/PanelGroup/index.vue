@@ -13,7 +13,13 @@ const active = (key) => {
 
 <template>
     <el-row class="panel-group-cantainer">
-        <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
+        <el-col
+            :xs="24"
+            :sm="24"
+            :md="12"
+            :lg="6"
+            :xl="6"
+            class="card-panel-col">
             <el-card
                 shadow="hover"
                 class="top-card"
@@ -33,7 +39,13 @@ const active = (key) => {
                 </el-row>
             </el-card>
         </el-col>
-        <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
+        <el-col
+            :xs="24"
+            :sm="24"
+            :md="12"
+            :lg="6"
+            :xl="6"
+            class="card-panel-col">
             <el-card
                 shadow="hover"
                 class="top-card"
@@ -53,7 +65,13 @@ const active = (key) => {
                 </el-row>
             </el-card>
         </el-col>
-        <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
+        <el-col
+            :xs="24"
+            :sm="24"
+            :md="12"
+            :lg="6"
+            :xl="6"
+            class="card-panel-col">
             <el-card
                 shadow="hover"
                 class="top-card"
@@ -73,7 +91,13 @@ const active = (key) => {
                 </el-row>
             </el-card>
         </el-col>
-        <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6" class="card-panel-col">
+        <el-col
+            :xs="24"
+            :sm="24"
+            :md="12"
+            :lg="6"
+            :xl="6"
+            class="card-panel-col">
             <el-card
                 shadow="hover"
                 class="top-card"

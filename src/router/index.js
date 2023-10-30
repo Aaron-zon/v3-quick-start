@@ -24,7 +24,7 @@ export const constantRoutes = [
                 meta: {
                     title: '首页',
                     svgIcon: 'dashboard',
-                    affix: true
+                    affix: true,
                 },
             },
         ],
@@ -51,7 +51,8 @@ export const constantRoutes = [
             },
             {
                 path: 'workableTable',
-                component: () => import('@/views/table/workableTable/index.vue'),
+                component: () =>
+                    import('@/views/table/workableTable/index.vue'),
                 name: 'WorkableTable',
                 meta: {
                     title: '可操作表格',
@@ -73,7 +74,8 @@ export const constantRoutes = [
         children: [
             {
                 path: 'comprehensiveForm',
-                component: () => import('@/views/form/comprehensiveForm/index.vue'),
+                component: () =>
+                    import('@/views/form/comprehensiveForm/index.vue'),
                 name: 'ComprehensiveForm',
                 meta: {
                     title: '综合表单',
@@ -102,7 +104,8 @@ export const constantRoutes = [
             // 上传文件
             {
                 path: 'upload',
-                component: () => import('@/views/commonComponents/upload/index.vue'),
+                component: () =>
+                    import('@/views/commonComponents/upload/index.vue'),
                 name: 'Upload',
                 meta: {
                     title: '上传',
@@ -135,7 +138,8 @@ export const constantRoutes = [
                         children: [
                             {
                                 path: 'menu-2-1',
-                                component: () => import('@/views/test2/index.vue'),
+                                component: () =>
+                                    import('@/views/test2/index.vue'),
                                 name: 'Menu-2-1',
                                 meta: {
                                     title: 'menu-2-1',
@@ -143,7 +147,8 @@ export const constantRoutes = [
                             },
                             {
                                 path: 'menu-2-2',
-                                component: () => import('@/views/test2/index.vue'),
+                                component: () =>
+                                    import('@/views/test2/index.vue'),
                                 name: 'Menu-2-2',
                                 meta: {
                                     title: 'menu-2-2',
@@ -166,7 +171,8 @@ export const constantRoutes = [
         children: [
             {
                 path: 'userManage',
-                component: () => import('@/views/classicCase/usersManage/index.vue'),
+                component: () =>
+                    import('@/views/classicCase/usersManage/index.vue'),
                 name: 'UserManage',
                 meta: {
                     title: '用户管理',
@@ -175,7 +181,8 @@ export const constantRoutes = [
             },
             {
                 path: 'personal',
-                component: () => import('@/views/classicCase/personal/index.vue'),
+                component: () =>
+                    import('@/views/classicCase/personal/index.vue'),
                 name: 'Personal',
                 meta: {
                     title: '个人设定',

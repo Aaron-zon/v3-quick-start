@@ -7,7 +7,14 @@ import BasicTable from '@/components/BasicTable/index.vue';
 
 import { useSimpleTable, useTool, useDialog } from './hooks/index.js';
 
-const { tableSetting, tableCol, tableData, toolbarData, rightToolData, getTableData } = useSimpleTable();
+const {
+    tableSetting,
+    tableCol,
+    tableData,
+    toolbarData,
+    rightToolData,
+    getTableData,
+} = useSimpleTable();
 const { searchLayouts, searchData } = useTool();
 const { dialogProps, dialogLayouts, dialogData, dialogRules } = useDialog();
 
@@ -32,12 +39,17 @@ const changePage = (page) => {
 <template>
     <div class="simple-table-container app-container">
         <!-- 检索区域 -->
-        <BasicSearch :layouts="searchLayouts" :modelData="searchData" @search="searchHandle" />
+        <BasicSearch
+            :layouts="searchLayouts"
+            :modelData="searchData"
+            @search="searchHandle" />
 
         <!-- table区域 -->
         <el-card>
             <div class="toolbar-wrapper">
-                <BasicToolbar :toolData="toolbarData" :rightToolData="rightToolData" />
+                <BasicToolbar
+                    :toolData="toolbarData"
+                    :rightToolData="rightToolData" />
             </div>
 
             <div class="table-wrapper">

@@ -82,12 +82,12 @@ export const useSearch = () => {
         searchData.department = '';
         searchData.status = '1';
         searchData.date = '';
-    }
+    };
 
     return {
         searchLayouts,
         searchData,
         searchHandle,
-        resetHandel
-    }
-}
+        resetHandel,
+    };
+};

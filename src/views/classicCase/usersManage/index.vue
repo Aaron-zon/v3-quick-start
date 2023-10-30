@@ -298,7 +298,10 @@ const changePage = (page) => {
 <template>
     <div class="user-manage-container app-container">
         <!-- 用户检索 -->
-        <BasicSearch :layouts="searchLayouts" :modelData="searchData" @search="searchHandle" />
+        <BasicSearch
+            :layouts="searchLayouts"
+            :modelData="searchData"
+            @search="searchHandle" />
         <!-- 用户管理 -->
         <el-card>
             <!-- 工具栏 -->

@@ -7,6 +7,9 @@ import { loginApi, getUserInfoApi } from '@/api/login';
 import { getToken, removeToken, setToken } from '@/utils/cache/cookies';
 import asyncRouteSettings from '@/config/async-route';
 
+/**
+ * 用户信息配置
+ */
 export const useUserStore = defineStore('user', () => {
     const username = ref(getToken() || '');
     const token = ref('');
@@ -28,7 +31,10 @@ export const useUserStore = defineStore('user', () => {
         // 设置用户名
         username.value = data.username;
         // 检查返回的roles是否为空数组，如果是设置为默认角色
-        roles.value = data.roles?.length > 0 ? data.roles : asyncRouteSettings.defaultRoles;
+        roles.value =
+            data.roles?.length > 0
+                ? data.roles
+                : asyncRouteSettings.defaultRoles;
     };
 
     const visitorInfo = () => {

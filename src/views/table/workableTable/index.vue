@@ -7,10 +7,11 @@ import BasicSearch from '@/components/BasicSearch/index.vue';
 import BasicTable from '@/components/BasicTable/index.vue';
 
 // 方法
-import { useSearch } from '../hooks/search';
-import { useTable } from '../hooks/tableData';
+import { useSearch } from './hooks/search';
+import { useTable } from './hooks/tableData';
 const { searchLayouts, searchData, searchHandle, resetHandel } = useSearch();
-const { tableModel, getTableModel, tableCol, tableSetting, tableToolData } = useTable();
+const { tableModel, getTableModel, tableCol, tableSetting, tableToolData } =
+    useTable();
 
 const changePage = async () => {
     tableSetting.loading = true;
@@ -18,9 +19,11 @@ const changePage = async () => {
     tableSetting.loading = false;
 };
 
+// 点击操作中修改按钮
 const editHandle = () => {
     // dialogProps.show = true;
 };
+// 点击操作中删除按钮
 const deleteHandle = () => {
     ElMessageBox.confirm('请确认是否删除该用户！', '消息', {
         confirmButtonText: '确定',
@@ -32,6 +35,10 @@ const deleteHandle = () => {
         });
     });
 };
+// 点击某元素
+const cellClickHandle = (scope) => {
+    console.log(scope);
+};
 onMounted(async () => {
     await getTableModel();
     tableSetting.loading = false;
@@ -40,7 +47,11 @@ onMounted(async () => {
 
 <template>
     <div class="workable-table-container app-container">
-        <BasicSearch :layouts="searchLayouts" :modelData="searchData" @search="searchHandle" @reset="resetHandel" />
+        <BasicSearch
+            :layouts="searchLayouts"
+            :modelData="searchData"
+            @search="searchHandle"
+            @reset="resetHandel" />
 
         <el-card class="content-wrapper">
             <div class="table-wrapper">
@@ -51,9 +62,20 @@ onMounted(async () => {
                     :toolData="tableToolData"
                     @changePage="changePage"
                     @edit="editHandle"
-                    @delete="deleteHandle" />
+                    @delete="deleteHandle"
+                    @cellClickHandle="cellClickHandle" />
             </div>
         </el-card>
+
+        <!-- 弹窗 -->
+        <!-- <BasicDialog
+            ref="dialog"
+            :dialogProps="dialogProps"
+            :dialogData="dialogData"
+            :layouts="dialogLayouts"
+            :rules="dialogRules"
+            @cancel="dialogCancel"
+            @confirm="dialogConfirm" /> -->
     </div>
 </template>
 

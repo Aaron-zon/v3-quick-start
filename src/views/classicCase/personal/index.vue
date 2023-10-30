@@ -15,7 +15,12 @@
                         <template #default>
                             <el-row>
                                 <!-- 资料 -->
-                                <el-col :lg="12" :xl="12" :md="20" :sm="20" :xs="24">
+                                <el-col
+                                    :lg="12"
+                                    :xl="12"
+                                    :md="20"
+                                    :sm="20"
+                                    :xs="24">
                                     <el-form
                                         ref="ruleFormRef"
                                         label-width="100px"
@@ -26,11 +31,15 @@
                                             <el-input />
                                         </el-form-item>
                                         <!-- 个人邮箱 -->
-                                        <el-form-item label="个人邮箱" prop="name">
+                                        <el-form-item
+                                            label="个人邮箱"
+                                            prop="name">
                                             <el-input />
                                         </el-form-item>
                                         <!-- 手机号 -->
-                                        <el-form-item label="手机号" prop="name">
+                                        <el-form-item
+                                            label="手机号"
+                                            prop="name">
                                             <el-input />
                                         </el-form-item>
                                         <!-- 简介 -->
@@ -38,15 +47,21 @@
                                             <el-input />
                                         </el-form-item>
                                         <!-- 社交账号 -->
-                                        <el-form-item label="社交账号" prop="name">
+                                        <el-form-item
+                                            label="社交账号"
+                                            prop="name">
                                             <el-input />
                                         </el-form-item>
                                         <!-- 合同公司 -->
-                                        <el-form-item label="合同公司" prop="name">
+                                        <el-form-item
+                                            label="合同公司"
+                                            prop="name">
                                             <el-input />
                                         </el-form-item>
                                         <!-- 工作地点 -->
-                                        <el-form-item label="工作地点" prop="name">
+                                        <el-form-item
+                                            label="工作地点"
+                                            prop="name">
                                             <el-input />
                                         </el-form-item>
                                         <!-- 部门 -->
@@ -64,7 +79,13 @@
                                     </el-form>
                                 </el-col>
                                 <!-- 头像 -->
-                                <el-col :lg="12" :xl="12" :md="4" :sm="4" :xs="24"> </el-col>
+                                <el-col
+                                    :lg="12"
+                                    :xl="12"
+                                    :md="4"
+                                    :sm="4"
+                                    :xs="24">
+                                </el-col>
                             </el-row>
                         </template>
                     </el-card>
