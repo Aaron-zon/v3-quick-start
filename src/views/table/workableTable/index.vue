@@ -10,8 +10,7 @@ import BasicTable from '@/components/BasicTable/index.vue';
 import { useSearch } from './hooks/search';
 import { useTable } from './hooks/tableData';
 const { searchLayouts, searchData, searchHandle, resetHandel } = useSearch();
-const { tableModel, getTableModel, tableCol, tableSetting, tableToolData } =
-    useTable();
+const { tableModel, getTableModel, tableCol, tableSetting, tableToolData } = useTable();
 
 const changePage = async () => {
     tableSetting.loading = true;

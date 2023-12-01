@@ -22,3 +22,4 @@ loadSvg(app);
 
 app.use(store).use(router).mount('#app');
 window.store = store;
+

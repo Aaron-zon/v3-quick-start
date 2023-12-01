@@ -57,6 +57,7 @@ export const useTable = () => {
         {
             prop: 'mail',
             label: '邮箱',
+            title: true
         },
         {
             prop: 'phone',
