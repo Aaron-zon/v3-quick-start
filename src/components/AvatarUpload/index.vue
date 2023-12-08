@@ -2,7 +2,9 @@
 import { ref, nextTick } from 'vue';
 import { genFileId } from 'element-plus';
 import Modal from '@/components/Modal/index.vue';
-import { drag } from '@/utils/drag.js'
+import { drag } from '@/utils/motion/drag.js'
+import { dragZoom } from '@/utils/motion/dragZoom.js'
+
 const emits = defineEmits(['setAvatar']);
 const srcUrl = ref('');
 const avatarUrl = ref('');
@@ -10,8 +12,16 @@ const avatarUpload = ref(null);
 // https://avatars.githubusercontent.com/u/47178158?s=400&v=4
 const showChangeAvatar = ref(false);
 
+// Dom
+const cropContainer = ref(null);
+const cropBox = ref(null);
+const avatarImage = ref(null);
+
+/**
+ * 修改上传图片
+ * @param {*} file 
+ */
 const handleChange = (file) => {
-    console.log('xxx');
     const reader = new FileReader();
     // 转换为base64
     reader.readAsDataURL(file.raw);
@@ -25,11 +35,23 @@ const handleChange = (file) => {
 
         nextTick(() => {
             drag(cropBox.value, cropContainer.value);
+            dragZoom({
+                content: cropBox.value, 
+                childs: cropBox.value.getElementsByClassName('handle'),
+                minW: 100,
+                minH: 100,
+                maxW: 365,
+                maxH: 365
+            });
         })
     };
 
 };
 
+/**
+ * 更换图片
+ * @param {*} files 
+ */
 const handleOnlyFileExceed = (files) => {
     avatarUpload.value.clearFiles();
     const file = files[0];
@@ -37,13 +59,44 @@ const handleOnlyFileExceed = (files) => {
     avatarUpload.value.handleStart(file);
 };
 
+/**
+ * 关闭设置头像画面
+ */
 const closeAvatar = () => {
     showChangeAvatar.value = false;
 }
+/**
+ * 点击-设置新的个人头像
+ */
+const generateAvatar = () => {
+    const avatarInfo = {
+        x: 350,
+        y: 350,
+        currentWidth: 100,
+        currentHeight: 100,
+        width: 100,
+        height: 100
+    }
 
-const cropContainer = ref(null);
-const cropBox = ref(null);
+    const canvas = document.createElement('canvas');
+    canvas.width = avatarInfo.width;
+    canvas.height = avatarInfo.height;
+    canvas.ctx = canvas.getContext('2d');
+    ctx.drawImage(
+        avatarImage.value
+        , avatarInfo.x
+        , avatarInfo.y
+        , avatarInfo.currentWidth
+        , avatarInfo.currentHeight
+        , 0
+        , 0
+        , avatarInfo.width
+        , avatarInfo.height
+    );
+    canvas.toBlob(blob => {
 
+    })
+}
 </script>
 
 <template>
@@ -71,19 +124,20 @@ const cropBox = ref(null);
                 </div>
             </div>
             <div class="content">
-                <img :src="avatarUrl">
+                <img ref="avatarImage" :src="avatarUrl">
                 <div ref="cropContainer" class="crop-container">
-                    <div ref="cropBox" class="crop-box" style="left: 0px; top: 0px; width: 200px; height: 200px;">
-                        <div class="crop-outline"></div>
-                        <div class="handle nw"></div>
-                        <div class="handle ne"></div>
-                        <div class="handle sw"></div>
-                        <div class="handle se"></div>
+                    <div ref="cropBox" class="crop-box" style="left: calc(50% - 175px); top: calc(50% - 175px);width: 350px; height: 350px;">
+                        <div class="crop-outline">
+                            <div ref="cropBoxNw" class="handle nw"></div>
+                            <div  ref="cropBoxNe" class="handle ne"></div>
+                            <div  ref="cropBoxSw" class="handle sw"></div>
+                            <div  ref="cropBoxSe" class="handle se"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="footer">
-                <el-button type="success">设置新的个人头像</el-button>
+                <el-button type="success" @click="generateAvatar">设置新的个人头像</el-button>
             </div>
         </div>
     </Modal>
@@ -170,12 +224,50 @@ const cropBox = ref(null);
             top: 0;
             width: 100%;
             height: 100%;
+            user-select: none;
 
             .crop-box {
                 position: absolute;
                 left: 15px;
                 border-radius: 50%;
-                box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.5);
+                user-select: none;
+
+                .crop-outline {
+                    .handle {
+                        width: 5px;
+                        height: 5px;
+                        background-color: #fff;
+                        position: absolute;
+                        border-radius: 50%;
+                        padding: 10px;
+                        user-select: none;
+                    }
+
+                    .nw {
+                        top: -5px;
+                        left: -5px;
+                        cursor: nw-resize;
+                    }
+
+                    .ne {
+                        top: -5px;
+                        right: -5px;
+                        cursor: ne-resize;
+                    }
+
+                    .sw {
+                        left: -5px;
+                        bottom: -5px;
+                        cursor: sw-resize;
+                    }
+
+                    .se {
+                        bottom: -5px;
+                        right: -5px;
+                        cursor: se-resize;
+                    }
+                }
             }
         }
     }
@@ -189,3 +281,4 @@ const cropBox = ref(null);
     }
 }
 </style>
+@/utils/motion/drag.js
