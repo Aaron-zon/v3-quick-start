@@ -1,4 +1,9 @@
 <script setup>
+/**
+ * Issues
+ * 剪裁后的图片尺寸还不正确
+ * 选择图片后预览图没有自适应
+ */
 import { ref, nextTick } from 'vue';
 import { genFileId } from 'element-plus';
 import Modal from '@/components/Modal/index.vue';
@@ -28,7 +33,7 @@ const handleChange = (file) => {
 
     reader.onload = () => {
         // 读取成功,赋值给数据变量
-        emits('setAvatar', reader.result);
+        // emits('setAvatar', reader.result);
         // srcUrl.value = reader.result;
         avatarUrl.value = reader.result;
         showChangeAvatar.value = true;
@@ -38,8 +43,8 @@ const handleChange = (file) => {
             dragZoom({
                 content: cropBox.value, 
                 childs: cropBox.value.getElementsByClassName('handle'),
-                minW: 100,
-                minH: 100,
+                minW: 180,
+                minH: 180,
                 maxW: 365,
                 maxH: 365
             });
@@ -70,32 +75,43 @@ const closeAvatar = () => {
  */
 const generateAvatar = () => {
     const avatarInfo = {
-        x: 350,
-        y: 350,
-        currentWidth: 100,
-        currentHeight: 100,
-        width: 100,
-        height: 100
+        x: parseFloat(cropBox.value.style.left.replace('px', '')), // 在图片上剪裁的起始位置 x轴 根据剪裁元素的left设定
+        y: parseFloat(cropBox.value.style.top.replace('px', '')), // 在图片上剪裁的起始位置 y轴 根据剪裁元素的top设定
+        currentWidth: parseFloat(cropBox.value.style.width.replace('px', '')), // 在图片上裁剪的宽度 根据剪裁元素的宽度决定
+        currentHeight: parseFloat(cropBox.value.style.height.replace('px', '')), // 在图片上裁剪的高度 根据剪裁元素的高度决定
+        dx: 0, // x轴绘画起始点 
+        dy: 0, // y轴绘画起始点 
+        width: parseFloat(cropBox.value.style.width.replace('px', '')), // canvas画布大小 根据剪裁元素的宽度决定
+        height: parseFloat(cropBox.value.style.height.replace('px', '')), // canvas画布大小 根据剪裁元素的高度决定
     }
 
     const canvas = document.createElement('canvas');
     canvas.width = avatarInfo.width;
     canvas.height = avatarInfo.height;
-    canvas.ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
     ctx.drawImage(
-        avatarImage.value
-        , avatarInfo.x
-        , avatarInfo.y
-        , avatarInfo.currentWidth
-        , avatarInfo.currentHeight
-        , 0
-        , 0
-        , avatarInfo.width
-        , avatarInfo.height
+        avatarImage.value // 图片实例
+        , avatarInfo.x // 在图片上剪裁的起始位置 x轴
+        , avatarInfo.y // 在图片上剪裁的起始位置 y轴
+        , avatarInfo.currentWidth // 在图片上裁剪的宽度
+        , avatarInfo.currentHeight // 在图片上裁剪的高度
+        , avatarInfo.dx // 绘画起始点 x轴
+        , avatarInfo.dy // 绘画起始点 y轴
+        , avatarInfo.width // 画布宽度
+        , avatarInfo.height // 画布高度
     );
     canvas.toBlob(blob => {
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
 
-    })
+        reader.onloadend = () => {
+            var base64 = reader.result;
+            srcUrl.value = base64;
+            emits('setAvatar', base64);
+            avatarUrl.value = null;
+            showChangeAvatar.value = false;
+        }
+    }, 'image/jpg')
 }
 </script>
 
@@ -110,7 +126,7 @@ const generateAvatar = () => {
         :on-change="handleChange"
         :on-exceed="handleOnlyFileExceed"
     >
-        <el-avatar :src="srcUrl" :size="180" />
+        <el-avatar :src="srcUrl" fit="fill" :size="180" />
     </el-upload>
 
     <Modal v-if="showChangeAvatar">
@@ -126,7 +142,7 @@ const generateAvatar = () => {
             <div class="content">
                 <img ref="avatarImage" :src="avatarUrl">
                 <div ref="cropContainer" class="crop-container">
-                    <div ref="cropBox" class="crop-box" style="left: calc(50% - 175px); top: calc(50% - 175px);width: 350px; height: 350px;">
+                    <div ref="cropBox" class="crop-box" style="left: 50px; top: 8px;width: 350px; height: 350px;">
                         <div class="crop-outline">
                             <div ref="cropBoxNw" class="handle nw"></div>
                             <div  ref="cropBoxNe" class="handle ne"></div>
@@ -174,7 +190,6 @@ const generateAvatar = () => {
         }
     }
 }
-
 .avatar-wrapper {
     width: 450px;
     height: 570px;
@@ -281,4 +296,3 @@ const generateAvatar = () => {
     }
 }
 </style>
-@/utils/motion/drag.js

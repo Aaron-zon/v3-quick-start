@@ -29,6 +29,32 @@ export const constantRoutes = [
             },
         ],
     },
+    // 外链
+    {
+        path: "/link",
+        meta: {
+            title: "外链",
+            svgIcon: "link"
+        },
+        children: [
+            {
+                path: "https://cn.vuejs.org/guide/introduction.html",
+                component: () => { },
+                name: "Link1",
+                meta: {
+                    title: "Vue文档"
+                }
+            },
+            {
+                path: "https://element-plus.org/zh-CN/component/button.html",
+                component: () => { },
+                name: "Link2",
+                meta: {
+                    title: "element-plus文档"
+                }
+            }
+        ]
+    },
     // 表格
     {
         path: '/table',
@@ -51,14 +77,22 @@ export const constantRoutes = [
             },
             {
                 path: 'workableTable',
-                component: () =>
-                    import('@/views/table/workableTable/index.vue'),
+                component: () => import('@/views/table/workableTable/index.vue'),
                 name: 'WorkableTable',
                 meta: {
                     title: '可操作表格',
                     elIcon: 'Grid',
                 },
             },
+            {
+                path: 'ElementPlus',
+                component: () => import('@/views/table/elementPlusTable/index.vue'),
+                name: 'Element Plus',
+                meta: {
+                    title: 'Element Plus表格',
+                    elIcon: 'Grid',
+                }
+            }
         ],
     },
     // 表单
@@ -79,6 +113,7 @@ export const constantRoutes = [
                 name: 'ComprehensiveForm',
                 meta: {
                     title: '综合表单',
+                    elIcon: 'Tickets',
                 },
             },
             {
@@ -87,6 +122,7 @@ export const constantRoutes = [
                 name: 'StepForm',
                 meta: {
                     title: '分步表单',
+                    elIcon: 'Tickets',
                 },
             },
         ],
@@ -118,6 +154,7 @@ export const constantRoutes = [
                 name: 'Menu',
                 meta: {
                     title: 'menu',
+                    elIcon: 'Menu',
                 },
                 children: [
                     {
@@ -126,6 +163,7 @@ export const constantRoutes = [
                         name: 'Menu-1',
                         meta: {
                             title: 'menu-1',
+                            elIcon: 'Menu',
                         },
                     },
                     {
@@ -143,6 +181,7 @@ export const constantRoutes = [
                                 name: 'Menu-2-1',
                                 meta: {
                                     title: 'menu-2-1',
+                                    elIcon: 'Menu',
                                 },
                             },
                             {
@@ -152,6 +191,7 @@ export const constantRoutes = [
                                 name: 'Menu-2-2',
                                 meta: {
                                     title: 'menu-2-2',
+                                    elIcon: 'Menu',
                                 },
                             },
                         ],

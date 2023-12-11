@@ -54,7 +54,6 @@ function mousedown(content, child) {
                 content.style.top = oldTop + (oldHeight - newHeight) + 'px';
 
             } else if (child.className.includes('ne') || child.className.includes('se')) {
-                console.log('dasda')
                 // 右上角和右下角
                 newWidth = oldWidth + (event.clientX - oldX);
                 newHeight = (newWidth / oldWidth) * oldHeight;

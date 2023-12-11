@@ -1,0 +1,69 @@
+<script setup>
+const tableData = [
+    {
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+    },
+    {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+    },
+    {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+    },
+    {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles',
+    },
+]
+</script>
+
+<template>
+    <div class="element-plus-table-container app-container">
+        <el-card class="content-wrapper">
+            提供两个示例详细请看element-plus官方文档：
+            <a class="link" target="_blank" href="https://element-plus.gitee.io/zh-CN/component/table.html">element-plus官方文档</a>
+        </el-card>
+
+        <el-card class="content-wrapper">
+            <template #header>
+                <div class="card-header">
+                    <span>普通表格</span>
+                </div>
+            </template>
+            <div class="table-wrapper">
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column prop="date" label="Date" width="180" />
+                    <el-table-column prop="name" label="Name" width="180" />
+                    <el-table-column prop="address" label="Address" />
+                </el-table>
+            </div>
+        </el-card>
+
+        <el-card class="content-wrapper">
+            <template #header>
+                <div class="card-header">
+                    <span>带边框表格</span>
+                </div>
+            </template>
+            <div class="table-wrapper">
+                <el-table :data="tableData" border style="width: 100%">
+                    <el-table-column prop="date" label="Date" width="180" />
+                    <el-table-column prop="name" label="Name" width="180" />
+                    <el-table-column prop="address" label="Address" />
+                </el-table>
+            </div>
+        </el-card>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+.link {
+    color: #a0cfff;
+}
+</style>
