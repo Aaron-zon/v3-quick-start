@@ -10,6 +10,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    icon: {
+        type: String,
+        default: '',
+    }
 });
 
 // svg 的地址
@@ -17,9 +21,11 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 </script>
 
 <template>
-    <svg class="svg-icon svg-icon-container" aria-hidden="true">
+
+    <svg v-if="props.icon === ''" class="svg-icon svg-icon-container" aria-hidden="true">
         <use :href="symbolId" />
     </svg>
+    <font-awesome-icon v-else :icon="props.icon" />
 </template>
 
 <style lang="scss" scoped>

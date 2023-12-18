@@ -148,6 +148,17 @@ export const constantRoutes = [
                     elIcon: 'UploadFilled',
                 },
             },
+            // 日历
+            {
+                path: 'calendarExample',
+                component: () =>
+                    import('@/views/commonComponents/calendar/calendarExample.vue'),
+                name: 'Calendar',
+                meta: {
+                    title: '日历',
+                    elIcon: 'Calendar',
+                },
+            },
             // 嵌套路由
             {
                 path: 'menu',
