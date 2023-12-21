@@ -35,8 +35,17 @@ export const useDateTable = (props) => {
                 type: 'current'
             }));
 
+            // 是否满足6行
+            const rowLen = 6 - (Math.floor(currentMonthRange.length / 7));
             // 空余几个空位
-            let remaining = 7 - (currentMonthRange.length % 7 || 7);
+            let remaining = 7 - (currentMonthRange.length % 7 || 7) + rowLen * 7;
+
+            if (remaining > 0 && rowLen > 0) {
+                remaining += (rowLen - 1) * 7
+            } else if (remaining == 0 && rowLen > 0) {
+                remaining += rowLen * 7
+            }
+
             // 下一月
             const nextMonthRange = rangeArr(
                 remaining
@@ -63,10 +72,16 @@ export const useDateTable = (props) => {
                 text: day,
                 type: 'current',
             }));
-
             days = [...prevMonthDays, ...currentMonthDays];
 
-            const remaining = 7 - (days.length % 7 || 7);
+            const rowLen = 6 - (Math.floor(days.length / 7));
+            let remaining = 7 - (days.length % 7 || 7);
+
+            if (remaining > 0 && rowLen > 0) {
+                remaining += (rowLen - 1) * 7
+            } else if (remaining == 0 && rowLen > 0) {
+                remaining += rowLen * 7
+            }
 
             // 下一月
             const nextMonthDays = rangeArr(

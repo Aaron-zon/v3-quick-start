@@ -7,7 +7,7 @@ const fc = {
         "activeList": "列表",
         "prevMonth": "上一月",
         "nextMonth": "下一月",
-        "toDay": "今天",
+        "today": "今天",
         "month": {
             "1": "1月",
             "2": "2月",

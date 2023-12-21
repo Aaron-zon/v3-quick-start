@@ -1,5 +1,5 @@
 <script setup>
-import { useDateTable } from './hooks/use-date-table.js'
+import { useDateTable } from '../hooks/use-date-table.js'
 defineOptions({
     name: 'DateTable',
 })

@@ -8,7 +8,7 @@ import { En, Cn } from '../locale';
  * @returns 
  */
 export const useLocale = (localeOverrides) => {
-    const locale = localeOverrides || Cn;
+    const locale = localeOverrides || En;
     return buildLocaleContext(computed(() => locale.value || locale));
 }
 

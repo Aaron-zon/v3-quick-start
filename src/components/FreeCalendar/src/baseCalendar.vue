@@ -1,9 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
-import DateTable from './dateTable.vue'
-import { useCalendar } from './hooks/use-calendar.js'
-import { rangeValidator } from './hooks/use-validator.js'
-import { useLocale } from './hooks/use-locale.js'
+import { ref, computed } from 'vue';
+import BasicDateTable from './components/BasicDateTable.vue';
+import { useCalendar } from './hooks/use-calendar.js';
+import { rangeValidator } from './hooks/use-validator.js';
+import { useLocale } from './hooks/use-locale.js';
 
 defineOptions({
     name: 'BaseCalendar'
@@ -18,10 +18,11 @@ const props = defineProps({
         validator: rangeValidator
     }
 })
+
 const emit = defineEmits(['update:modelValue', 'input']);
 
-const { date, realSelectedDay } = useCalendar(props);
-const { t } = useLocale()
+const { date, realSelectedDay, selectDate, pickDay } = useCalendar(props, emit);
+const { t } = useLocale();
 
 const modeActive = ref(0);
 const jumpActive = ref(0);
@@ -36,17 +37,10 @@ const selectMode = (value) => {
     modeActive.value = value;
 }
 
-const selectJump = (value) => {
-    jumpActive.value = value;
-}
-
-const pickDay = () => {
-
-}
 </script>
 
 <template>
-    <div class="free-calendar-container">
+    <div class="base-calendar-container">
         <!-- header -->
         <div class="fs-header">
             <div class="fs-header__button-group change-mode">
@@ -69,26 +63,32 @@ const pickDay = () => {
                 <h2 class="title">{{ i18nDate }}</h2>
             </div>
             <div class="fs-header__button-group jump-data">
-                <button class="fc-button fc-button__primary today" :class="{'active': jumpActive == 0}" @click="selectJump(0)">
+                <button class="fc-button fc-button__primary today" 
+                    :class="{'active': jumpActive == 0}" @click="selectDate('prev-month')"
+                >
                     {{ t('fc.datepicker.prevMonth') }}
                 </button>
-                <button class="fc-button fc-button__primary today" :class="{'active': jumpActive == 1}" @click="selectJump(1)">
+                <button class="fc-button fc-button__primary today" 
+                    :class="{'active': jumpActive == 1}" @click="selectDate('next-month')"
+                >
                     {{ t('fc.datepicker.nextMonth') }}
                 </button>
-                <button class="fc-button fc-button__primary today" :class="{'active': jumpActive == 2}" @click="selectJump(2)">
+                <button class="fc-button fc-button__primary today" 
+                    :class="{'active': jumpActive == 2}" @click="selectDate('today')"
+                >
                     {{ t('fc.datepicker.toDay') }}
                 </button>
             </div>
         </div>
         <!-- body -->
         <div class="free-calendar__body">
-            <DateTable :date="date" :selected-day="realSelectedDay" @pick="pickDay"></DateTable>
+            <BasicDateTable :date="date" :selected-day="realSelectedDay" @pick="pickDay"></BasicDateTable>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.free-calendar-container {
+.base-calendar-container {
     --fc-bg-color: #fff;
     --fc-button-bg-color: #2c3e50;
     --fc-button-border-color: #2c3e50;
