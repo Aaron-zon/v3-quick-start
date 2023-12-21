@@ -137,17 +137,6 @@ export const constantRoutes = [
             elIcon: 'Menu',
         },
         children: [
-            // 上传文件
-            {
-                path: 'upload',
-                component: () =>
-                    import('@/views/commonComponents/upload/index.vue'),
-                name: 'Upload',
-                meta: {
-                    title: '上传',
-                    elIcon: 'UploadFilled',
-                },
-            },
             // 日历
             {
                 path: 'calendarExample',
@@ -159,12 +148,12 @@ export const constantRoutes = [
                     elIcon: 'Calendar',
                 },
             },
-            // 嵌套路由
+            // 多级路由
             {
                 path: 'menu',
                 name: 'Menu',
                 meta: {
-                    title: 'menu',
+                    title: '多级路由',
                     elIcon: 'Menu',
                 },
                 children: [
@@ -211,6 +200,7 @@ export const constantRoutes = [
             },
         ],
     },
+    // 经典案例
     {
         path: '/classicCase',
         component: layout,
@@ -228,16 +218,6 @@ export const constantRoutes = [
                 meta: {
                     title: '用户管理',
                     elIcon: 'UserFilled',
-                },
-            },
-            {
-                path: 'personal',
-                component: () =>
-                    import('@/views/classicCase/personal/index.vue'),
-                name: 'Personal',
-                meta: {
-                    title: '个人设定',
-                    elIcon: 'Avatar',
                 },
             },
         ],
