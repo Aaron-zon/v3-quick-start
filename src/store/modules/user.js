@@ -17,11 +17,10 @@ export const useUserStore = defineStore('user', () => {
 
     const permissionStore = usePermissionStore();
 
-    const login = async ({ account, password }) => {
-        const { data } = await loginApi({ account, password });
+    /** login成功时登录token信息 */
+    const login = async (data) => {
         setToken(data.token);
         token.value = data.token;
-
         return data;
     };
 
@@ -39,7 +38,7 @@ export const useUserStore = defineStore('user', () => {
 
     const visitorInfo = () => {
         username.value = '游客';
-        roles.value = 'visitor';
+        roles.value = ['visitor'];
     };
 
     /** 切换角色 */

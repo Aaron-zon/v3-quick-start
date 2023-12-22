@@ -200,45 +200,77 @@ export const constantRoutes = [
             },
         ],
     },
-    // 经典案例
+    // 404
     {
-        path: '/classicCase',
-        component: layout,
-        name: 'ClassicCase',
+        path: "/404",
+        component: () => import("@/views/error/404.vue"),
         meta: {
-            title: '经典案例',
-            elIcon: 'CopyDocument',
+            hidden: true
         },
-        children: [
-            {
-                path: 'userManage',
-                component: () =>
-                    import('@/views/classicCase/usersManage/index.vue'),
-                name: 'UserManage',
-                meta: {
-                    title: '用户管理',
-                    elIcon: 'UserFilled',
-                },
-            },
-        ],
+        alias: "/:pathMatch(.*)*"
     },
 ];
 
 export const asyncRoutes = [
-    // {
-    //     path: "/permission", // Must put the 'ErrorPage' route at the end, 必须将 'ErrorPage' 路由放在最后
-    //     component: layout,
-    //     children: [
-    //         {
-    //             path: 'test2',
-    //             component: () => import('@/views/test2/index.vue'),
-    //             meta: {
-    //                 title: 'test2',
-    //                 svgIcon: 'unocss'
-    //             }
-    //         }
-    //     ]
-    // }
+    {
+        path: '/roleManage',
+        component: layout,
+        name: 'RoleManage',
+        meta: {
+            title: '权限处理',
+            elIcon: 'CopyDocument',
+        },
+        children: [
+            {
+                path: 'adminPage',
+                component: () => import('@/views/classicCase/usersManage/adminPage.vue'),
+                name: 'AdminPage',
+                meta: {
+                    title: '管理员权限画面',
+                    elIcon: 'UserFilled',
+                    roles: ['admin']
+                },
+            },
+            {
+                path: 'userPage',
+                component: () => import('@/views/classicCase/usersManage/userPage.vue'),
+                name: 'UserPage',
+                meta: {
+                    title: '用户权限画面',
+                    elIcon: 'UserFilled',
+                    roles: ['admin', 'user']
+                },
+            },
+            {
+                path: 'visitorPage',
+                component: () => import('@/views/classicCase/usersManage/visitorPage.vue'),
+                name: 'VisitorPage',
+                meta: {
+                    title: '游客权限画面',
+                    elIcon: 'UserFilled',
+                    roles: ['visitor']
+                },
+            },
+            {
+                path: 'userManage',
+                component: () => import('@/views/classicCase/usersManage/index.vue'),
+                name: 'UserManage',
+                meta: {
+                    title: '用户管理',
+                    elIcon: 'UserFilled',
+                    roles: ['admin']
+                },
+            },
+        ],
+    },
+    {
+        path: "/:pathMatch(.*)*", // Must put the 'ErrorPage' route at the end, 必须将 'ErrorPage' 路由放在最后
+        redirect: "/404",
+        name: "ErrorPage",
+        meta: {
+            hidden: true
+        }
+    }
 ];
 
 const router = createRouter({
