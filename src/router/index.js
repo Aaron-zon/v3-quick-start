@@ -1,3 +1,4 @@
+import { markRaw } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { layout } from '@/layout/index.js';
 // 常驻路由
@@ -214,7 +215,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
     {
         path: '/roleManage',
-        component: layout,
+        component: markRaw(layout),
         name: 'RoleManage',
         meta: {
             title: '权限处理',

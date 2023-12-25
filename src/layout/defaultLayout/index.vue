@@ -1,5 +1,5 @@
 <script setup>
-import { computed, markRaw } from 'vue';
+import { computed } from 'vue';
 import { useSettings } from '@/store/modules/settings.js';
 import LeftMode from './LeftMode.vue';
 import TopMode from './TopMode.vue';
