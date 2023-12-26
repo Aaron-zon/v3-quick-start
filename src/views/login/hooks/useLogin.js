@@ -1,6 +1,7 @@
 import { ref, reactive, onMounted } from 'vue';
 import { useUserStore } from '@/store/modules/user';
 import { getToken, removeToken, setToken } from '@/utils/cache/cookies';
+import { loginApi } from '@/api/login/index.js'
 import router from '@/router';
 import Cookies from 'js-cookie';
 
@@ -29,12 +30,12 @@ export default function useLogin(loginFormRef) {
         account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
         password: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            {
-                min: 8,
-                max: 16,
-                message: '长度在 8 到 16 个字符',
-                trigger: 'blur',
-            },
+            // {
+            //     min: 8,
+            //     max: 16,
+            //     message: '长度在 8 到 16 个字符',
+            //     trigger: 'blur',
+            // },
         ],
     };
 
@@ -43,26 +44,22 @@ export default function useLogin(loginFormRef) {
         loginFormRef.value?.validate((valid, fields) => {
             if (valid) {
                 loading.value = true;
-                useUserStore()
-                    .login(loginFormData)
-                    .then((res) => {
-                        // 记住密码
-                        if (loginFormData.remember) {
-                            const { account, password, remember } =
-                                loginFormData;
-                            Cookies.set('user-account', account);
-                            Cookies.set('user-password', password);
-                            Cookies.set('user-remember', remember);
-                        }
-                        // 跳转至 Home 画面
-                        router.push({ name: 'Home' });
-                    })
-                    .catch(() => {
-                        loginFormData.password = '';
-                    })
-                    .finally(() => {
-                        loading.value = false;
-                    });
+                loginApi(loginFormData).then((res) => {
+                    // 记住密码
+                    if (loginFormData.remember) {
+                        const { account, password, remember } =
+                            loginFormData;
+                        Cookies.set('user-account', account);
+                        Cookies.set('user-password', password);
+                        Cookies.set('user-remember', remember);
+                    }
+                    // 跳转至 Home 画面
+                    router.push({ name: 'Home' });
+                }).catch(() => {
+                    loginFormData.password = '';
+                }).finally(() => {
+                    loading.value = false;
+                })
             } else {
                 console.error('表单校验不通过', fields);
             }

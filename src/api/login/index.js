@@ -1,12 +1,21 @@
 import { request } from '@/utils/service';
+import { useUserStore } from '@/store/modules/user';
+
 
 /** 登录 */
-export function loginApi(data) {
-    return request({
+export async function loginApi(params) {
+    const { data } = await request({
         url: 'users/login',
         method: 'post',
-        data,
-    });
+        data: params,
+    })
+    // 登录成功时在此处添加合适的判断用于保存token，如
+    // if (data.code == '200') useUserStore().login(data);
+
+    // 因为测试版本使用mock因此此处直接保存，不添加判断
+    useUserStore().login(data);
+    return data;
+
 }
 
 /** 获取用户详细信息 */
