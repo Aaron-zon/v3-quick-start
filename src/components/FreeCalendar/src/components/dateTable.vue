@@ -27,15 +27,7 @@ const props = defineProps({
     }
 });
 const emit = defineEmits(['pick'])
-
-const { weekDays, rows } = useDateTable(props, emit);
-
-const year = computed(() => {
-    return props.date.year();
-});
-const month = computed(() => {
-    return props.date.month();
-});
+const { weekDays, rows, eventMap } = useDateTable(props, emit);
 
 /**
  * 获取日期位置动态样式
@@ -82,7 +74,7 @@ const pickDay = (cell) => {
  * @param { Object } event 
  * @param { Object } cell 
  */
-const eventManage = (event, cell) => {
+const eventManage = (cell) => {
     const {type, text} = cell;
     let date = props.date;
     if (type == 'prev') {
@@ -93,27 +85,27 @@ const eventManage = (event, cell) => {
         date = date.set('date', text);
     }
 
-    return date.format('YYYYMMDD') == dayjs(event.start).format('YYYYMMDD')
+    return !!eventMap.value[date.format('YYYY-MM-DD')];
 }
 
 /**
- * 获取任务的开始事件
+ * 获取event的样式
  * @param { Object } event 
  */
-const eventTime = (event) => {
-    let time = "";
-    if (event.start.includes('T') || event.start.includes(' ')) {
-        time = dayjs(event.start).format('HH:mma');
-        if (time == 'Invalid Date') {
-            time = '';
-        } else {
-            time = time.substring(0, time.length - 1);
-            if (time.includes(':00')) {
-                time = time.replace(':00', '');
-            }
-        }
+const eventClass = (event) => {
+    if (!event.start) {
+        return [];
     }
-    return time;
+    const resClass = [];
+    const start = dayjs(event.start);
+    const end = event.end ? dayjs(event.end) : null;
+    const startTime = start.format('HH:mm:ss');
+    const endTime = end ? end.format('HH:mm:ss') : '00:00:00';
+    if (startTime === '00:00:00' && endTime === '00:00:00') {
+        resClass.push('fc-all-day-event');
+    }
+
+    return resClass;
 }
 </script>
 
@@ -138,14 +130,16 @@ const eventTime = (event) => {
                             </div>
                         </slot>
 
-                        <div class="fc-daygrid-day-events" v-for="(event, index) in props.events" :key="index">
-                            <div class="fc-daygrid-event-harness" v-if="eventManage(event, cell)">
-                                <a href="#" class="fc-event">
-                                    <div class="fc-daygrid-event-dot"></div>
-                                    <div class="fc-event-time">{{ eventTime(event) }}</div>
-                                    <div class="fc-event-title">{{ event.title }}</div>
-                                </a>
-                            </div>
+                        <div class="fc-daygrid-day-events">
+                            <template v-if="eventManage(cell)">
+                                <div class="fc-daygrid-event-harness" v-for="(event, index) in eventMap[cell.date]" :key="index">
+                                    <a href="#" :class="['fc-event', ...eventClass(event)]">
+                                        <div class="fc-daygrid-event-dot"></div>
+                                        <div class="fc-event-time">{{ event.time }}</div>
+                                        <div class="fc-event-title">{{ event.title }}</div>
+                                    </a>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </td>
@@ -235,6 +229,13 @@ const eventTime = (event) => {
                                 margin-right: 3px;
                                 font-weight: 500;
                             }
+                        }
+
+                        .fc-all-day-event {
+                            background-color: var(--fc-event-bg-color);
+                            border: 1px solid var(--fc-event-border-color);
+                            border-radius: 5px;
+                            color: var(--fc-event-text-color);
                         }
                     }
                 }

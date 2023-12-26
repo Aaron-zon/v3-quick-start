@@ -147,6 +147,8 @@ const headerEmit = computed(() => {
 
     --fc-daygrid-event-dot-width: 8px;
     --fc-event-border-color: #3788d8;
+    --fc-event-bg-color: #3788d8;
+    --fc-event-text-color: #fff;
 
 
     background-color: var(--fc-bg-color);

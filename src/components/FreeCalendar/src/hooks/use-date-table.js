@@ -6,7 +6,7 @@ import { rangeArr, getPrevMonthLastDays, getMonthDays, toNestedArr } from './use
 
 const { t } = useLocale();
 
-export const useDateTable = (props) => {
+export const useDateTable = (props, emit) => {
     dayjs.extend(localeData)
     const firstDayOfWeek = dayjs.localeData().firstDayOfWeek()
     // 星期标题
@@ -25,6 +25,7 @@ export const useDateTable = (props) => {
     const rows = computed(() => {
         // 全部显示日期
         let days = [];
+
         // 有日期范围信息时根据日期范围进行取值
         if (isInRange.value) {
             const [start, end] = props.range;
@@ -32,7 +33,8 @@ export const useDateTable = (props) => {
                 end.date() - start.date() + 1
             ).map((index) => ({
                 text: start.date() + index,
-                type: 'current'
+                type: 'current',
+                date: props.date.set('date', start.date() + index).format('YYYY-MM-DD'),
             }));
 
             // 是否满足6行
@@ -52,6 +54,7 @@ export const useDateTable = (props) => {
             ).map((_, index) => ({
                 text: index + 1,
                 type: 'next',
+                date: props.date.add(1, 'month').set('date', index + 1).format('YYYY-MM-DD'),
             }));
 
             days = currentMonthRange.concat(nextMonthRange);
@@ -64,6 +67,7 @@ export const useDateTable = (props) => {
             ).map((day) => ({
                 text: day,
                 type: 'prev',
+                date: props.date.add(-1, 'month').set('date', day).format('YYYY-MM-DD'),
             }));
             // 本月
             const currentMonthDays = getMonthDays(
@@ -71,6 +75,7 @@ export const useDateTable = (props) => {
             ).map((day) => ({
                 text: day,
                 type: 'current',
+                date: props.date.set('date', day).format('YYYY-MM-DD'),
             }));
             days = [...prevMonthDays, ...currentMonthDays];
 
@@ -89,6 +94,7 @@ export const useDateTable = (props) => {
             ).map((_, index) => ({
                 text: index + 1,
                 type: 'next',
+                date: props.date.add(1, 'month').set('date', index + 1).format('YYYY-MM-DD'),
             }));
 
             days = days.concat(nextMonthDays);
@@ -108,8 +114,57 @@ export const useDateTable = (props) => {
         }
     });
 
+    const year = computed(() => {
+        return props.date.format('YYYY');
+    });
+
+    const month = computed(() => {
+        return props.date.format('MM');
+    });
+
+    const eventMap = computed(() => {
+        const result = {};
+        for (let event of props.events) {
+            const date = dayjs(event.start);
+
+            if (!result[date.format('YYYY-MM-DD')]) {
+                result[date.format('YYYY-MM-DD')] = [];
+            }
+            result[date.format('YYYY-MM-DD')].push({
+                time: eventTime(event),
+                currentMonth: year.value == date.format('YYYY') && month.value == date.format('MM'),
+                ...event
+            });
+            result[date.format('YYYY-MM-DD')].sort((a, b) => {
+                return dayjs(a.start).valueOf() - dayjs(b.start).valueOf();
+            })
+        }
+        return result;
+    })
+
+    /**
+     * 获取任务的开始事件
+     * @param { Object } event 
+     */
+    const eventTime = (event) => {
+        let time = "";
+        if (event.start.includes('T') || event.start.includes(' ')) {
+            time = dayjs(event.start).format('HH:mma');
+            if (time == 'Invalid Date') {
+                time = '';
+            } else {
+                time = time.substring(0, time.length - 1);
+                if (time.includes(':00')) {
+                    time = time.replace(':00', '');
+                }
+            }
+        }
+        return time;
+    }
+
     return {
         weekDays,
-        rows
+        rows,
+        eventMap
     }
 }
