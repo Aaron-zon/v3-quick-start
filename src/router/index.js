@@ -149,6 +149,15 @@ export const constantRoutes = [
                     elIcon: 'Calendar',
                 },
             },
+            {
+                path: 'draggable',
+                component: () => import('@/views/commonComponents/draggable/index.vue'),
+                name: 'Draggable',
+                meta: {
+                    title: '拖拽',
+                    elIcon: 'DocumentCopy'
+                }
+            },
             // 多级路由
             {
                 path: 'menu',

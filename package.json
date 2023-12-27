@@ -28,6 +28,7 @@
     "sass": "^1.69.5",
     "vite-svg-loader": "^4.0.0",
     "vue": "^3.3.7",
+    "vue-draggable-plus": "^0.3.3",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
