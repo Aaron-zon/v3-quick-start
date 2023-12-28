@@ -149,6 +149,7 @@ export const constantRoutes = [
                     elIcon: 'Calendar',
                 },
             },
+            // 拖拽
             {
                 path: 'draggable',
                 component: () => import('@/views/commonComponents/draggable/index.vue'),
@@ -165,6 +166,7 @@ export const constantRoutes = [
                 meta: {
                     title: '多级路由',
                     elIcon: 'Menu',
+
                 },
                 children: [
                     {
@@ -208,6 +210,16 @@ export const constantRoutes = [
                     },
                 ],
             },
+            // 不在Menu显示 hidden
+            {
+                path: 'hidden',
+                component: () => import('@/views/commonComponents/hidden/index.vue'),
+                name: 'Hidden',
+                meta: {
+                    title: '隐藏',
+                    hidden: true
+                }
+            }
         ],
     },
     // 404
