@@ -80,18 +80,18 @@ const props = defineProps(['data'])
               核心任务内容及描述：
             </el-col>
             <el-col :span="17">
-              <el-checkbox v-model="checked1" label="总图" size="large" />
-              <el-checkbox v-model="checked2" label="效果图（鸟瞰/单体）" size="large" />
-              <el-checkbox v-model="checked2" label="平立剖" size="large" />
-              <el-checkbox v-model="checked2" label="彩平" size="large" />
-              <el-checkbox v-model="checked2" label="文本" size="large" />
-              <el-checkbox v-model="checked2" label="概算" size="large" />
+              <el-checkbox label="总图" size="large" />
+              <el-checkbox label="效果图（鸟瞰/单体）" size="large" />
+              <el-checkbox label="平立剖" size="large" />
+              <el-checkbox label="彩平" size="large" />
+              <el-checkbox label="文本" size="large" />
+              <el-checkbox label="概算" size="large" />
             </el-col>
           </el-row>
 
           <el-row class="stage">
-            <el-checkbox v-model="checked1" label="________" size="large" />
-            <el-checkbox v-model="checked2" label="________" size="large" />
+            <el-checkbox label="________" size="large" />
+            <el-checkbox label="________" size="large" />
           </el-row>
 
           <el-row class="stage department">
@@ -224,15 +224,14 @@ const props = defineProps(['data'])
 
 <style lang="scss" scoped>
 .pdf-wrapper {
+    z-index: 1000;
     border: 1px solid #ccc;
-    margin: 0 auto;
+    margin: 20px auto;
     background-color: #fff;
     padding: 10px;
     font-size: 12px;
     width: 750px;
-    height: 1122px;
-    
-
+    min-height: 900px;
     .header {
       text-align: center;
       .company {

@@ -1,7 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
 import Template from './template.vue'
-
 const data = reactive({
   baseInfo: {
     col1: '2023-12-29',

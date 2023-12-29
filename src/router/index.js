@@ -204,6 +204,7 @@ export const constantRoutes = [
                                 meta: {
                                     title: 'menu-2-1',
                                     elIcon: 'Menu',
+                                    hidden: true
                                 },
                             },
                             {
