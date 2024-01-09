@@ -11,9 +11,7 @@ const key = computed(() => {
 <template>
     <main class="app-main-container">
         <router-view v-slot="{ Component }">
-            <transition name="no-transform" mode="out-in">
-                <component :is="Component" :key="key" />
-            </transition>
+            <component :is="Component" :key="key" />
         </router-view>
     </main>
 </template>

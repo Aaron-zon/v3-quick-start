@@ -159,6 +159,16 @@ export const constantRoutes = [
                     elIcon: 'DocumentCopy'
                 }
             },
+            // PDF生成
+            {
+                path: 'createPDF',
+                component: () => import('@/views/commonComponents/createPdf/index.vue'),
+                name: 'CreatePDF',
+                meta: {
+                    title: 'PDF生成',
+                    elIcon: 'Tickets'
+                }
+            },
             // 多级路由
             {
                 path: 'menu',
@@ -194,6 +204,7 @@ export const constantRoutes = [
                                 meta: {
                                     title: 'menu-2-1',
                                     elIcon: 'Menu',
+                                    hidden: true
                                 },
                             },
                             {
