@@ -7,6 +7,7 @@ import '@/router/permission';
 // load
 import { loadPlugins } from '@/plugins';
 import { loadSvg } from '@/icons/index.js';
+import { loadDirectives } from "@/directives";
 
 // css
 import 'normalize.css';
@@ -19,7 +20,9 @@ const app = createApp(App);
 loadPlugins(app);
 /** load svg */
 loadSvg(app);
+/** load directives */
+loadDirectives(app);
 
 app.use(store).use(router).mount('#app');
-window.store = store;
 
+export default app;
