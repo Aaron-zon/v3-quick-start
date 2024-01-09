@@ -4,7 +4,8 @@ import { VueDraggable } from 'vue-draggable-plus'
 const list1 = ref([
     {
         name: '苹果',
-        id: 1
+        id: 1,
+        disabled: true
     },
     {
         name: '日历',
@@ -48,6 +49,8 @@ function onAdd() {
 function remove() {
   console.log('remove')
 }
+
+const filter = '.draggable-item1'
 </script>
 
 <template>
@@ -59,13 +62,10 @@ function remove() {
             class="draggable"
             animation="150"
             ghostClass="ghost"
-            dragClass="draggable-item"
             group="people"
-            @update="onUpdate"
-            @add="onAdd"
-            @remove="remove"
+            :filter="filter"
         >
-            <div v-for="item in list1" :key="item.id" class="draggable-item">
+            <div v-for="item, i in list1" :key="item.id" class="draggable-item" :class="`draggable-item${item.id}`">
                 {{ item.name }}
             </div>
         </VueDraggable>
@@ -73,13 +73,12 @@ function remove() {
         <VueDraggable 
             ref="el" 
             v-model="list2" 
-            dragClass="draggable-item"
             class="draggable"
             animation="150"
             ghostClass="ghost"
             group="people"
         >
-            <div v-for="item in list2" :key="item.id" class="draggable-item">
+            <div v-for="item in list2" :key="item.id" class="draggable-item" :class="`draggable-item${item.id}`">
                 {{ item.name }}
             </div>
         </VueDraggable>
