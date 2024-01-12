@@ -8,7 +8,10 @@ const props = defineProps({
     },
     name: {
         type: String,
-        required: true,
+    },
+    type: {
+        type: String,
+        default: 'fas'
     },
     icon: {
         type: String,
@@ -21,11 +24,10 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 </script>
 
 <template>
-
     <svg v-if="props.icon === ''" class="svg-icon svg-icon-container" aria-hidden="true">
         <use :href="symbolId" />
     </svg>
-    <font-awesome-icon v-else :icon="props.icon" />
+    <font-awesome-icon v-else :icon="[type, icon]" />
 </template>
 
 <style lang="scss" scoped>

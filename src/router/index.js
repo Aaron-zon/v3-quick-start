@@ -137,6 +137,7 @@ export const constantRoutes = [
             title: '常用组件',
             elIcon: 'Menu',
         },
+        redirect: '/commonComponents/calendarExample',
         children: [
             // 日历
             {
@@ -167,6 +168,16 @@ export const constantRoutes = [
                 meta: {
                     title: 'PDF生成',
                     elIcon: 'Tickets'
+                }
+            },
+            // SVG ICON
+            {
+                path: 'svgIcon',
+                component: () => import('@/views/commonComponents/icons/index.vue'),
+                name: 'SvgIcon',
+                meta: {
+                    title: 'SvgIcon',
+                    elIcon: 'PictureFilled'
                 }
             },
             // 多级路由
