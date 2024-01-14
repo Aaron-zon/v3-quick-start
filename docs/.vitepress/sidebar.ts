@@ -18,12 +18,14 @@ export const sidebar = {
             text: '组件',
             items: [
                 { text: 'SVG', link: '/docs/svg-icon/'},
-                // { text: '拖拽', link: '/docs/test/'},
-                // { text: '日历', link: '/docs/test/'},
-                // { text: '遮罩', link: '/docs/test/'},
-                // { text: '表格', link: '/docs/test/'},
-                // { text: '编辑器', link: '/docs/test/'},
-                // { text: '文档', link: '/docs/test/'},
+                { text: '拖拽', link: '/docs/draggable/'},
+                { text: '日历', link: '/docs/calendar/'},
+                // { text: '通知', link: '/docs/notify/'},
+                // { text:  '遮罩', link: '/docs/modal/'},
+                // { text: '表格', link: '/docs/table/'},
+                // { text: '表单', link: '/docs/form/'},
+                // { text: '编辑器', link: '/docs/editor/'},
+                // { text: '文档', link: '/docs/document/'},
             ]
         }
 
