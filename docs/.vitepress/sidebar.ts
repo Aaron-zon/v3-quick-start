@@ -19,8 +19,8 @@ export const sidebar = {
             items: [
                 { text: 'SVG', link: '/docs/svg-icon/'},
                 { text: '拖拽', link: '/docs/draggable/'},
-                { text: '日历', link: '/docs/calendar/'},
-                // { text: '通知', link: '/docs/notify/'},
+                { text: '通知', link: '/docs/notify/'},
+                // { text: '日历', link: '/docs/calendar/'},
                 // { text:  '遮罩', link: '/docs/modal/'},
                 // { text: '表格', link: '/docs/table/'},
                 // { text: '表单', link: '/docs/form/'},

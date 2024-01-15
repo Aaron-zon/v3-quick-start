@@ -21,8 +21,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
     nav: [
-      { text: '指南', link: '/' },
-      { text: '演示', link: '/markdown-examples' }
+      { text: '指南', link: '/docs/guide/' },
+      // { text: '演示', link: '/markdown-examples' }
     ],
     sidebar,
     socialLinks: [
