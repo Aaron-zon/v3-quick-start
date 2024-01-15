@@ -88,9 +88,18 @@ export const constantRoutes = [
             {
                 path: 'ElementPlus',
                 component: () => import('@/views/table/elementPlusTable/index.vue'),
-                name: 'Element Plus',
+                name: 'ElementPlus',
                 meta: {
                     title: 'Element Plus表格',
+                    elIcon: 'Grid',
+                }
+            },
+            {
+                path: 'freeTable',
+                component: () => import('@/views/table/freeTable/index.vue'),
+                name: 'FreeTable',
+                meta: {
+                    title: 'FreeTable表格',
                     elIcon: 'Grid',
                 }
             }
