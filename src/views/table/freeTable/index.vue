@@ -26,6 +26,7 @@ const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
+        // width: 500
     },
     {
         title: 'Cash Assets',
@@ -35,12 +36,15 @@ const columns = [
     {
         title: 'Address',
         dataIndex: 'address',
+        // width: 1000
     },
 ];
 </script>
 
 <template>
-    <FTable :data-source="dataSource" :columns="columns"></FTable>
+    <el-card>
+        <FTable :data-source="dataSource" :columns="columns" :scroll="{y: 400, x: 1800}"></FTable>
+    </el-card>
 </template>
 
 <style lang="scss" scoped>

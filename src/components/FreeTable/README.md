@@ -43,3 +43,33 @@ table-summary-cell
 - footer：表格尾部
 - summary：描述
 - tooltipTitle：提示
+
+结构：
+- surely-table-wrapper
+  - ant-spin-nested-loading
+    - ant-spin-container
+      - surely-table
+        - surely-table-header 表头区域
+          - surely-table-center-viewport 表头
+            - surely-table-fix-left
+            - surely-table-center 显示的主要表头内容
+              - surely-table-center-container 表头容器
+                - surely-table-cell * n 每一列的表头
+                  - surely-table-column-title 标题容器
+                    - surely-table-header-cell-title 用来居中
+                      - surely-table-header-cell-title-inner 存放文字信息
+                        - text 文字信息
+            - surely-table-fix-right
+          - surely-table-header-scrollbar 表头滚动条
+        - surely-table-body 内容区域
+          - surely-table-body-container 容器
+            - surely-table-fix-left 左侧固定
+            - surely-table-center 主内容区
+              - surely-table-center-container 容器
+                - surely-table-row * n 行
+                  - surely-table-cell * n 列
+                    - surely-table-cell-inner 内部容器
+                      - surely-table-cell-content 内容
+                        - text 文字
+            - surely-table-fix-right 右侧固定
+      - ul ant-pagination 分页
