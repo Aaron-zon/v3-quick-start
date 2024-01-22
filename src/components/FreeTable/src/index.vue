@@ -35,7 +35,6 @@ onMounted(() => {
  */
 const handleResize = () => {
     freeTableWidth.value = freeTableRef.value.offsetWidth;
-    console.log(freeTableWidth.value);
 }
 
 /**
@@ -43,6 +42,12 @@ const handleResize = () => {
  */
 const calculateColumnWidths = computed(() => {
     let width = freeTableWidth.value;
+    if (props?.scroll?.x && props.scroll.x > width) {
+        width = props?.scroll?.x;
+    }
+    if (props?.scroll?.y && props?.scroll?.y > 0) {
+        width = width - 17;
+    }
     // 自定义宽度的列的个数
     let customWidthNum = 0;
     // 列设定
@@ -70,14 +75,14 @@ const calculateColumnWidths = computed(() => {
         }
         totalColumnWidth += columnWidths[column.dataIndex];
     })
-
-    if (props?.scroll?.x && totalColumnWidth > props.scroll.x) {
-        freeTableRef.value.style.overflowX = 'auto';
-    }
-
+    
     return columnWidths;
 })
 
+/**
+ * 判断传入参数是否是number或string类型
+ * @param {*} input 
+ */
 function checkNumberOrString(input) {
     if (typeof input === 'number' || (!isNaN(input) && typeof input !== 'boolean')) {
         return 'Number';
@@ -88,15 +93,42 @@ function checkNumberOrString(input) {
     }
 }
 
+/**
+ * 计算free-table-center-container的样式
+ */
 const tableCenterStyles = computed(() => {
     let width = freeTableWidth.value;
-    if (props?.scroll?.x) {
+    if (props?.scroll?.x && props.scroll.x > width) {
         width = props?.scroll?.x;
+    }
+    if (props?.scroll?.y && props?.scroll?.y > 0) {
+        width = width - 17;
     }
     return {
         width: `${width}px`
     }
 })
+
+/**
+ * 计算free-table-body的样式
+ */
+const tableBodyStyles = computed(() => {
+    let styles = {};
+    if (props?.scroll?.y) {
+        styles['max-height'] = `${props.scroll.y}px`
+    }
+
+    return styles;
+
+})
+
+const tableCellBoxClass = (idx) => {
+    let className = 'free-table-cell-box';
+    if (idx == props.columns.length - 1 && !props?.scroll?.y) {
+        className = '';
+    }
+    return className;
+}
 
 const columnStyles = (col) => {
     return {
@@ -111,7 +143,8 @@ const columnStyles = (col) => {
             <!-- Header -->
             <div class="free-table-header">
                 <div class="free-table-center-viewport">
-                    <div class="free-table-fix-left"></div>
+                    <!-- <div class="free-table-fix-left"></div> -->
+
                     <div class="free-table-center">
                         <div class="free-table-center-container" :style="tableCenterStyles">
                             <div class="free-table-cell" 
@@ -119,7 +152,7 @@ const columnStyles = (col) => {
                                 :key="idx" 
                                 :style="[columnStyles(col)]"
                             >
-                                <span class="free-table-column-title">
+                                <span class="free-table-column-title" :class="[tableCellBoxClass(idx)]">
                                     <div class="free-table-header-cell-title">
                                         <div class="free-table-header-cell-title-inner">
                                             {{ col.title }}
@@ -129,11 +162,13 @@ const columnStyles = (col) => {
                             </div>
                         </div>
                     </div>
-                    <div class="free-table-fix-right"></div>
+                    
+                    <!-- <div class="free-table-fix-right"></div> -->
                 </div>
+                <div class="free-table-header-scrollbar"></div>
             </div>
             <!-- body -->
-            <div class="free-table-body">
+            <div class="free-table-body" :style="tableBodyStyles">
                 <div class="free-table-body-viewport-container">
                     <div class="free-table-fix-left"></div>
 
@@ -148,7 +183,6 @@ const columnStyles = (col) => {
                                     <div class="free-table-cell-inner">
                                         <div class="free-table-cell-content">
                                             {{ row[col['dataIndex']] }}
-                                            <!-- {{ calculateColumnWidths[col['dataIndex']] }} -->
                                         </div>
                                     </div>
                                 </div>
@@ -218,43 +252,43 @@ const columnStyles = (col) => {
 .free-table-container {
     width: 100%;
     max-width: 100%;
-    border: 1px solid var(--table-black);
 
     .free-table-loading {
         position: relative;
         box-sizing: border-box;
+        overflow-x: auto;
+        overflow-y: hidden;
 
         .free-table-header {
             box-sizing: border-box;
             flex-grow: 0;
             flex-shrink: 0;
             height: auto;
-            overflow-x: auto;
-            overflow-y: hidden;
             background-color: var(--free-table-background-color);
             transition: background-color 0.3s ease;
             border-radius: 6px 6px 0 0;
+            display: flex;
+            position: relative;
 
             .free-table-center-viewport {
                 box-sizing: border-box;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
+                height: 55px;
                 display: flex;
-
-                position: relative;
                 flex: 1 1 auto;
-                min-width: 0;
-                min-height: 100%;
+                flex-shrink: 0;
+                flex-grow: 0;
+                position: relative;
+                width: auto;
 
                 .free-table-center {
                     box-sizing: border-box;
                     flex-shrink: 0;
                     flex-grow: 0;
                     position: relative;
-                    flex: 1 1 auto;
                     min-width: 0;
                     min-height: 100%;
+                    height: 100%;
+                    width: auto;
 
                     .free-table-center-container {
                         width: 100%;
@@ -280,30 +314,31 @@ const columnStyles = (col) => {
                             height: 55px;
 
                             &:last-child {
-                                .free-table-column-title::before {
+                                .free-table-cell-box::before {
                                     background-color: transparent;
                                 }
                             }
+                            
 
                             .free-table-column-title {
                                 box-sizing: border-box;
                                 width: 100%;
                                 padding: 0 16px;
                                 position: relative;
-                                // TODO
-                                left: 0px;
 
-                                &:before {
-                                    position: absolute;
-                                    top: 50%;
-                                    right: 1px;
-                                    width: 1px;
-                                    height: 1.6em;
-                                    pointer-events: none;
-                                    background-color: var(--free-table-header-cell-split-color);
-                                    transform: translateY(-50%);
-                                    transition: background-color 0.3s;
-                                    content: '';
+                                &.free-table-cell-box {
+                                    ::before {
+                                        position: absolute;
+                                        top: 50%;
+                                        right: 1px;
+                                        width: 1px;
+                                        height: 1.6em;
+                                        pointer-events: none;
+                                        background-color: var(--free-table-header-cell-split-color);
+                                        transform: translateY(-50%);
+                                        transition: background-color 0.3s;
+                                        content: '';
+                                    }
                                 }
 
                                 .free-table-header-cell-title {
@@ -330,6 +365,16 @@ const columnStyles = (col) => {
                     }
                 }
             }
+
+            .free-table-header-scrollbar {
+                box-sizing: border-box;
+                display: inline-block;
+                position: absolute; 
+                top: 0;
+                right: 0px;
+                width: 17px; 
+                height: 55px;
+            }
         }
 
         .free-table-body {
@@ -340,6 +385,8 @@ const columnStyles = (col) => {
             width: 100%;
             flex: 1 1 auto;
             flex-direction: row;
+            overflow-y: auto;
+            overflow-x: hidden;
 
             .free-table-body-viewport-container {
                 
@@ -353,48 +400,55 @@ const columnStyles = (col) => {
                     min-height: 100%;
                     position: relative;
 
-                    .free-table-row {
-                        box-sizing: border-box;
-                        color: var(--free-table-text-color);
-                        background-color: var(--free-table-row-bg);
+                    .free-table-center-container {
                         width: 100%;
-                        display: flex;
-                        align-items: center;
-                        // position: absolute;
-                        border-bottom: 1px solid var(--free-table-border-color);
+                        height: 100%;
+                        box-sizing: border-box;
+                        position: relative;
 
-                        .free-table-cell {
-                            // position: absolute;
-                            // top: 0;
-                            height: 100%;
-                            flex: none;
+                        .free-table-row {
+                            box-sizing: border-box;
+                            color: var(--free-table-text-color);
+                            background-color: var(--free-table-row-bg);
+                            width: 100%;
                             display: flex;
                             align-items: center;
+                            // position: absolute;
+                            border-bottom: 1px solid var(--free-table-border-color);
 
-                            // TODO
-                            width: 188px;
-
-
-                            .free-table-cell-inner {
-                                box-sizing: border-box;
-                                padding: 0 !important;
-                                margin: 0 !important;
-                                border: none !important;
-                                min-width: 1px;
-                                flex-grow: 1;
-                                flex-shrink: 1;
-                                display: inline-flex;
+                            .free-table-cell {
+                                // position: absolute;
+                                // top: 0;
+                                height: 100%;
+                                flex: none;
+                                display: flex;
                                 align-items: center;
 
-                                .free-table-cell-content {
-                                    padding: 16px 16px;
-                                    width: 100%;
-                                    overflow-wrap: break-word;
-                                    -webkit-font-smoothing: subpixel-antialiased;
+                                // TODO
+                                width: 188px;
+
+                                .free-table-cell-inner {
+                                    box-sizing: border-box;
+                                    padding: 0 !important;
+                                    margin: 0 !important;
+                                    border: none !important;
+                                    min-width: 1px;
+                                    flex-grow: 1;
+                                    flex-shrink: 1;
+                                    display: inline-flex;
+                                    align-items: center;
+
+                                    .free-table-cell-content {
+                                        padding: 16px 16px;
+                                        width: 100%;
+                                        overflow-wrap: break-word;
+                                        -webkit-font-smoothing: subpixel-antialiased;
+                                    }
                                 }
                             }
                         }
                     }
+                    
 
                 }
             }

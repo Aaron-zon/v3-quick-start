@@ -26,7 +26,7 @@ const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
-        // width: 500
+        width: 500
     },
     {
         title: 'Cash Assets',
@@ -39,11 +39,25 @@ const columns = [
         // width: 1000
     },
 ];
+
+for (let i = 3; i < 13; i++) {
+    dataSource.push({
+        key: i,
+        name: `Edrward ${i}`,
+        money: i + 1,
+        address: `London Park no. ${i}`,
+    });
+}
+
+// const scroll = {y: 400, x: 1800};
+const scroll = {y: 400};
+// const scroll = null;
+
 </script>
 
 <template>
     <el-card>
-        <FTable :data-source="dataSource" :columns="columns" :scroll="{y: 400, x: 1800}"></FTable>
+        <FTable :data-source="dataSource" :columns="columns" :scroll="scroll"></FTable>
     </el-card>
 </template>
 
