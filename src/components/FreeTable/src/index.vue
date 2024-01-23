@@ -15,11 +15,32 @@ const props = defineProps({
     },
     scroll: {
         type: Object,
+    },
+    // 行高
+    rowHeight: {
+        type: Number,
+        default: 50,
+    },
+    // 滚动条尺寸设置
+    scrollMeasure: {
+        type: Number,
+        default: 17,
     }
 });
 
+// Free Table
 const freeTableRef = ref(null);
+// Header
+const freeTableHeaderRef = ref(null);
+// Body
+const freeTableBodyRef = ref(null);
+// X轴滚动条
+const horizontalScrollRef = ref(null);
+
+// 表格宽度
 const freeTableWidth = ref(0);
+// 滚动条尺寸设置
+// const scrollMeasure = ref(17);
 
 onMounted(() => {
     const resizeObserver = new ResizeObserver(handleResize);
@@ -34,7 +55,7 @@ onMounted(() => {
  * 当浏览器尺寸变化时监控freeTable的尺寸变化
  */
 const handleResize = () => {
-    freeTableWidth.value = freeTableRef.value.offsetWidth;
+    freeTableWidth.value = freeTableRef?.value?.offsetWidth || 0;
 }
 
 /**
@@ -46,7 +67,7 @@ const calculateColumnWidths = computed(() => {
         width = props?.scroll?.x;
     }
     if (props?.scroll?.y && props?.scroll?.y > 0) {
-        width = width - 17;
+        width = width - props.scrollMeasure;
     }
     // 自定义宽度的列的个数
     let customWidthNum = 0;
@@ -102,7 +123,7 @@ const tableCenterStyles = computed(() => {
         width = props?.scroll?.x;
     }
     if (props?.scroll?.y && props?.scroll?.y > 0) {
-        width = width - 17;
+        width = width - props.scrollMeasure;
     }
     return {
         width: `${width}px`
@@ -122,6 +143,10 @@ const tableBodyStyles = computed(() => {
 
 })
 
+/**
+ * 设置表头列的class
+ * @param {*} idx 
+ */
 const tableCellBoxClass = (idx) => {
     let className = 'free-table-cell-box';
     if (idx == props.columns.length - 1 && !props?.scroll?.y) {
@@ -130,18 +155,109 @@ const tableCellBoxClass = (idx) => {
     return className;
 }
 
+/**
+ * 表头列样式
+ * @param {*} col 
+ */
 const columnStyles = (col) => {
     return {
         width: `${calculateColumnWidths.value[col['dataIndex']]}px`
     }
 }
+
+
+// Y轴滚动条容器样式
+const bodyVerticalScrollRef = ref(null);
+
+/**
+ * X轴滚动条滚动时
+ */
+const horizontalScroll = () => {
+    freeTableHeaderRef.value.scrollLeft = horizontalScrollRef.value.scrollLeft;
+    freeTableBodyRef.value.scrollLeft = horizontalScrollRef.value.scrollLeft;
+}
+
+/**
+ * X轴滚动条容器样式
+ */
+const horizontalScrollViewportStyles = computed(() => {
+    let styles = {
+        'overflow-x': 'hidden'
+    };
+    let width = freeTableWidth.value;
+    if (props?.scroll?.x && width < props.scroll.x && width != 0) {
+        styles['overflow-x'] = 'scroll';
+    }
+
+    return styles;
+})
+
+/**
+ * X轴滚动条内容部分样式
+ */
+const horizontalScrollStyles = computed(() => {
+    let width = freeTableWidth.value;
+    if (props?.scroll?.x && props.scroll.x > width) {
+        width = props?.scroll?.x;
+    }
+    if (props?.scroll?.y && props?.scroll?.y > 0) {
+        width = width - props.scrollMeasure;
+    }
+    return {
+        'width': `${width}px`,
+        'min-width': `${width}px`,
+        'max-width': `${width}px`,
+        'height': `${props.scrollMeasure}px`,
+        'min-height': `${props.scrollMeasure}px`,
+        'max-height': `${props.scrollMeasure}px`,
+    }
+})
+
+/**
+ * Y轴滚动条滚动时
+ */
+const bodyVerticalScroll = () => {
+    freeTableBodyRef.value.scrollTop = bodyVerticalScrollRef.value.scrollTop;
+}
+/**
+ * Y轴滚动条容器样式
+ */
+const bodyVerticalScrollViewportStyle = computed(() => {
+    let styles = {
+        'overflow-y': 'hidden'
+    };
+    if (props?.scroll?.y) {
+        const height = props.scroll.y + props.scrollMeasure;
+        styles['height'] = `${height}px`
+        styles['overflow-y'] = 'scroll';
+    }
+    return styles;
+})
+
+/**
+ * Y轴滚动条内容部分样式
+ */
+const bodyScrollStyles = computed(() => {
+    let styles = {};
+    if (props?.scroll?.y && props.scroll.y > 0) {
+        const height = props.rowHeight * props.dataSource.length + props.scrollMeasure + 1;
+        styles['height'] = `${height}px`;
+        styles['min-height'] = `${height}px`;
+        styles['max-height'] = `${height}px`;
+
+        styles['width'] = `${props.scrollMeasure}px`;
+        styles['min-width'] = `${props.scrollMeasure}px`;
+        styles['max-width'] = `${props.scrollMeasure}px`;
+    }
+    return styles;
+})
 </script>
 
 <template>
     <div class="free-table-container" ref="freeTableRef">
         <div class="free-table-loading">
             <!-- Header -->
-            <div class="free-table-header">
+            <div class="free-table-header" ref="freeTableHeaderRef">
                 <div class="free-table-center-viewport">
                     <!-- <div class="free-table-fix-left"></div> -->
 
@@ -169,7 +285,7 @@ const columnStyles = (col) => {
             </div>
             <!-- body -->
             <div class="free-table-body" :style="tableBodyStyles">
-                <div class="free-table-body-viewport-container">
+                <div class="free-table-body-viewport-container" ref="freeTableBodyRef">
                     <div class="free-table-fix-left"></div>
 
                     <div class="free-table-center">
@@ -192,11 +308,31 @@ const columnStyles = (col) => {
 
                     <div class="free-table-fix-right"></div>
                 </div>
+                <div class="free-table-vertical-scroll">
+                    <div class="free-table-vertical-scroll-viewport"
+                        ref="bodyVerticalScrollRef"
+                        @scroll="bodyVerticalScroll"
+                        :style="bodyVerticalScrollViewportStyle"
+                    >
+                        <div class="free-table-body-vertical-scroll-container" :style="bodyScrollStyles"></div>
+                    </div>
+                </div>
             </div>
             <!-- pagination -->
             <div>
 
             </div>
+        </div>
+        <div class="free-table-horizontal-scroll">
+            <div class="free-table-horizontal-scroll-viewport" 
+                ref="horizontalScrollRef" 
+                :style="horizontalScrollViewportStyles"
+                @scroll="horizontalScroll"
+            >
+                <div class="free-table-body-horizontal-scroll-container" :style="horizontalScrollStyles"></div>
+            </div>
+            <!-- 右侧填充 -->
+            <div class="free-table-horizontal-scroll-fill"></div>
         </div>
     </div>
 </template>
@@ -252,12 +388,13 @@ const columnStyles = (col) => {
 .free-table-container {
     width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
 
     .free-table-loading {
         position: relative;
         box-sizing: border-box;
-        overflow-x: auto;
-        overflow-y: hidden;
+        height: 100%;
 
         .free-table-header {
             box-sizing: border-box;
@@ -269,6 +406,7 @@ const columnStyles = (col) => {
             border-radius: 6px 6px 0 0;
             display: flex;
             position: relative;
+            overflow: hidden;
 
             .free-table-center-viewport {
                 box-sizing: border-box;
@@ -366,6 +504,7 @@ const columnStyles = (col) => {
                 }
             }
 
+            // 头部区域Y轴滚动条填充
             .free-table-header-scrollbar {
                 box-sizing: border-box;
                 display: inline-block;
@@ -377,6 +516,7 @@ const columnStyles = (col) => {
             }
         }
 
+        // 内容区域
         .free-table-body {
             box-sizing: border-box;
             display: flex;
@@ -385,11 +525,12 @@ const columnStyles = (col) => {
             width: 100%;
             flex: 1 1 auto;
             flex-direction: row;
-            overflow-y: auto;
-            overflow-x: hidden;
-
+            
+            // 数据
             .free-table-body-viewport-container {
-                
+                box-sizing: border-box;
+                overflow-x: hidden;
+                overflow-y: hidden;
                 .free-table-center {
                     box-sizing: border-box;
                     flex-shrink: 0;
@@ -452,6 +593,60 @@ const columnStyles = (col) => {
 
                 }
             }
+
+            // 内容区Y轴滚动条
+            .free-table-vertical-scroll {
+                box-sizing: border-box;
+                outline: none;
+                position: absolute;
+                right: 0;
+                display: flex;
+                min-height: 0;
+                z-index: 4;
+
+                height: auto;
+                max-width: 17px;
+                min-width: 17px;
+                width: 17px;
+                .free-table-vertical-scroll-viewport {
+                    width: 17px; 
+                    min-width: 17px; 
+                    max-width: 17px; 
+                }
+            }
+        }
+        
+        
+    }
+
+    // X轴滚动条
+    .free-table-horizontal-scroll {
+        box-sizing: border-box;
+        outline: none;
+        position: relative;
+        display: flex;
+        min-width: 0;
+        z-index: 4;
+
+        width: 100%;
+        max-height: 17px;
+        min-height: 17px;
+        height: 17px;
+
+        .free-table-horizontal-scroll-viewport {
+            height: 17px; 
+            min-height: 17px; 
+            max-height: 17px; 
+            width: 100%;
+        }
+
+        .free-table-horizontal-scroll-fill {
+            width: 17px; 
+            height: 100%; 
+            overflow-x: hidden;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
         }
     }
 }

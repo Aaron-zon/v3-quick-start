@@ -49,8 +49,11 @@ for (let i = 3; i < 13; i++) {
     });
 }
 
-// const scroll = {y: 400, x: 1800};
-const scroll = {y: 400};
+const scroll = {y: 400, x: 1800};
+// const scroll = {y: 403.12, x: 1800};
+// const scroll = {y: 415};
+// const scroll = {y: 400};
+
 // const scroll = null;
 
 </script>
@@ -59,6 +62,7 @@ const scroll = {y: 400};
     <el-card>
         <FTable :data-source="dataSource" :columns="columns" :scroll="scroll"></FTable>
     </el-card>
+
 </template>
 
 <style lang="scss" scoped>
