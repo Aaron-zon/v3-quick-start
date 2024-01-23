@@ -40,7 +40,7 @@ const columns = [
     },
 ];
 
-for (let i = 3; i < 13; i++) {
+for (let i = 3; i < 1003; i++) {
     dataSource.push({
         key: i,
         name: `Edrward ${i}`,
