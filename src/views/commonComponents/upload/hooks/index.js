@@ -6,7 +6,6 @@ export const useUpload = () => {
 
     /** 由组件默认方法上传到服务器 */
     const defaultUploadFile = (ref) => {
-        debugger;
         ref.upload.submit();
     };
 
