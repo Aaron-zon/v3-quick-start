@@ -28,15 +28,7 @@ export default function useLogin(loginFormRef) {
     /** 登录表单校验规则 */
     const loginFormRules = {
         account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            // {
-            //     min: 8,
-            //     max: 16,
-            //     message: '长度在 8 到 16 个字符',
-            //     trigger: 'blur',
-            // },
-        ],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
     };
 
     /** 登录处理 */

@@ -68,6 +68,15 @@ export const constantRoutes = [
         },
         children: [
             {
+                path: 'ElementPlus',
+                component: () => import('@/views/table/elementPlusTable/index.vue'),
+                name: 'ElementPlus',
+                meta: {
+                    title: 'Element Plus表格',
+                    elIcon: 'Grid',
+                }
+            },
+            {
                 path: 'simpleTable',
                 component: () => import('@/views/table/simpleTable/index.vue'),
                 name: 'SimpleTable',
@@ -85,24 +94,15 @@ export const constantRoutes = [
                     elIcon: 'Grid',
                 },
             },
-            {
-                path: 'ElementPlus',
-                component: () => import('@/views/table/elementPlusTable/index.vue'),
-                name: 'ElementPlus',
-                meta: {
-                    title: 'Element Plus表格',
-                    elIcon: 'Grid',
-                }
-            },
-            {
-                path: 'freeTable',
-                component: () => import('@/views/table/freeTable/index.vue'),
-                name: 'FreeTable',
-                meta: {
-                    title: 'FreeTable表格',
-                    elIcon: 'Grid',
-                }
-            }
+            // {
+            //     path: 'freeTable',
+            //     component: () => import('@/views/table/freeTable/index.vue'),
+            //     name: 'FreeTable',
+            //     meta: {
+            //         title: 'FreeTable表格',
+            //         elIcon: 'Grid',
+            //     }
+            // }
         ],
     },
     // 表单
@@ -149,16 +149,16 @@ export const constantRoutes = [
         redirect: '/commonComponents/calendarExample',
         children: [
             // 日历
-            {
-                path: 'calendarExample',
-                component: () =>
-                    import('@/views/commonComponents/calendar/calendarExample.vue'),
-                name: 'Calendar',
-                meta: {
-                    title: '日历',
-                    elIcon: 'Calendar',
-                },
-            },
+            // {
+            //     path: 'calendarExample',
+            //     component: () =>
+            //         import('@/views/commonComponents/calendar/calendarExample.vue'),
+            //     name: 'Calendar',
+            //     meta: {
+            //         title: '日历',
+            //         elIcon: 'Calendar',
+            //     },
+            // },
             // 拖拽
             {
                 path: 'draggable',
